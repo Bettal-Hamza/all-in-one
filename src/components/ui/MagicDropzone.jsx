@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UploadCloud } from 'lucide-react'
+import { UploadCloud, FileText, FileImage, Film, Music, Archive, Braces, Folder, Check } from 'lucide-react'
 import { TOOLS } from '../../constants/tools.js'
 import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 
@@ -10,15 +10,15 @@ function formatBytes(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`
 }
 
-function getFileEmoji(file) {
-  if (!file) return '📁'
-  if (file.type === 'application/pdf') return '📄'
-  if (file.type.startsWith('image/')) return '🖼️'
-  if (file.type.startsWith('video/')) return '🎬'
-  if (file.type.startsWith('audio/')) return '🎵'
-  if (file.type.includes('zip') || file.type.includes('rar')) return '📦'
-  if (file.type.includes('json') || file.type.includes('xml')) return '{ }'
-  return '📁'
+function getFileIcon(file) {
+  if (!file) return Folder
+  if (file.type === 'application/pdf') return FileText
+  if (file.type.startsWith('image/')) return FileImage
+  if (file.type.startsWith('video/')) return Film
+  if (file.type.startsWith('audio/')) return Music
+  if (file.type.includes('zip') || file.type.includes('rar')) return Archive
+  if (file.type.includes('json') || file.type.includes('xml')) return Braces
+  return Folder
 }
 
 function detectTool(file) {
@@ -148,7 +148,7 @@ export default function MagicDropzone({ inputRef: externalInputRef }) {
           >
             {/* File info card */}
             <div className="flex items-center gap-3 bg-gray-50/80 rounded-2xl px-4 py-3 border border-gray-100">
-              <span className="text-3xl flex-shrink-0">{getFileEmoji(dropped.file)}</span>
+              {(() => { const Icon = getFileIcon(dropped.file); return <Icon className="w-6 h-6 flex-shrink-0 text-gray-400" /> })()}
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-extrabold text-gray-900 truncate">{dropped.file.name}</p>
                 <p className="text-xs text-gray-400 font-medium mt-0.5">
@@ -156,8 +156,9 @@ export default function MagicDropzone({ inputRef: externalInputRef }) {
                   {dropped.file.type ? ` · ${dropped.file.type.split('/')[1]?.toUpperCase()}` : ''}
                 </p>
               </div>
-              <span className="flex-shrink-0 text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
-                ✓ Ready
+              <span className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                <Check className="w-3 h-3" />
+                Ready
               </span>
             </div>
 

@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Upload, Zap, LayoutGrid, Download,
+  ChevronDown, ShieldCheck, Gauge, FileType, FileText,
+} from 'lucide-react'
 import { splitPdf } from '../../lib/pdfSplitter.js'
 import { recordVisit } from '../../lib/recentTools.js'
 import ProgressBar from '../ui/ProgressBar.jsx'
 import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
+import SEOManager from '../SEOManager.jsx'
 
 const ACCEPT = 'application/pdf'
 
@@ -19,15 +24,101 @@ function formatBytes(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`
 }
 
+// ─── SEO CONTENT ────────────────────────────────────────────────────────────
+
+const HOW_TO_STEPS = [
+  {
+    Icon: Upload,
+    title: 'Upload your PDF',
+    body: 'Drag and drop your file onto the upload area, or click to open the file picker. Any PDF — single page or hundreds of pages — is accepted.',
+  },
+  {
+    Icon: Zap,
+    title: 'Processing happens instantly',
+    body: 'SwiftTool reads and splits your PDF directly inside your browser using the pdf-lib engine. There is no upload step, so processing starts immediately.',
+  },
+  {
+    Icon: LayoutGrid,
+    title: 'Review your pages',
+    body: 'Every page appears as a labelled entry in the results list. You can see exactly how many pages were extracted before downloading anything.',
+  },
+  {
+    Icon: Download,
+    title: 'Download what you need',
+    body: 'Click any page entry to save that single page, or hit "Download All" to grab every page at once. Each page is saved as its own clean PDF file.',
+  },
+]
+
+const FAQS = [
+  {
+    q: 'Is it safe to use this Free PDF Splitter?',
+    a: 'Absolutely. Unlike most online PDF tools, SwiftTool never sends your file to a server. All processing happens locally in your browser using JavaScript. Your document never leaves your device, so there is nothing to intercept, log, or accidentally leak — even if the file contains sensitive personal or business information.',
+  },
+  {
+    q: 'What is the maximum file size?',
+    a: 'There is no hard server-side limit because your file never gets uploaded. The practical limit is your device\'s available RAM. Most modern computers and phones can comfortably handle PDFs up to several hundred megabytes. Very large files (500 MB+) may take a little longer, but they will process successfully.',
+  },
+  {
+    q: 'Does this online PDF tool work on mobile?',
+    a: 'Yes — this Free PDF Splitter works on any modern browser, including Safari on iPhone and Chrome on Android. Simply open the page, tap the upload area to choose your PDF from your device or cloud storage, and download your pages when ready.',
+  },
+  {
+    q: 'Can I split a password-protected PDF?',
+    a: 'Currently, encrypted or password-protected PDFs are not supported. You will need to remove the password protection first using your PDF viewer (e.g., Adobe Acrobat or Preview on Mac), then use SwiftTool to split the unlocked file.',
+  },
+  {
+    q: 'What output format will I get?',
+    a: 'Each extracted page is saved as a standard, fully compatible PDF file. The output files are named sequentially (e.g., page-1.pdf, page-2.pdf) and can be opened in any PDF viewer, printed, emailed, or uploaded anywhere PDFs are accepted.',
+  },
+]
+
+// ─── SUB-COMPONENTS ─────────────────────────────────────────────────────────
+
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between gap-4 py-4 text-left group"
+        aria-expanded={open}
+      >
+        <span className="text-sm font-bold text-gray-800 group-hover:text-brand transition-colors">
+          {q}
+        </span>
+        <ChevronDown
+          className={`w-4 h-4 flex-shrink-0 text-gray-300 transition-transform duration-300 ${open ? 'rotate-180 text-brand' : ''}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="answer"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="text-sm text-gray-500 leading-relaxed pb-4 pr-8">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+// ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
+
 export default function PdfSplitter() {
-  const [phase, setPhase] = useState('idle')      // 'idle' | 'processing' | 'done'
-  const [progress, setProgress]       = useState(0)
+  const [phase, setPhase]               = useState('idle')
+  const [progress, setProgress]         = useState(0)
   const [progressLabel, setProgressLabel] = useState('')
-  const [pages, setPages]             = useState([])
-  const [error, setError]             = useState(null)
-  const [fileName, setFileName]       = useState('')
-  const [fileSize, setFileSize]       = useState(0)
-  const [isDragOver, setIsDragOver]   = useState(false)
+  const [pages, setPages]               = useState([])
+  const [error, setError]               = useState(null)
+  const [fileName, setFileName]         = useState('')
+  const [fileSize, setFileSize]         = useState(0)
+  const [isDragOver, setIsDragOver]     = useState(false)
   const inputRef = useRef(null)
   const urlsRef  = useRef([])
 
@@ -89,7 +180,14 @@ export default function PdfSplitter() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      {/* Page title */}
+      <SEOManager
+        title="Split PDF Online — 100% Private &amp; Free"
+        description="Free PDF splitter that runs entirely in your browser. No uploads, no server, instant results. Split any multi-page PDF into individual pages — 100% private."
+        appName="Free PDF Splitter"
+        appDescription="A free online PDF tool that splits multi-page PDFs into individual pages entirely in your browser. No uploads, no servers — 100% private and instant."
+      />
+
+      {/* ── Page title ──────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -105,9 +203,9 @@ export default function PdfSplitter() {
         </p>
       </motion.div>
 
+      {/* ── Tool ────────────────────────────────────────────────── */}
       <AnimatePresence mode="wait">
 
-        {/* ── IDLE: full-width glass drop card ─────────────────── */}
         {phase === 'idle' && (
           <motion.div key="idle" {...fadeUp}>
             <div
@@ -117,34 +215,29 @@ export default function PdfSplitter() {
               onDragLeave={() => setIsDragOver(false)}
               className={`
                 relative cursor-pointer rounded-3xl border-2 p-16 text-center
-                bg-surface-card backdrop-blur-xl
-                transition-all duration-300
+                bg-surface-card backdrop-blur-xl transition-all duration-300
                 ${isDragOver
                   ? 'border-brand shadow-glow scale-[1.01]'
                   : 'border-white/50 shadow-glass hover:border-brand/25 hover:shadow-glass-lg'
                 }
               `}
             >
-              {/* Drag-over glow overlay */}
               {isDragOver && (
                 <div className="absolute inset-0 rounded-3xl bg-brand/[0.04] pointer-events-none" />
               )}
-
               <motion.div
                 animate={{ scale: isDragOver ? 1.15 : 1, rotate: isDragOver ? -5 : 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                className="text-7xl mb-6 select-none inline-block"
+                className="mb-6"
               >
-                📄
+                <FileText className={`w-20 h-20 mx-auto transition-colors duration-300 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
               </motion.div>
-
               <p className="text-2xl font-extrabold text-gray-800 mb-2">
                 {isDragOver ? 'Release to split' : 'Drop your PDF here'}
               </p>
               <p className="text-gray-400 text-sm font-medium">
                 or click to browse · PDF files only · processed locally
               </p>
-
               {error && (
                 <motion.p
                   initial={{ opacity: 0, y: 6 }}
@@ -154,7 +247,6 @@ export default function PdfSplitter() {
                   {error}
                 </motion.p>
               )}
-
               <input
                 ref={inputRef}
                 type="file"
@@ -167,15 +259,10 @@ export default function PdfSplitter() {
           </motion.div>
         )}
 
-        {/* ── PROCESSING / DONE: side-by-side split layout ────── */}
         {(phase === 'processing' || phase === 'done') && (
           <motion.div key="split" {...fadeUp}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-
-              {/* Left panel — file info + progress or results list */}
               <div className="lg:col-span-2 bg-surface-card backdrop-blur-xl border border-surface-border rounded-3xl shadow-glass p-8 flex flex-col">
-
-                {/* File metadata header */}
                 <div className="flex items-start justify-between mb-6">
                   <div className="min-w-0 pr-4">
                     <p className="text-[11px] font-bold tracking-widest uppercase text-brand mb-1">
@@ -192,7 +279,6 @@ export default function PdfSplitter() {
                   </button>
                 </div>
 
-                {/* Processing state */}
                 {phase === 'processing' && (
                   <div className="flex-1">
                     <ProgressBar pct={progress} />
@@ -200,7 +286,6 @@ export default function PdfSplitter() {
                   </div>
                 )}
 
-                {/* Done state — scrollable page list */}
                 {phase === 'done' && (
                   <ul className="flex-1 space-y-1.5 overflow-y-auto max-h-80 pr-1 -mr-1">
                     {pages.map(({ url, filename }, i) => (
@@ -216,7 +301,7 @@ export default function PdfSplitter() {
                           className="flex items-center justify-between px-4 py-2.5 bg-gray-50/80 rounded-2xl hover:bg-brand/5 hover:text-brand transition-all group"
                         >
                           <span className="flex items-center gap-2.5 text-sm font-semibold text-gray-700 group-hover:text-brand">
-                            <span className="text-base">📄</span>
+                            <FileText className="w-4 h-4 text-gray-300 group-hover:text-brand transition-colors" />
                             Page {i + 1}
                           </span>
                           <span className="text-xs font-semibold text-gray-300 group-hover:text-brand transition-colors">
@@ -228,7 +313,6 @@ export default function PdfSplitter() {
                   </ul>
                 )}
 
-                {/* Post-action ad zone below the results list */}
                 {phase === 'done' && (
                   <div className="mt-6">
                     <GlobalAdContainer slot="postAction" />
@@ -236,10 +320,8 @@ export default function PdfSplitter() {
                 )}
               </div>
 
-              {/* Right panel — sidebar ad + action button */}
               <div className="flex flex-col gap-4">
                 <GlobalAdContainer slot="sidebar" className="rounded-3xl" />
-
                 <AnimatePresence mode="wait">
                   {phase === 'done' ? (
                     <motion.button
@@ -267,12 +349,134 @@ export default function PdfSplitter() {
                   )}
                 </AnimatePresence>
               </div>
-
             </div>
           </motion.div>
         )}
 
       </AnimatePresence>
+
+      {/* ── SEO content (intro · how-to · faq) ──────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-20 space-y-16"
+      >
+
+        {/* ── Introduction ──────────────────────────────────────── */}
+        <section aria-labelledby="intro-heading">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 rounded-xl bg-red-50 flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4 text-red-500" />
+            </div>
+            <h2 id="intro-heading" className="text-xl font-black text-gray-900">
+              Why SwiftTool's Free PDF Splitter?
+            </h2>
+          </div>
+
+          <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
+            <p className="text-sm text-gray-600 leading-relaxed mb-4">
+              Most online PDF tools quietly upload your file to a remote server the moment you drop it in.
+              That means your contracts, invoices, medical records, or personal documents travel across the
+              internet — raising real privacy concerns. SwiftTool's <strong className="text-gray-800">Free PDF Splitter</strong> works
+              completely differently.
+            </p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-4">
+              Every byte of processing happens <strong className="text-gray-800">directly in your browser</strong> using
+              the pdf-lib engine — a battle-tested JavaScript library that reads and writes PDF files without
+              any server contact. Your file never leaves your device. There is nothing to intercept, nothing
+              logged, and nothing retained. Whether you are handling a confidential legal brief or a personal
+              bank statement, you stay in complete control from start to finish.
+            </p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-4">
+              Speed is the other major advantage. Because there is no upload step, this <strong className="text-gray-800">online PDF tool</strong> starts
+              working the instant you choose a file. A 50-page PDF typically splits in under two seconds on
+              any modern device — laptop, tablet, or phone — with no queue and no bandwidth cap.
+            </p>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              There is no account to create, no subscription to manage, and no watermarks added to your
+              output files. Just open the page, drop your PDF, and download your individual pages. Fast,
+              private, and completely free — that is the SwiftTool promise.
+            </p>
+
+            {/* Privacy + Speed highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+              <div className="flex items-start gap-3 bg-red-50/60 rounded-2xl p-4">
+                <ShieldCheck className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-black uppercase tracking-wider text-red-600 mb-1">100% Private</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Your file never leaves your device. Zero uploads, zero data retention.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 bg-blue-50/60 rounded-2xl p-4">
+                <Gauge className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-black uppercase tracking-wider text-blue-600 mb-1">Instant Results</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">No upload wait, no server queue. Processing starts immediately.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Ad slot between sections ──────────────────────────── */}
+        <GlobalAdContainer slot="midContent" />
+
+        {/* ── How to Use ────────────────────────────────────────── */}
+        <section aria-labelledby="howto-heading">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 rounded-xl bg-brand/10 flex items-center justify-center">
+              <LayoutGrid className="w-4 h-4 text-brand" />
+            </div>
+            <h2 id="howto-heading" className="text-xl font-black text-gray-900">
+              How to Use the PDF Splitter
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {HOW_TO_STEPS.map(({ Icon, title, body }, i) => (
+              <div
+                key={i}
+                className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass flex gap-4"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 rounded-2xl bg-brand/8 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-brand" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-brand/50">
+                      Step {i + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-extrabold text-gray-900 mb-1">{title}</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── FAQ ───────────────────────────────────────────────── */}
+        <section aria-labelledby="faq-heading">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
+              <FileType className="w-4 h-4 text-emerald-500" />
+            </div>
+            <h2 id="faq-heading" className="text-xl font-black text-gray-900">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="bg-white border border-gray-100 rounded-3xl px-8 shadow-glass divide-y divide-gray-100">
+            {FAQS.map((item, i) => (
+              <FaqItem key={i} q={item.q} a={item.a} />
+            ))}
+          </div>
+        </section>
+
+      </motion.div>
     </div>
   )
 }

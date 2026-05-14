@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Download, Zap } from 'lucide-react'
+import { Download, Zap, FileImage } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 
 const ACCEPT = 'image/jpeg,image/png'
@@ -177,9 +177,9 @@ export default function ImageOptimizer() {
               <motion.div
                 animate={{ scale: isDragOver ? 1.15 : 1, rotate: isDragOver ? -5 : 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                className="text-7xl mb-6 select-none inline-block"
+                className="mb-6"
               >
-                🖼️
+                <FileImage className={`w-20 h-20 mx-auto transition-colors duration-300 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
               </motion.div>
               <p className="text-2xl font-extrabold text-gray-800 mb-2">
                 {isDragOver ? 'Release to optimize' : 'Drop your image here'}

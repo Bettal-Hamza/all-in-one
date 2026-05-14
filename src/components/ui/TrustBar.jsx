@@ -1,37 +1,40 @@
+import {
+  FileText, FileImage, Zap, Film, Music,
+  PenTool, Braces, Table2, Archive, FileSpreadsheet, Layout,
+} from 'lucide-react'
+
 const FORMATS = [
-  { label: 'PDF',  emoji: '📄' },
-  { label: 'JPG',  emoji: '🖼️' },
-  { label: 'PNG',  emoji: '🖼️' },
-  { label: 'WebP', emoji: '⚡' },
-  { label: 'MP4',  emoji: '🎬' },
-  { label: 'GIF',  emoji: '🎞️' },
-  { label: 'MP3',  emoji: '🎵' },
-  { label: 'SVG',  emoji: '✏️' },
-  { label: 'JSON', emoji: '{ }' },
-  { label: 'CSV',  emoji: '📊' },
-  { label: 'ZIP',  emoji: '📦' },
-  { label: 'DOCX', emoji: '📝' },
-  { label: 'XLSX', emoji: '📈' },
-  { label: 'PPTX', emoji: '📋' },
+  { label: 'PDF',  Icon: FileText },
+  { label: 'JPG',  Icon: FileImage },
+  { label: 'PNG',  Icon: FileImage },
+  { label: 'WebP', Icon: Zap },
+  { label: 'MP4',  Icon: Film },
+  { label: 'GIF',  Icon: Film },
+  { label: 'MP3',  Icon: Music },
+  { label: 'SVG',  Icon: PenTool },
+  { label: 'JSON', Icon: Braces },
+  { label: 'CSV',  Icon: Table2 },
+  { label: 'ZIP',  Icon: Archive },
+  { label: 'DOCX', Icon: FileText },
+  { label: 'XLSX', Icon: FileSpreadsheet },
+  { label: 'PPTX', Icon: Layout },
 ]
 
-// Duplicate for seamless infinite loop
 const ITEMS = [...FORMATS, ...FORMATS]
 
 export default function TrustBar() {
   return (
     <div className="w-full overflow-hidden border-y border-gray-100/80 bg-white/40 backdrop-blur-sm py-3">
-      {/* Screen-reader context */}
       <p className="sr-only">Supported file formats: {FORMATS.map(f => f.label).join(', ')}</p>
 
       <div className="flex animate-trust-scroll gap-0 w-max" aria-hidden="true">
-        {ITEMS.map((f, i) => (
+        {ITEMS.map(({ label, Icon }, i) => (
           <span
             key={i}
             className="inline-flex items-center gap-1.5 mx-4 text-xs font-semibold text-gray-400 whitespace-nowrap select-none"
           >
-            <span className="text-sm">{f.emoji}</span>
-            {f.label}
+            <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+            {label}
           </span>
         ))}
       </div>
