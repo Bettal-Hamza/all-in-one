@@ -1,0 +1,48 @@
+export const TOOLS = [
+  {
+    id: 'pdf-splitter',
+    label: 'PDF Splitter',
+    description: 'Split any multi-page PDF into individual pages.',
+    icon: '📄',
+    category: 'PDF',
+    path: '/tools/pdf-splitter',
+    accent: '#EF4444',
+    live: true,
+    component: () => import('../components/tools/PdfSplitter.jsx'),
+  },
+  {
+    id: 'image-converter',
+    label: 'Image to WebP',
+    description: 'Convert JPG and PNG to WebP for faster, leaner websites.',
+    icon: '🖼️',
+    category: 'Image',
+    path: '/tools/image-converter',
+    accent: '#F59E0B',
+    live: true,
+    component: () => import('../components/tools/ImageOptimizer.jsx'),
+  },
+  {
+    id: 'qr-generator',
+    label: 'QR Generator',
+    description: 'Generate scannable QR codes from any URL or text.',
+    icon: '⬛',
+    category: 'Utility',
+    path: '/tools/qr-generator',
+    accent: '#10B981',
+    live: true,
+    component: () => import('../components/tools/QrGenerator.jsx'),
+  },
+  {
+    id: 'background-remover',
+    label: 'Background Remover',
+    description: 'Remove any image background instantly with on-device AI.',
+    icon: '✨',
+    category: 'Image',
+    path: '/tools/background-remover',
+    accent: '#8B5CF6',
+    live: true,
+    component: () => import('../components/tools/BackgroundRemover.jsx'),
+  },
+]
+
+export const LIVE_TOOLS = TOOLS.filter(t => t.live)

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Sora', system-ui, sans-serif;
+  /* Dot grid pattern */
+  background-color: #FAFAFA;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
+  min-height: 100vh;
+}
+
+/* Trust bar infinite scroll */
+@keyframes trust-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-trust-scroll {
+  animation: trust-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-trust-scroll:hover {
+  animation-play-state: paused;
+}
