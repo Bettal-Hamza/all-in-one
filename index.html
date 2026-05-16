@@ -3,11 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SwiftTool — free browser-based utilities. PDF splitter, image converter and more. Your files never leave your device." />
-    <title>SwiftTool — Edit Files. No Stress.</title>
+    <meta name="theme-color" content="#4F46E5" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="description" content="Toolyy — free browser-based utilities. PDF splitter, image converter and more. Your files never leave your device." />
+    <title>Toolyy — Edit Files. No Stress.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!--
+      Non-render-blocking font load (FilamentGroup pattern):
+      rel="preload" fetches the CSS without blocking paint.
+      The onload handler swaps it to rel="stylesheet" once it arrives,
+      so users see the system-ui fallback immediately (no layout shift),
+      then Sora swaps in — this is what font-display:swap enables on the
+      Google Fonts side. The <noscript> tag covers JS-disabled agents.
+    -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

@@ -29,7 +29,7 @@ export default function Hero() {
             {...fadeUp(0)}
             className="inline-flex items-center self-start gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-extrabold tracking-widest uppercase mb-6"
           >
-            All-in-One Browser Toolkit
+            Toolyy Browser Toolkit
           </motion.span>
 
           <motion.h1
@@ -38,7 +38,7 @@ export default function Hero() {
           >
             <span className="inline-flex items-baseline gap-3">
               File magic,
-              <Sparkles className="w-10 h-10 text-indigo-500 shrink-0 self-center" />
+              <Sparkles aria-hidden="true" className="w-10 h-10 text-indigo-500 shrink-0 self-center" />
             </span>
             <br />
             <span className="text-brand">no friction.</span>
@@ -59,7 +59,7 @@ export default function Hero() {
                 key={text}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-100 text-xs font-bold text-gray-600 shadow-sm"
               >
-                <Icon className="w-3.5 h-3.5 text-brand" />
+                <Icon aria-hidden="true" className="w-3.5 h-3.5 text-brand" />
                 {text}
               </span>
             ))}

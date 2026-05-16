@@ -1,0 +1,20 @@
+{
+  "name": "Toolyy",
+  "short_name": "Toolyy",
+  "description": "Free, private browser utilities — PDF splitter, image converter, background remover and more. Your files never leave your device.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#4F46E5",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "en"
+}

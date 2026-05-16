@@ -51,7 +51,7 @@ const SECTIONS = [
         accent: '#EC4899',
         accentBg: '#FDF2F8',
         path: '/tools/mp4-to-mp3',
-        live: false,
+        live: true,
         badge: 'Free',
         badgeStyle: 'green',
       },
@@ -95,7 +95,7 @@ const SECTIONS = [
         accent: '#3B82F6',
         accentBg: '#EFF6FF',
         path: '/tools/social-resizer',
-        live: false,
+        live: true,
         badge: 'Multi-size',
         badgeStyle: 'sky',
       },
@@ -115,7 +115,7 @@ const SECTIONS = [
         accent: '#8B5CF6',
         accentBg: '#F5F3FF',
         path: '/tools/json-formatter',
-        live: false,
+        live: true,
         badge: 'Instant',
         badgeStyle: 'blue',
       },
@@ -127,7 +127,7 @@ const SECTIONS = [
         accent: '#0EA5E9',
         accentBg: '#F0F9FF',
         path: '/tools/unit-converter',
-        live: false,
+        live: true,
         badge: 'Offline',
         badgeStyle: 'green',
       },
@@ -142,7 +142,7 @@ function SectionHeader({ label, SectionIcon, color }) {
         className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: color + '18' }}
       >
-        <SectionIcon className="w-4 h-4" style={{ color }} />
+        <SectionIcon aria-hidden="true" className="w-4 h-4" style={{ color }} />
       </div>
       <span
         className="text-xs font-extrabold tracking-widest uppercase"
@@ -180,7 +180,7 @@ function BentoCard({ tool }) {
         className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
         style={{ backgroundColor: accentBg }}
       >
-        <Icon className="w-6 h-6" style={{ color: accent }} />
+        <Icon aria-hidden="true" className="w-6 h-6" style={{ color: accent }} />
       </div>
 
       {/* Label + live / soon pill */}

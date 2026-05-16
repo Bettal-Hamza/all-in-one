@@ -8,7 +8,7 @@ export default function Header() {
           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand text-white text-sm font-black shadow-md group-hover:scale-105 transition-transform">
             S
           </span>
-          <span className="font-extrabold text-gray-900 tracking-tight">SwiftTool</span>
+          <span className="font-extrabold text-gray-900 tracking-tight">Toolyy</span>
         </Link>
 
         <nav className="flex items-center gap-1 text-sm font-medium">
@@ -17,6 +17,12 @@ export default function Header() {
             className="px-3 py-1.5 rounded-xl text-gray-500 hover:text-gray-900 hover:bg-white/70 transition-all"
           >
             Home
+          </Link>
+          <Link
+            to="/about"
+            className="px-3 py-1.5 rounded-xl text-gray-500 hover:text-gray-900 hover:bg-white/70 transition-all"
+          >
+            About
           </Link>
         </nav>
       </div>

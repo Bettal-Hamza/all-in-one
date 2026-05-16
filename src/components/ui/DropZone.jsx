@@ -36,7 +36,7 @@ export default function DropZone({ accept, onFile, hint }) {
         }
       `}
     >
-      <FolderOpen className={`w-14 h-14 mx-auto mb-4 transition-colors duration-200 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
+      <FolderOpen aria-hidden="true" className={`w-14 h-14 mx-auto mb-4 transition-colors duration-200 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
       <p className="text-brand-text font-medium">{hint}</p>
       <p className="mt-1 text-brand-muted text-sm">
         {accept === 'application/pdf' ? 'PDF files only' : accept}

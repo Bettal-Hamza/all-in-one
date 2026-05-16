@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const SITE_NAME    = 'SwiftTool'
-const DEFAULT_TITLE = 'SwiftTool — Edit Files. No Stress.'
-const DEFAULT_DESC  = 'SwiftTool — free browser-based utilities. PDF splitter, image converter and more. Your files never leave your device.'
+const SITE_NAME    = 'Toolyy'
+const DEFAULT_TITLE = 'Toolyy — Edit Files. No Stress.'
+const DEFAULT_DESC  = 'Toolyy — free browser-based utilities. PDF splitter, image converter and more. Your files never leave your device.'
 
 /**
  * Drop this at the top of any tool page's JSX return.

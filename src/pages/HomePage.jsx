@@ -1,39 +1,46 @@
-import { motion } from 'framer-motion'
-import Hero from '../components/Hero.jsx'
-import BentoGrid from '../components/BentoGrid.jsx'
-import TrustBar from '../components/ui/TrustBar.jsx'
+import Hero        from '../components/Hero.jsx'
+import TrustBar    from '../components/ui/TrustBar.jsx'
+import BentoGrid   from '../components/BentoGrid.jsx'
+import UtilityPitch from '../components/sections/UtilityPitch.jsx'
+import ToolCatalog  from '../components/sections/ToolCatalog.jsx'
+import HowItWorks   from '../components/sections/HowItWorks.jsx'
+import ExpertFAQ    from '../components/sections/ExpertFAQ.jsx'
+
+function Divider() {
+  return <div aria-hidden="true" className="border-t border-gray-100 mx-4 lg:mx-8" />
+}
 
 export default function HomePage() {
   return (
     <div>
-      {/* ══════════════════════════════════════════════
-          HERO — split layout
-      ══════════════════════════════════════════════ */}
+
+      {/* ── Hero ─────────────────────────────────────────────── */}
       <Hero />
 
-      {/* ══════════════════════════════════════════════
-          TRUST BAR — scrolling format ticker
-      ══════════════════════════════════════════════ */}
+      {/* ── Trust bar ─────────────────────────────────────────── */}
       <TrustBar />
 
-      {/* ══════════════════════════════════════════════
-          SPONSOR — 728×90 reserved slot
-      ══════════════════════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex justify-center px-4 py-8"
-      >
-        <div className="w-full max-w-[728px] h-[90px] flex items-center justify-center rounded-xl border border-dashed border-gray-200 bg-gray-50 text-xs font-bold text-gray-300 tracking-widest uppercase select-none">
-          Sponsor
-        </div>
-      </motion.div>
-
-      {/* ══════════════════════════════════════════════
-          BENTO GRID — 4 tool cards
-      ══════════════════════════════════════════════ */}
+      {/* ── Bento grid (quick-pick tool cards) ────────────────── */}
       <BentoGrid />
+
+      <Divider />
+
+      {/* ── "The All-in-One Utility" — 300-word editorial copy ── */}
+      <UtilityPitch />
+
+      {/* ── Detailed Tool Catalog — 8-card grid ───────────────── */}
+      <ToolCatalog />
+
+      <Divider />
+
+      {/* ── How It Works — 3-step visual ──────────────────────── */}
+      <HowItWorks />
+
+      <Divider />
+
+      {/* ── Expert FAQ — native details/summary accordion ──────── */}
+      <ExpertFAQ />
+
     </div>
   )
 }

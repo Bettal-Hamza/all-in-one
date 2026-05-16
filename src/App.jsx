@@ -1,9 +1,15 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/layout/Header.jsx'
+import Footer from './components/layout/Footer.jsx'
 import HomePage from './pages/HomePage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import { TOOLS } from './constants/tools.js'
+
+const PrivacyPage  = React.lazy(() => import('./pages/PrivacyPage.jsx'))
+const TermsPage    = React.lazy(() => import('./pages/TermsPage.jsx'))
+const AboutPage    = React.lazy(() => import('./pages/AboutPage.jsx'))
+const FeedbackPage = React.lazy(() => import('./pages/FeedbackPage.jsx'))
 
 // Only register routes for tools that are live and have a component
 const toolRoutes = TOOLS
@@ -29,7 +35,7 @@ export default function App() {
 
         <Header />
 
-        <main className="flex-1 relative z-10">
+        <main className="flex-1 relative z-10 flex flex-col">
           <Suspense
             fallback={
               <div className="flex items-center justify-center h-64 text-gray-300 font-semibold text-sm tracking-wide">
@@ -38,7 +44,11 @@ export default function App() {
             }
           >
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/"        element={<HomePage />} />
+              <Route path="/about"    element={<AboutPage />} />
+              <Route path="/privacy"  element={<PrivacyPage />} />
+              <Route path="/terms"    element={<TermsPage />} />
+              <Route path="/feedback" element={<FeedbackPage />} />
               {toolRoutes.map(({ path, Component }) => (
                 <Route key={path} path={path} element={<Component />} />
               ))}
@@ -46,6 +56,8 @@ export default function App() {
             </Routes>
           </Suspense>
         </main>
+
+        <Footer />
       </div>
     </BrowserRouter>
   )

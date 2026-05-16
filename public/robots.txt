@@ -1,0 +1,17 @@
+# robots.txt — Toolyy
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+
+# Allow all public content
+Allow: /
+
+# Block any processing pipelines or internal endpoints.
+# These paths do not exist today but are disallowed defensively
+# so that if server-side routes are ever added under these prefixes
+# they are not indexed before an explicit Allow rule is added.
+Disallow: /processing/
+Disallow: /internal/
+
+# Sitemap location
+Sitemap: https://toolyy.net/sitemap.xml

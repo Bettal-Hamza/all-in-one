@@ -35,7 +35,7 @@ const HOW_TO_STEPS = [
   {
     Icon: Zap,
     title: 'Processing happens instantly',
-    body: 'SwiftTool reads and splits your PDF directly inside your browser using the pdf-lib engine. There is no upload step, so processing starts immediately.',
+    body: 'Toolyy reads and splits your PDF directly inside your browser using the pdf-lib engine. There is no upload step, so processing starts immediately.',
   },
   {
     Icon: LayoutGrid,
@@ -52,7 +52,7 @@ const HOW_TO_STEPS = [
 const FAQS = [
   {
     q: 'Is it safe to use this Free PDF Splitter?',
-    a: 'Absolutely. Unlike most online PDF tools, SwiftTool never sends your file to a server. All processing happens locally in your browser using JavaScript. Your document never leaves your device, so there is nothing to intercept, log, or accidentally leak — even if the file contains sensitive personal or business information.',
+    a: 'Absolutely. Unlike most online PDF tools, Toolyy never sends your file to a server. All processing happens locally in your browser using JavaScript. Your document never leaves your device, so there is nothing to intercept, log, or accidentally leak — even if the file contains sensitive personal or business information.',
   },
   {
     q: 'What is the maximum file size?',
@@ -64,7 +64,7 @@ const FAQS = [
   },
   {
     q: 'Can I split a password-protected PDF?',
-    a: 'Currently, encrypted or password-protected PDFs are not supported. You will need to remove the password protection first using your PDF viewer (e.g., Adobe Acrobat or Preview on Mac), then use SwiftTool to split the unlocked file.',
+    a: 'Currently, encrypted or password-protected PDFs are not supported. You will need to remove the password protection first using your PDF viewer (e.g., Adobe Acrobat or Preview on Mac), then use Toolyy to split the unlocked file.',
   },
   {
     q: 'What output format will I get?',
@@ -195,9 +195,9 @@ export default function PdfSplitter() {
         className="mb-8"
       >
         <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">PDF Tools</p>
-        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+        <p className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
           PDF Splitter
-        </h1>
+        </p>
         <p className="mt-2 text-gray-400 font-medium">
           Split any PDF into individual pages — entirely in your browser. Zero uploads.
         </p>
@@ -230,7 +230,7 @@ export default function PdfSplitter() {
                 transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                 className="mb-6"
               >
-                <FileText className={`w-20 h-20 mx-auto transition-colors duration-300 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
+                <FileText aria-hidden="true" className={`w-20 h-20 mx-auto transition-colors duration-300 ${isDragOver ? 'text-brand' : 'text-gray-300'}`} />
               </motion.div>
               <p className="text-2xl font-extrabold text-gray-800 mb-2">
                 {isDragOver ? 'Release to split' : 'Drop your PDF here'}
@@ -301,7 +301,7 @@ export default function PdfSplitter() {
                           className="flex items-center justify-between px-4 py-2.5 bg-gray-50/80 rounded-2xl hover:bg-brand/5 hover:text-brand transition-all group"
                         >
                           <span className="flex items-center gap-2.5 text-sm font-semibold text-gray-700 group-hover:text-brand">
-                            <FileText className="w-4 h-4 text-gray-300 group-hover:text-brand transition-colors" />
+                            <FileText aria-hidden="true" className="w-4 h-4 text-gray-300 group-hover:text-brand transition-colors" />
                             Page {i + 1}
                           </span>
                           <span className="text-xs font-semibold text-gray-300 group-hover:text-brand transition-colors">
@@ -355,128 +355,158 @@ export default function PdfSplitter() {
 
       </AnimatePresence>
 
-      {/* ── SEO content (intro · how-to · faq) ──────────────────── */}
-      <motion.div
+      {/* ── SEO Content Article ──────────────────────────────────── */}
+      <motion.article
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-20 space-y-16"
+        className="mt-20"
+        aria-label="Free PDF Splitter Online — complete guide"
       >
 
-        {/* ── Introduction ──────────────────────────────────────── */}
-        <section aria-labelledby="intro-heading">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 rounded-xl bg-red-50 flex items-center justify-center">
-              <ShieldCheck className="w-4 h-4 text-red-500" />
-            </div>
-            <h2 id="intro-heading" className="text-xl font-black text-gray-900">
-              Why SwiftTool's Free PDF Splitter?
-            </h2>
-          </div>
+        {/* Article H1 — the page's primary semantic heading */}
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
+          Free PDF Splitter Online
+        </h1>
+        <p className="text-sm text-gray-500 leading-relaxed mb-16 max-w-2xl">
+          Toolyy's browser-based PDF splitter extracts every page of your document into a
+          separate, download-ready PDF file — instantly, privately, and at no cost. No account
+          required, no file size cap, no watermarks.
+        </p>
 
-          <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">
-              Most online PDF tools quietly upload your file to a remote server the moment you drop it in.
-              That means your contracts, invoices, medical records, or personal documents travel across the
-              internet — raising real privacy concerns. SwiftTool's <strong className="text-gray-800">Free PDF Splitter</strong> works
-              completely differently.
-            </p>
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">
-              Every byte of processing happens <strong className="text-gray-800">directly in your browser</strong> using
-              the pdf-lib engine — a battle-tested JavaScript library that reads and writes PDF files without
-              any server contact. Your file never leaves your device. There is nothing to intercept, nothing
-              logged, and nothing retained. Whether you are handling a confidential legal brief or a personal
-              bank statement, you stay in complete control from start to finish.
-            </p>
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">
-              Speed is the other major advantage. Because there is no upload step, this <strong className="text-gray-800">online PDF tool</strong> starts
-              working the instant you choose a file. A 50-page PDF typically splits in under two seconds on
-              any modern device — laptop, tablet, or phone — with no queue and no bandwidth cap.
-            </p>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              There is no account to create, no subscription to manage, and no watermarks added to your
-              output files. Just open the page, drop your PDF, and download your individual pages. Fast,
-              private, and completely free — that is the SwiftTool promise.
-            </p>
+        <div className="space-y-16">
 
-            {/* Privacy + Speed highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-              <div className="flex items-start gap-3 bg-red-50/60 rounded-2xl p-4">
-                <ShieldCheck className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-black uppercase tracking-wider text-red-600 mb-1">100% Private</p>
-                  <p className="text-xs text-gray-500 leading-relaxed">Your file never leaves your device. Zero uploads, zero data retention.</p>
-                </div>
+          {/* ── How to Split PDF Pages Fast ─────────────────────── */}
+          <section aria-labelledby="howto-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-brand/10 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-brand" />
               </div>
-              <div className="flex items-start gap-3 bg-blue-50/60 rounded-2xl p-4">
-                <Gauge className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-black uppercase tracking-wider text-blue-600 mb-1">Instant Results</p>
-                  <p className="text-xs text-gray-500 leading-relaxed">No upload wait, no server queue. Processing starts immediately.</p>
-                </div>
-              </div>
+              <h2 id="howto-heading" className="text-xl font-black text-gray-900">
+                How to Split PDF Pages Fast
+              </h2>
             </div>
-          </div>
-        </section>
 
-        {/* ── Ad slot between sections ──────────────────────────── */}
-        <GlobalAdContainer slot="midContent" />
-
-        {/* ── How to Use ────────────────────────────────────────── */}
-        <section aria-labelledby="howto-heading">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 rounded-xl bg-brand/10 flex items-center justify-center">
-              <LayoutGrid className="w-4 h-4 text-brand" />
-            </div>
-            <h2 id="howto-heading" className="text-xl font-black text-gray-900">
-              How to Use the PDF Splitter
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {HOW_TO_STEPS.map(({ Icon, title, body }, i) => (
-              <div
-                key={i}
-                className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass flex gap-4"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-2xl bg-brand/8 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-brand" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {HOW_TO_STEPS.map(({ Icon, title, body }, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass flex gap-4"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-brand/8 flex items-center justify-center">
+                      <Icon aria-hidden="true" className="w-5 h-5 text-brand" />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div>
                     <span className="text-[10px] font-black uppercase tracking-widest text-brand/50">
                       Step {i + 1}
                     </span>
+                    <h3 className="text-sm font-extrabold text-gray-900 mt-0.5 mb-1">{title}</h3>
+                    <p className="text-xs text-gray-500 leading-relaxed">{body}</p>
                   </div>
-                  <h3 className="text-sm font-extrabold text-gray-900 mb-1">{title}</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">{body}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── FAQ ───────────────────────────────────────────────── */}
-        <section aria-labelledby="faq-heading">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
-              <FileType className="w-4 h-4 text-emerald-500" />
+              ))}
             </div>
-            <h2 id="faq-heading" className="text-xl font-black text-gray-900">
-              Frequently Asked Questions
-            </h2>
-          </div>
+          </section>
 
-          <div className="bg-white border border-gray-100 rounded-3xl px-8 shadow-glass divide-y divide-gray-100">
-            {FAQS.map((item, i) => (
-              <FaqItem key={i} q={item.q} a={item.a} />
-            ))}
-          </div>
-        </section>
+          {/* ── Ad slot between sections ──────────────────────────── */}
+          <GlobalAdContainer slot="midContent" />
 
-      </motion.div>
+          {/* ── Privacy First: No Server Uploads ─────────────────── */}
+          <section aria-labelledby="privacy-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-red-50 flex items-center justify-center">
+                <ShieldCheck aria-hidden="true" className="w-4 h-4 text-red-500" />
+              </div>
+              <h2 id="privacy-heading" className="text-xl font-black text-gray-900">
+                Privacy First: No Server Uploads
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass lg:flex lg:gap-10">
+
+              {/* Main privacy copy */}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                  Most online PDF tools quietly upload your file to a remote server the moment you drop
+                  it in. That means your contracts, invoices, medical records, or personal documents
+                  travel across the internet — raising real privacy concerns.
+                  Toolyy's <strong className="text-gray-800">Free PDF Splitter Online</strong> works
+                  completely differently.
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                  Every byte of processing happens <strong className="text-gray-800">directly in your
+                  browser</strong> using the pdf-lib engine — a battle-tested JavaScript library that
+                  reads and rewrites PDF files without any server contact. Your file never leaves your
+                  device. There is nothing to intercept, nothing logged, and nothing retained. The
+                  moment you close the tab the data is gone.
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Speed is the other major advantage. Because there is no upload step, this
+                  online PDF splitter starts working the instant you choose a file. A 50-page PDF
+                  typically splits in under two seconds on any modern device — laptop, tablet, or
+                  phone — with no queue and no bandwidth cap.
+                </p>
+              </div>
+
+              {/* Aside — supplementary privacy highlights */}
+              <aside
+                aria-label="Privacy and performance highlights"
+                className="mt-8 lg:mt-0 lg:w-56 flex-shrink-0 flex flex-col gap-3"
+              >
+                <div className="flex items-start gap-3 bg-red-50/70 rounded-2xl p-4">
+                  <ShieldCheck aria-hidden="true" className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-red-600 mb-1">100% Private</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">
+                      Zero uploads, zero data retention. Your file never leaves your device.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 bg-blue-50/70 rounded-2xl p-4">
+                  <Gauge aria-hidden="true" className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-blue-600 mb-1">Instant Results</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">
+                      No upload wait, no server queue. Processing starts immediately.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 bg-emerald-50/70 rounded-2xl p-4">
+                  <FileType aria-hidden="true" className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-emerald-600 mb-1">No Watermarks</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">
+                      Clean, standard PDF output with no branding added.
+                    </p>
+                  </div>
+                </div>
+              </aside>
+
+            </div>
+          </section>
+
+          {/* ── Frequently Asked Questions ────────────────────────── */}
+          <section aria-labelledby="faq-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
+                <FileType aria-hidden="true" className="w-4 h-4 text-emerald-500" />
+              </div>
+              <h2 id="faq-heading" className="text-xl font-black text-gray-900">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl px-8 shadow-glass divide-y divide-gray-100">
+              {FAQS.map((item, i) => (
+                <FaqItem key={i} q={item.q} a={item.a} />
+              ))}
+            </div>
+          </section>
+
+        </div>
+      </motion.article>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'swifttool_recent'
+const STORAGE_KEY = 'toolyy_recent'
 const MAX_RECENT = 5
 
 export function recordVisit(toolId) {
