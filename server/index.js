@@ -36,6 +36,11 @@ if (IS_PROD) {
   app.get('*', (_req, res) => res.sendFile(join(dist, 'index.html')))
 }
 
+app.use((err, _req, res, _next) => {
+  console.error('[Toolyy API] Unhandled error:', err)
+  res.status(500).json({ success: false, error: 'Internal server error' })
+})
+
 app.listen(PORT, () => {
   const env = IS_PROD ? 'production' : 'development'
   console.log(`[Toolyy API] ${env} server on http://localhost:${PORT}`)
