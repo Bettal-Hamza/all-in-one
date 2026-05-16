@@ -33,7 +33,7 @@ if (IS_PROD) {
   const dist = join(__dirname, '..', 'dist')
   app.use(express.static(dist))
   // SPA fallback — any unmatched path returns index.html so React Router works
-  app.get('*', (_req, res) => res.sendFile(join(dist, 'index.html')))
+  app.get('{*splat}', (_req, res) => res.sendFile(join(dist, 'index.html')))
 }
 
 app.use((err, _req, res, _next) => {
