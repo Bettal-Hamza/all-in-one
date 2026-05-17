@@ -28,10 +28,15 @@ export default function Footer() {
 
           {/* ── Col 1: Brand ────────────────────────────────── */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link to="/" className="inline-flex items-center gap-2.5 group mb-4">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white text-sm font-black shadow-md group-hover:scale-105 transition-transform">
-                T
-              </span>
+            <Link to="/" className="inline-flex items-center gap-2 group mb-4">
+              <img
+                src="/logo-icon-lg.png"
+                alt="Toolyy"
+                width="82"
+                height="48"
+                loading="lazy"
+                className="group-hover:scale-105 transition-transform"
+              />
               <span className="font-extrabold text-gray-900 tracking-tight text-lg">Toolyy</span>
             </Link>
 
