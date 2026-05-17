@@ -153,6 +153,43 @@ function formatResult(num) {
   return fixed.toLocaleString('en-US', { maximumFractionDigits: decimals })
 }
 
+// ─── DYNAMIC SEO META PER CATEGORY ──────────────────────────────────────────
+
+const CATEGORY_SEO = {
+  length: {
+    title: 'Online Length Unit Converter | mm, cm, m, km, in, ft, mi',
+    description: 'Convert between length units instantly — millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles. Free, private, and works offline.',
+  },
+  weight: {
+    title: 'Online Weight & Mass Converter | kg, lb, oz, g, stone',
+    description: 'Convert between weight and mass units including kilograms, pounds, ounces, grams, milligrams, metric tons, and stones. Instant results in your browser.',
+  },
+  temperature: {
+    title: 'Temperature Converter | Celsius, Fahrenheit, Kelvin',
+    description: 'Convert between Celsius (°C), Fahrenheit (°F), and Kelvin (K) instantly. Uses exact conversion formulas for scientific-grade precision.',
+  },
+  area: {
+    title: 'Online Area Unit Converter | m², ft², acres, hectares',
+    description: 'Convert between area units — square meters, square feet, acres, hectares, square kilometers, and square miles. Real-time metric and imperial area conversion.',
+  },
+  volume: {
+    title: 'Online Volume Converter | liters, gallons, cups, mL, fl oz',
+    description: 'Convert between volume units including liters, milliliters, gallons, cups, pints, fluid ounces, tablespoons, and cubic meters instantly.',
+  },
+  speed: {
+    title: 'Online Speed Unit Converter | m/s, km/h, mph, knots',
+    description: 'Convert between speed units including meters per second (m/s), kilometers per hour (km/h), miles per hour (mph), knots, and feet per second instantly.',
+  },
+  data: {
+    title: 'Data Storage Converter | bytes, KB, MB, GB, TB, bits',
+    description: 'Convert between digital storage units — bytes, kilobytes, megabytes, gigabytes, terabytes, bits, kilobits, and megabits. Uses binary (1024) base.',
+  },
+  time: {
+    title: 'Online Time Unit Converter | seconds, minutes, hours, days',
+    description: 'Convert between time units — milliseconds, seconds, minutes, hours, days, weeks, months, and years. Instant real-time calculations in your browser.',
+  },
+}
+
 // ─── SEO CONTENT ────────────────────────────────────────────────────────────
 
 const HOW_TO_STEPS = [
@@ -184,12 +221,28 @@ const FAQS = [
     a: 'Yes — Toolyy\'s Unit Converter uses IEEE 754 double-precision arithmetic, the same standard used by scientific calculators, spreadsheets, and programming languages. Conversion factors are sourced from NIST and SI standards. Results are displayed with up to 12 significant digits of precision.',
   },
   {
+    q: 'How do I convert mph to km/h?',
+    a: 'To convert miles per hour to kilometers per hour, multiply by 1.60934. For example, 60 mph × 1.60934 = 96.56 km/h. Toolyy\'s Speed converter does this instantly — select "Miles/hour" as the source unit and "km/h" as the target, then type your value.',
+  },
+  {
+    q: 'What is the formula for Celsius to Fahrenheit?',
+    a: 'The formula is °F = (°C × 9/5) + 32. For example, 100°C × 9/5 + 32 = 212°F. To convert Fahrenheit back to Celsius, use °C = (°F − 32) × 5/9. Toolyy applies these exact formulas so results are precise to full floating-point accuracy.',
+  },
+  {
     q: 'Does it work offline?',
     a: 'Yes — once the page has loaded, the converter works entirely offline. All conversion logic runs in your browser using JavaScript. There are no server calls, no API dependencies, and no network requests. You can disconnect from the internet and continue converting.',
   },
   {
+    q: 'What is the difference between metric and imperial units?',
+    a: 'The metric system (SI) uses base-10 units like meters, kilograms, and liters, used by most countries worldwide. The imperial system uses feet, pounds, and gallons, primarily in the United States and United Kingdom. Toolyy supports both systems and converts between them seamlessly.',
+  },
+  {
     q: 'Is my data private?',
     a: 'Completely. The Unit Converter is a pure client-side tool. Every calculation happens in your browser and nothing is sent to any server. There is no tracking of what you convert, no analytics on your inputs, and no data storage of any kind.',
+  },
+  {
+    q: 'How many bytes are in a gigabyte?',
+    a: 'In binary (computing standard), 1 Gigabyte = 1,073,741,824 bytes (1024³). In decimal (storage marketing), 1 GB = 1,000,000,000 bytes (10⁹). Toolyy\'s Data converter uses binary (base-1024) values, which matches how operating systems report storage.',
   },
   {
     q: 'Which temperature scales are supported?',
@@ -294,28 +347,30 @@ export default function UnitConverter() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="Unit Converter — Free Online Conversion Tool"
-        description="Free unit converter. Convert length, weight, temperature, area, volume, speed, data, and time units instantly in your browser. 100% private and offline-capable."
-        appName="Free Unit Converter"
-        appDescription="A free online tool that converts between hundreds of units across 8 categories — entirely in your browser. No uploads, no servers, works offline."
+        title={CATEGORY_SEO[catId].title}
+        description={CATEGORY_SEO[catId].description}
+        appName="Toolyy Unit Converter"
+        appDescription="A free online real-time unit calculator that converts between hundreds of metric and imperial units across 8 categories — length, weight, temperature, area, volume, speed, data, and time. 100% private, offline-capable, no sign-up required."
+        applicationCategory="UtilityApplication"
+        operatingSystem="All"
       />
       <FAQSchema faqs={FAQS} />
 
-      {/* ── Page title ──────────────────────────────────────────── */}
-      <motion.div
+      {/* ── Page heading ───────────────────────────────────────────── */}
+      <motion.header
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="mb-8"
       >
         <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Developer &amp; Utility</p>
-        <p className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
           Unit Converter
-        </p>
+        </h1>
         <p className="mt-2 text-gray-400 font-medium">
-          Convert between any units — length, weight, temperature &amp; more.
+          Convert between any units — length, weight, temperature &amp; more. Free online metric conversion calculator.
         </p>
-      </motion.div>
+      </motion.header>
 
       {/* ── Tool ────────────────────────────────────────────────── */}
       <motion.div
@@ -459,11 +514,11 @@ export default function UnitConverter() {
         className="mt-20"
         aria-label="Free Unit Converter — complete guide"
       >
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
-          Free Unit Converter
-        </h1>
+        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
+          Free Online Unit Converter
+        </h2>
         <p className="text-sm text-gray-500 leading-relaxed mb-16 max-w-2xl">
-          Toolyy's browser-based Unit Converter lets you convert between hundreds of units
+          Toolyy's browser-based Unit Converter lets you convert between hundreds of metric and imperial units
           across 8 categories — instantly, privately, and at no cost. No account needed,
           no ads interrupting your workflow, and everything runs locally on your device.
         </p>
@@ -476,9 +531,9 @@ export default function UnitConverter() {
               <div className="w-8 h-8 rounded-xl bg-brand/10 flex items-center justify-center">
                 <LayoutGrid aria-hidden="true" className="w-4 h-4 text-brand" />
               </div>
-              <h2 id="howto-heading" className="text-xl font-black text-gray-900">
-                How to Convert Units
-              </h2>
+              <h3 id="howto-heading" className="text-xl font-black text-gray-900">
+                How to Convert Units Online
+              </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {HOW_TO_STEPS.map(({ Icon, title, body }, i) => (
@@ -495,7 +550,7 @@ export default function UnitConverter() {
                     <span className="text-[10px] font-black uppercase tracking-widest text-brand/50">
                       Step {i + 1}
                     </span>
-                    <h3 className="text-sm font-extrabold text-gray-900 mt-0.5 mb-1">{title}</h3>
+                    <h4 className="text-sm font-extrabold text-gray-900 mt-0.5 mb-1">{title}</h4>
                     <p className="text-xs text-gray-500 leading-relaxed">{body}</p>
                   </div>
                 </div>
@@ -505,15 +560,82 @@ export default function UnitConverter() {
 
           <GlobalAdContainer slot="midContent" />
 
+          {/* ── Metric vs Imperial Overview ─────────────────────── */}
+          <section aria-labelledby="overview-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <ArrowRightLeft aria-hidden="true" className="w-4 h-4 text-amber-600" />
+              </div>
+              <h3 id="overview-heading" className="text-xl font-black text-gray-900">
+                Metric vs Imperial Units — Overview
+              </h3>
+            </div>
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass space-y-4">
+              <p className="text-sm text-gray-600 leading-relaxed">
+                The <strong className="text-gray-800">metric system</strong> (International System of Units, SI) is a decimal-based
+                measurement standard used by most countries worldwide. It uses base units like the meter (length),
+                kilogram (mass), liter (volume), and second (time), with prefixes such as kilo-, centi-, and milli-
+                to denote multiples and fractions. Its consistent base-10 structure makes mental math and scientific
+                calculations straightforward.
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                The <strong className="text-gray-800">imperial system</strong> (also called the US customary system) uses units like
+                feet, pounds, gallons, and Fahrenheit. It is primarily used in the United States, Liberia, and Myanmar.
+                Imperial units have inconsistent conversion factors — 12 inches in a foot, 3 feet in a yard, 5,280 feet
+                in a mile — which makes cross-unit conversion more complex without a tool.
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Toolyy's Unit Converter bridges both systems seamlessly. Whether you need to convert kilometers to miles
+                for a road trip, kilograms to pounds for shipping, or Celsius to Fahrenheit for a recipe, the tool
+                handles the conversion instantly with full precision.
+              </p>
+            </div>
+          </section>
+
+          {/* ── Supported Units Table ──────────────────────────── */}
+          <section aria-labelledby="units-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <Ruler aria-hidden="true" className="w-4 h-4 text-blue-600" />
+              </div>
+              <h3 id="units-heading" className="text-xl font-black text-gray-900">
+                All Supported Units
+              </h3>
+            </div>
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
+              <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                Toolyy supports real-time conversion across the following units. Every conversion is computed
+                client-side with precision factors sourced from NIST and SI standards.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {CATEGORIES.map(category => (
+                  <div key={category.id}>
+                    <h4 className="text-xs font-black uppercase tracking-widest text-gray-900 mb-2 flex items-center gap-1.5">
+                      <category.Icon aria-hidden="true" className="w-3.5 h-3.5 text-brand" />
+                      {category.label}
+                    </h4>
+                    <ul className="space-y-1">
+                      {category.units.map(u => (
+                        <li key={u.id} className="text-xs text-gray-500">
+                          {u.label} <span className="text-gray-300">({u.abbr})</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* ── Privacy ──────────────────────────────────────── */}
           <section aria-labelledby="privacy-heading">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-8 rounded-xl bg-red-50 flex items-center justify-center">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4 text-red-500" />
               </div>
-              <h2 id="privacy-heading" className="text-xl font-black text-gray-900">
+              <h3 id="privacy-heading" className="text-xl font-black text-gray-900">
                 100% Private &amp; Offline
-              </h2>
+              </h3>
             </div>
             <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
@@ -535,14 +657,47 @@ export default function UnitConverter() {
               <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <Ruler aria-hidden="true" className="w-4 h-4 text-emerald-500" />
               </div>
-              <h2 id="faq-heading" className="text-xl font-black text-gray-900">
+              <h3 id="faq-heading" className="text-xl font-black text-gray-900">
                 Frequently Asked Questions
-              </h2>
+              </h3>
             </div>
             <div className="bg-white border border-gray-100 rounded-3xl px-8 shadow-glass divide-y divide-gray-100">
               {FAQS.map((item, i) => (
                 <FaqItem key={i} q={item.q} a={item.a} />
               ))}
+            </div>
+          </section>
+
+          {/* ── Common Conversion Formulas ───────────────────────── */}
+          <section aria-labelledby="formulas-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-violet-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-violet-600" />
+              </div>
+              <h3 id="formulas-heading" className="text-xl font-black text-gray-900">
+                Common Conversion Formulas
+              </h3>
+            </div>
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                {[
+                  { label: 'Kilometers to Miles', formula: 'mi = km × 0.621371' },
+                  { label: 'Miles to Kilometers', formula: 'km = mi × 1.60934' },
+                  { label: 'Kilograms to Pounds', formula: 'lb = kg × 2.20462' },
+                  { label: 'Pounds to Kilograms', formula: 'kg = lb × 0.453592' },
+                  { label: 'Celsius to Fahrenheit', formula: '°F = (°C × 9/5) + 32' },
+                  { label: 'Fahrenheit to Celsius', formula: '°C = (°F − 32) × 5/9' },
+                  { label: 'Liters to Gallons', formula: 'gal = L × 0.264172' },
+                  { label: 'Meters to Feet', formula: 'ft = m × 3.28084' },
+                  { label: 'Inches to Centimeters', formula: 'cm = in × 2.54' },
+                  { label: 'km/h to mph', formula: 'mph = km/h × 0.621371' },
+                ].map(({ label, formula }) => (
+                  <div key={label} className="flex items-baseline justify-between py-2 border-b border-gray-50 last:border-0">
+                    <span className="text-xs font-bold text-gray-700">{label}</span>
+                    <code className="text-xs text-brand font-mono bg-brand/5 px-2 py-0.5 rounded-lg">{formula}</code>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 

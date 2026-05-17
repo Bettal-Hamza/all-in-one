@@ -16,17 +16,14 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Heavy AI library — only loads on /tools/background-remover
           if (id.includes('@imgly/background-removal')) return 'vendor-bg-removal'
           if (id.includes('@ffmpeg'))                   return 'vendor-ffmpeg'
-          // PDF engine — only loads on /tools/pdf-splitter
-          if (id.includes('pdf-lib'))                  return 'vendor-pdf'
-          // Animation library — shared but large; isolate for long-term caching
-          if (id.includes('framer-motion'))            return 'vendor-motion'
-          // React core — rarely changes, maximise cache life
+          if (id.includes('pdf-lib'))                   return 'vendor-pdf'
+          if (id.includes('framer-motion'))             return 'vendor-motion'
+          if (id.includes('qrcode.react'))              return 'vendor-qr'
           if (id.includes('node_modules/react-dom') ||
               id.includes('node_modules/react/') ||
-              id.includes('react-router-dom'))         return 'vendor-react'
+              id.includes('react-router-dom'))          return 'vendor-react'
         },
       },
     },
