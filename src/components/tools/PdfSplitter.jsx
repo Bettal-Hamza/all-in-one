@@ -7,7 +7,6 @@ import {
 import { splitPdf } from '../../lib/pdfSplitter.js'
 import { recordVisit } from '../../lib/recentTools.js'
 import ProgressBar from '../ui/ProgressBar.jsx'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const ACCEPT = 'application/pdf'
@@ -313,15 +312,9 @@ export default function PdfSplitter() {
                   </ul>
                 )}
 
-                {phase === 'done' && (
-                  <div className="mt-6">
-                    <GlobalAdContainer slot="postAction" />
-                  </div>
-                )}
               </div>
 
               <div className="flex flex-col gap-4">
-                <GlobalAdContainer slot="sidebar" className="rounded-3xl" />
                 <AnimatePresence mode="wait">
                   {phase === 'done' ? (
                     <motion.button
@@ -409,9 +402,6 @@ export default function PdfSplitter() {
               ))}
             </div>
           </section>
-
-          {/* ── Ad slot between sections ──────────────────────────── */}
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Privacy First: No Server Uploads ─────────────────── */}
           <section aria-labelledby="privacy-heading">

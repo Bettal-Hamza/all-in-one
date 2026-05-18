@@ -6,7 +6,6 @@ import {
   ChevronDown, ShieldCheck, Gauge, Palette, Smartphone,
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
 
@@ -189,11 +188,6 @@ export default function QrGenerator() {
         </p>
       </motion.div>
 
-      {/* ── Sponsor ad (728×90) ──────────────────────────────── */}
-      <div className="mb-8">
-        <GlobalAdContainer slot="sponsor" />
-      </div>
-
       {/* ── Tool area ─────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -314,10 +308,8 @@ export default function QrGenerator() {
           </div>
         </div>
 
-        {/* ── Sidebar: ad + trust cards ─────────────────────── */}
+        {/* ── Sidebar: trust cards ────────────────────────────── */}
         <div className="flex flex-col gap-4">
-          <GlobalAdContainer slot="sidebar" />
-
           <div className="bg-white border border-gray-100 rounded-3xl p-5 shadow-glass flex flex-col gap-3">
             {[
               {
@@ -407,9 +399,6 @@ export default function QrGenerator() {
               ))}
             </div>
           </section>
-
-          {/* ── Mid-content ad ────────────────────────────────── */}
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Why use a browser-based QR generator ─────────── */}
           <section aria-labelledby="why-heading">

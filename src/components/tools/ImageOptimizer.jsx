@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Download, Zap, FileImage, ChevronDown, ShieldCheck, Gauge, Globe } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
 
@@ -246,11 +245,6 @@ export default function ImageOptimizer() {
           Convert JPG &amp; PNG to WebP for faster websites — runs entirely in your browser, zero uploads.
         </p>
       </motion.div>
-
-      {/* ── Sponsor ad (728×90) ──────────────────────────────── */}
-      <div className="mb-8">
-        <GlobalAdContainer slot="sponsor" />
-      </div>
 
       {/* ── Tool ────────────────────────────────────────────────── */}
       <AnimatePresence mode="wait">
@@ -503,10 +497,8 @@ export default function ImageOptimizer() {
 
               </div>
 
-              {/* ── Sidebar: ad (300×250) + download ─────────────── */}
+              {/* ── Sidebar: download ────────────────────────────── */}
               <div className="flex flex-col gap-4">
-                <GlobalAdContainer slot="sidebar" />
-
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
@@ -591,9 +583,6 @@ export default function ImageOptimizer() {
               ))}
             </div>
           </section>
-
-          {/* ── Mid-content ad ────────────────────────────────── */}
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Why WebP Images Improve SEO ───────────────────── */}
           <section aria-labelledby="why-heading">

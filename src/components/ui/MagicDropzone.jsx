@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { UploadCloud, FileText, FileImage, Film, Music, Archive, Braces, Folder, Check } from 'lucide-react'
 import { TOOLS } from '../../constants/tools.js'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 
 function formatBytes(bytes) {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`
@@ -184,9 +183,6 @@ export default function MagicDropzone({ inputRef: externalInputRef }) {
                 <p className="text-xs text-gray-300 mt-1">More tools for this type are coming soon.</p>
               </div>
             )}
-
-            {/* Square ad placeholder inside results */}
-            <GlobalAdContainer slot="sidebar" />
 
             {/* Reset */}
             <button

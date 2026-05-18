@@ -7,7 +7,6 @@ import {
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const ACCEPT = 'video/mp4,video/webm,video/quicktime,video/x-msvideo,video/x-matroska,.mp4,.webm,.mov,.avi,.mkv'
@@ -422,7 +421,6 @@ export default function Mp4ToMp3() {
                   </div>
                 )}
 
-                <GlobalAdContainer slot="postAction" />
               </div>
 
               {/* Sidebar */}
@@ -464,8 +462,6 @@ export default function Mp4ToMp3() {
                     })}
                   </div>
                 </div>
-
-                <GlobalAdContainer slot="sidebar" className="rounded-3xl" />
 
                 {/* Convert / Download button */}
                 {phase === 'ready' && (
@@ -542,8 +538,6 @@ export default function Mp4ToMp3() {
               ))}
             </div>
           </section>
-
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Privacy ──────────────────────────────────────── */}
           <section aria-labelledby="privacy-heading">

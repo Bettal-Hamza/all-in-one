@@ -17,19 +17,5 @@ const AD_CONFIG = {
 }
 
 export default function GlobalAdContainer({ slot = 'sponsor', className = '' }) {
-  const { width, height, label } = AD_CONFIG[slot] ?? AD_CONFIG.sponsor
-
-  return (
-    <div
-      style={{ width: '100%', maxWidth: width, height }}
-      className={`mx-auto flex items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-white/50 backdrop-blur-sm ${className}`}
-      data-ad-slot={slot}
-      aria-label="Advertisement"
-    >
-      {/* ── Replace the span below with your AdSense <ins> tag ── */}
-      <span className="text-[10px] font-bold tracking-widest text-gray-300 uppercase select-none">
-        {label}
-      </span>
-    </div>
-  )
+  return null
 }

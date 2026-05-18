@@ -7,7 +7,6 @@ import {
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const ACCEPT = 'image/jpeg,image/png,image/webp'
@@ -456,9 +455,6 @@ export default function SocialResizer() {
                   />
                 </div>
 
-                <div className="mt-4">
-                  <GlobalAdContainer slot="postAction" />
-                </div>
               </div>
 
               {/* Sidebar */}
@@ -557,8 +553,6 @@ export default function SocialResizer() {
                   </p>
                 </div>
 
-                <GlobalAdContainer slot="sidebar" className="rounded-3xl" />
-
                 {/* Download button */}
                 <motion.button
                   whileHover={{ scale: 1.03 }}
@@ -626,9 +620,6 @@ export default function SocialResizer() {
               ))}
             </div>
           </section>
-
-          {/* ── Ad slot between sections ─────────────────────────── */}
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Privacy First ──────────────────────────────────── */}
           <section aria-labelledby="privacy-heading">

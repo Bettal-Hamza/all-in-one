@@ -7,7 +7,6 @@ import {
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const fadeUp = {
@@ -413,11 +412,6 @@ export default function JsonFormatter() {
         </div>
       </motion.div>
 
-      {/* ── Ad slot ─────────────────────────────────────────────── */}
-      <div className="mt-8">
-        <GlobalAdContainer slot="postAction" />
-      </div>
-
       {/* ── SEO Content Article ──────────────────────────────────── */}
       <motion.article
         initial={{ opacity: 0, y: 24 }}
@@ -469,9 +463,6 @@ export default function JsonFormatter() {
               ))}
             </div>
           </section>
-
-          {/* ── Ad slot between sections ─────────────────────────── */}
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Privacy First ──────────────────────────────────── */}
           <section aria-labelledby="privacy-heading">

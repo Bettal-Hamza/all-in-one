@@ -7,7 +7,6 @@ import {
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
-import GlobalAdContainer from '../ads/GlobalAdContainer.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const CATEGORIES = [
@@ -472,7 +471,6 @@ export default function UnitConverter() {
               )}
             </div>
 
-            <GlobalAdContainer slot="postAction" />
           </div>
 
           {/* Sidebar — quick reference */}
@@ -501,7 +499,6 @@ export default function UnitConverter() {
               </div>
             </div>
 
-            <GlobalAdContainer slot="sidebar" className="rounded-3xl" />
           </div>
         </div>
       </motion.div>
@@ -557,8 +554,6 @@ export default function UnitConverter() {
               ))}
             </div>
           </section>
-
-          <GlobalAdContainer slot="midContent" />
 
           {/* ── Metric vs Imperial Overview ─────────────────────── */}
           <section aria-labelledby="overview-heading">
