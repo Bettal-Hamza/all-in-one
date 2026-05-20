@@ -30,7 +30,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-2 group mb-4">
               <img
-                src="/logo-icon-lg.png"
+                src="/toolyy-logo.png"
                 alt="Toolyy"
                 width="82"
                 height="48"

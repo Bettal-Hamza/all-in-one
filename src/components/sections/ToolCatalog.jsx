@@ -61,8 +61,8 @@ const CATALOG = [
     category: 'Audio',
     accent: '#EC4899',
     accentBg: '#FDF2F8',
-    path: null,
-    live: false,
+    path: '/tools/mp4-to-mp3',
+    live: true,
     description:
       'Our MP4 to MP3 converter will extract the audio track from any MP4, MOV, or WebM file and save it as a standard MP3 — without uploading your video to any server. Useful for pulling podcast recordings, lecture audio, or music from locally saved video files.',
   },
@@ -73,8 +73,8 @@ const CATALOG = [
     category: 'Developer',
     accent: '#8B5CF6',
     accentBg: '#F5F3FF',
-    path: null,
-    live: false,
+    path: '/tools/json-formatter',
+    live: true,
     description:
       'Our JSON Formatter will beautify, validate, and minify any raw or malformed JSON payload with syntax highlighting and line-level error reporting. No upload required — all formatting runs in your browser, keeping API tokens or private response bodies in your hands only.',
   },
@@ -85,8 +85,8 @@ const CATALOG = [
     category: 'Design',
     accent: '#3B82F6',
     accentBg: '#EFF6FF',
-    path: null,
-    live: false,
+    path: '/tools/social-resizer',
+    live: true,
     description:
       'Our Social Image Resizer will resize a single source image to perfect pixel dimensions for every major platform — Instagram, X, LinkedIn, Facebook, and more — in one step. Secure file conversion happens via the Canvas API with zero cloud processing involved.',
   },
@@ -97,8 +97,8 @@ const CATALOG = [
     category: 'Utility',
     accent: '#0EA5E9',
     accentBg: '#F0F9FF',
-    path: null,
-    live: false,
+    path: '/tools/unit-converter',
+    live: true,
     description:
       'Our Unit Converter will instantly translate values across length, weight, temperature, volume, speed, data, and dozens of other categories as you type, with no round-trip to a server. Privacy-focused and offline-capable, it works in full once the page has loaded.',
   },

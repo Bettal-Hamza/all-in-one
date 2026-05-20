@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { Suspense, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
 import HomePage from './pages/HomePage.jsx'
@@ -19,6 +19,12 @@ const toolRoutes = TOOLS
     Component: React.lazy(tool.component),
   }))
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -33,6 +39,7 @@ export default function App() {
           }}
         />
 
+        <ScrollToTop />
         <Header />
 
         <main className="flex-1 relative z-10 flex flex-col">

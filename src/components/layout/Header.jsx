@@ -6,7 +6,7 @@ export default function Header() {
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-1.5 group">
           <img
-            src="/logo-icon.png"
+            src="/toolyy-logo.png"
             alt="Toolyy"
             width="55"
             height="32"
