@@ -258,10 +258,10 @@ export default function Mp4ToMp3() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="MP4 to MP3 Converter — Free Online Audio Extractor"
-        description="Free MP4 to MP3 converter. Extract audio from any video file directly in your browser. 100% private — your videos never leave your device."
-        appName="Free MP4 to MP3 Converter"
-        appDescription="A free online tool that extracts audio from video files and converts to MP3 — entirely in your browser. No uploads, no servers."
+        title="Convert MP4 to MP3 Audio Online | High-Quality Audio Extractor"
+        description="Extract crystal clear MP3 audio files from any MP4 video natively in your browser. Fast conversion speeds with zero file-size limitations or data tracking."
+        appName="MP4 to MP3 Audio Extractor"
+        appDescription="Extract high-quality MP3 audio from MP4, MOV, and WebM video files entirely in your browser. No uploads, no file-size limits, no data tracking."
       />
       <FAQSchema faqs={FAQS} />
 

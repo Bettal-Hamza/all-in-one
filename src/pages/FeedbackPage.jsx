@@ -34,8 +34,8 @@ export default function FeedbackPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
       <SEOManager
-        title="Suggest a Tool or Leave Feedback — Toolyy"
-        description="Have an idea for a new browser utility, or spotted a bug? Tell us — every submission is read personally and used to shape Toolyy's roadmap."
+        title="Suggest a Tool | Share Your Feedback"
+        description="Have an idea for a new browser utility or spotted a bug? Every submission is read personally and shapes the Toolyy roadmap. Your voice builds better tools."
         appName="Toolyy Feedback"
         appDescription="Submit tool suggestions and feedback for Toolyy — free browser-based file utilities."
       />

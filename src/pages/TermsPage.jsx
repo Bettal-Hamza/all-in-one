@@ -102,8 +102,8 @@ export default function TermsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
       <SEOManager
-        title="Terms of Service — Toolyy Free Browser Utilities"
-        description="Read Toolyy's Terms of Service. Free browser-based file utilities, no server uploads, standard usage rights for personal and commercial use."
+        title="Terms of Service | Usage Rights &amp; Conditions"
+        description="Read the Toolyy Terms of Service. Free browser-based utilities with standard usage rights for personal and commercial use. No account or payment required."
         appName="Toolyy Terms of Service"
         appDescription="Terms governing the use of Toolyy's free browser-based utility tools."
       />

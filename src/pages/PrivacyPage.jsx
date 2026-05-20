@@ -81,8 +81,8 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
       <SEOManager
-        title="Privacy Policy — Zero Uploads, Zero Data Retention"
-        description="Toolyy never uploads your files to a server. All file processing is 100% client-side in your browser. Read our full privacy policy."
+        title="Privacy Policy | Zero Uploads, Zero Data Retention"
+        description="Toolyy never uploads your files. All processing is 100% client-side in your browser. No cookies, no analytics fingerprinting, no personal data collected."
         appName="Toolyy Privacy Policy"
         appDescription="Toolyy processes every file locally in your browser. No server uploads, no data retention, no personal data collected."
       />

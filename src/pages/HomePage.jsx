@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import Hero        from '../components/Hero.jsx'
 import TrustBar    from '../components/ui/TrustBar.jsx'
 import BentoGrid   from '../components/BentoGrid.jsx'
+import SEOManager  from '../components/SEOManager.jsx'
 
 const UtilityPitch = lazy(() => import('../components/sections/UtilityPitch.jsx'))
 const ToolCatalog  = lazy(() => import('../components/sections/ToolCatalog.jsx'))
@@ -19,6 +20,11 @@ function SectionFallback() {
 export default function HomePage() {
   return (
     <div>
+      <SEOManager
+        title="Minimalist Developer & Consumer Utility Hub"
+        description="Access clean, fast, privacy-first web utilities. Convert formats, compress assets, and format data instantly in your browser with zero server uploads."
+        canonicalPath="/"
+      />
       {/* Above-the-fold — loads immediately, no framer-motion */}
       <Hero />
       <TrustBar />

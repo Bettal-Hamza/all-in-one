@@ -1,15 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Upload, Zap, LayoutGrid, Download,
+  Upload, Zap, LayoutGrid, Download, Check, X,
   ChevronDown, ShieldCheck, Gauge, FileType, FileText,
+  RotateCcw, Files, FileOutput, CheckSquare, Square,
 } from 'lucide-react'
-import { splitPdf } from '../../lib/pdfSplitter.js'
+import { splitPdf, mergePages } from '../../lib/pdfSplitter.js'
 import { recordVisit } from '../../lib/recentTools.js'
 import ProgressBar from '../ui/ProgressBar.jsx'
 import SEOManager from '../SEOManager.jsx'
 
 const ACCEPT = 'application/pdf'
+const THUMB_SCALE = 0.5
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -21,6 +23,25 @@ const fadeUp = {
 function formatBytes(bytes) {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`
+}
+
+function parseRangeInput(input, max) {
+  const indices = new Set()
+  const parts = input.split(',')
+  for (const part of parts) {
+    const trimmed = part.trim()
+    if (!trimmed) continue
+    const rangeMatch = trimmed.match(/^(\d+)\s*-\s*(\d+)$/)
+    if (rangeMatch) {
+      const start = Math.max(1, parseInt(rangeMatch[1], 10))
+      const end = Math.min(max, parseInt(rangeMatch[2], 10))
+      for (let i = start; i <= end; i++) indices.add(i - 1)
+    } else {
+      const num = parseInt(trimmed, 10)
+      if (num >= 1 && num <= max) indices.add(num - 1)
+    }
+  }
+  return [...indices].sort((a, b) => a - b)
 }
 
 // ─── SEO CONTENT ────────────────────────────────────────────────────────────
@@ -38,13 +59,13 @@ const HOW_TO_STEPS = [
   },
   {
     Icon: LayoutGrid,
-    title: 'Review your pages',
-    body: 'Every page appears as a labelled entry in the results list. You can see exactly how many pages were extracted before downloading anything.',
+    title: 'Select your pages',
+    body: 'Click page thumbnails to select the ones you need, use "Select All", or type a custom range like "1-3, 5, 8-10". Visual previews make it easy to find the right pages.',
   },
   {
     Icon: Download,
-    title: 'Download what you need',
-    body: 'Click any page entry to save that single page, or hit "Download All" to grab every page at once. Each page is saved as its own clean PDF file.',
+    title: 'Download your way',
+    body: 'Choose to download selected pages as separate PDF files, or merge them into a single combined PDF. One click and your files are ready.',
   },
 ]
 
@@ -62,6 +83,10 @@ const FAQS = [
     a: 'Yes — this Free PDF Splitter works on any modern browser, including Safari on iPhone and Chrome on Android. Simply open the page, tap the upload area to choose your PDF from your device or cloud storage, and download your pages when ready.',
   },
   {
+    q: 'Can I merge selected pages into one PDF?',
+    a: 'Yes! After splitting, select the pages you want, then choose "Merged PDF" as your download mode. Toolyy will combine those pages into a single PDF file in the order they appear in the original document. This is perfect for extracting specific chapters or sections.',
+  },
+  {
     q: 'Can I split a password-protected PDF?',
     a: 'Currently, encrypted or password-protected PDFs are not supported. You will need to remove the password protection first using your PDF viewer (e.g., Adobe Acrobat or Preview on Mac), then use Toolyy to split the unlocked file.',
   },
@@ -70,6 +95,78 @@ const FAQS = [
     a: 'Each extracted page is saved as a standard, fully compatible PDF file. The output files are named sequentially (e.g., page-1.pdf, page-2.pdf) and can be opened in any PDF viewer, printed, emailed, or uploaded anywhere PDFs are accepted.',
   },
 ]
+
+// ─── THUMBNAIL RENDERER ─────────────────────────────────────────────────────
+
+function PageThumbnail({ fileArrayBuffer, pageIndex, selected, onToggle }) {
+  const canvasRef = useRef(null)
+  const [rendered, setRendered] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    async function render() {
+      const pdfjsLib = await import('pdfjs-dist')
+      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+        'pdfjs-dist/build/pdf.worker.min.mjs',
+        import.meta.url,
+      ).toString()
+
+      const pdf = await pdfjsLib.getDocument({ data: fileArrayBuffer.slice(0) }).promise
+      const page = await pdf.getPage(pageIndex + 1)
+      const viewport = page.getViewport({ scale: THUMB_SCALE })
+      const canvas = canvasRef.current
+      if (!canvas || cancelled) return
+      canvas.width = viewport.width
+      canvas.height = viewport.height
+      const ctx = canvas.getContext('2d')
+      await page.render({ canvasContext: ctx, viewport }).promise
+      if (!cancelled) setRendered(true)
+    }
+    render()
+    return () => { cancelled = true }
+  }, [fileArrayBuffer, pageIndex])
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`
+        relative group rounded-xl overflow-hidden border-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand
+        ${selected
+          ? 'border-brand shadow-glow ring-2 ring-brand/20 scale-[1.02]'
+          : 'border-gray-200 hover:border-gray-300 hover:shadow-glass'
+        }
+      `}
+    >
+      <div className="bg-white">
+        <canvas
+          ref={canvasRef}
+          className={`w-full h-auto block transition-opacity duration-300 ${rendered ? 'opacity-100' : 'opacity-0'}`}
+        />
+        {!rendered && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+            <div className="w-5 h-5 border-2 border-gray-200 border-t-brand rounded-full animate-spin" />
+          </div>
+        )}
+      </div>
+
+      {/* Selection overlay */}
+      <div className={`absolute inset-0 transition-colors duration-200 ${selected ? 'bg-brand/10' : 'bg-transparent group-hover:bg-gray-900/5'}`} />
+
+      {/* Checkbox */}
+      <div className={`absolute top-2 left-2 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200 ${
+        selected ? 'bg-brand text-white shadow-md' : 'bg-white/90 border border-gray-300 text-transparent group-hover:border-gray-400'
+      }`}>
+        <Check className="w-3.5 h-3.5" strokeWidth={3} />
+      </div>
+
+      {/* Page number */}
+      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent px-2 py-2">
+        <p className="text-white text-xs font-bold text-center">Page {pageIndex + 1}</p>
+      </div>
+    </button>
+  )
+}
 
 // ─── SUB-COMPONENTS ─────────────────────────────────────────────────────────
 
@@ -118,8 +215,14 @@ export default function PdfSplitter() {
   const [fileName, setFileName]         = useState('')
   const [fileSize, setFileSize]         = useState(0)
   const [isDragOver, setIsDragOver]     = useState(false)
-  const inputRef = useRef(null)
-  const urlsRef  = useRef([])
+  const [selected, setSelected]         = useState(new Set())
+  const [rangeInput, setRangeInput]     = useState('')
+  const [downloadMode, setDownloadMode] = useState('separate')
+  const [merging, setMerging]           = useState(false)
+  const inputRef      = useRef(null)
+  const urlsRef       = useRef([])
+  const fileRef       = useRef(null)
+  const arrayBufRef   = useRef(null)
 
   useEffect(() => {
     recordVisit('pdf-splitter')
@@ -139,6 +242,11 @@ export default function PdfSplitter() {
     setProgress(0)
     setProgressLabel('')
     setPhase('processing')
+    setSelected(new Set())
+    setRangeInput('')
+    setDownloadMode('separate')
+    fileRef.current = file
+    arrayBufRef.current = await file.arrayBuffer()
 
     try {
       const results = await splitPdf(file, (current, total) => {
@@ -164,6 +272,65 @@ export default function PdfSplitter() {
     setFileName('')
     setFileSize(0)
     setPhase('idle')
+    setSelected(new Set())
+    setRangeInput('')
+    fileRef.current = null
+    arrayBufRef.current = null
+  }
+
+  const togglePage = useCallback((index) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      if (next.has(index)) next.delete(index)
+      else next.add(index)
+      return next
+    })
+    setRangeInput('')
+  }, [])
+
+  function selectAll() {
+    setSelected(new Set(pages.map((_, i) => i)))
+    setRangeInput('')
+  }
+
+  function deselectAll() {
+    setSelected(new Set())
+    setRangeInput('')
+  }
+
+  function applyRange() {
+    if (!rangeInput.trim()) return
+    const indices = parseRangeInput(rangeInput, pages.length)
+    setSelected(new Set(indices))
+  }
+
+  async function handleDownload() {
+    const indices = [...selected].sort((a, b) => a - b)
+    if (indices.length === 0) return
+
+    if (downloadMode === 'merged') {
+      setMerging(true)
+      try {
+        const result = await mergePages(fileRef.current, indices)
+        const a = document.createElement('a')
+        a.href = result.url
+        a.download = result.filename
+        a.click()
+        setTimeout(() => URL.revokeObjectURL(result.url), 5000)
+      } finally {
+        setMerging(false)
+      }
+    } else {
+      indices.forEach((pageIdx, i) => {
+        setTimeout(() => {
+          const { url, filename } = pages[pageIdx]
+          const a = document.createElement('a')
+          a.href = url
+          a.download = filename
+          a.click()
+        }, i * 150)
+      })
+    }
   }
 
   function handleDownloadAll() {
@@ -177,13 +344,15 @@ export default function PdfSplitter() {
     })
   }
 
+  const selectedCount = selected.size
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="Split PDF Online — 100% Private &amp; Free"
-        description="Free PDF splitter that runs entirely in your browser. No uploads, no server, instant results. Split any multi-page PDF into individual pages — 100% private."
-        appName="Free PDF Splitter"
-        appDescription="A free online PDF tool that splits multi-page PDFs into individual pages entirely in your browser. No uploads, no servers — 100% private and instant."
+        title="Free PDF Splitter Online | Extract Pages Instantly"
+        description="Split files and extract specific pages from your PDF documents completely client-side. Fast, safe, and works entirely in your browser without uploading data."
+        appName="Free PDF Splitter Online"
+        appDescription="Split and extract specific pages from multi-page PDFs entirely in your browser. Select pages visually, download separately or merged — no uploads, no servers."
       />
 
       {/* ── Page title ──────────────────────────────────────────── */}
@@ -258,91 +427,177 @@ export default function PdfSplitter() {
           </motion.div>
         )}
 
-        {(phase === 'processing' || phase === 'done') && (
-          <motion.div key="split" {...fadeUp}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <div className="lg:col-span-2 bg-surface-card backdrop-blur-xl border border-surface-border rounded-3xl shadow-glass p-8 flex flex-col">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="min-w-0 pr-4">
-                    <p className="text-[11px] font-bold tracking-widest uppercase text-brand mb-1">
-                      {phase === 'processing' ? 'Splitting PDF…' : `${pages.length} pages ready`}
-                    </p>
-                    <h2 className="text-xl font-black text-gray-900 truncate">{fileName}</h2>
-                    <p className="text-xs text-gray-400 mt-0.5 font-medium">{formatBytes(fileSize)}</p>
+        {phase === 'processing' && (
+          <motion.div key="processing" {...fadeUp}>
+            <div className="bg-surface-card backdrop-blur-xl border border-surface-border rounded-3xl shadow-glass p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div className="min-w-0 pr-4">
+                  <p className="text-[11px] font-bold tracking-widest uppercase text-brand mb-1">
+                    Splitting PDF…
+                  </p>
+                  <h2 className="text-xl font-black text-gray-900 truncate">{fileName}</h2>
+                  <p className="text-xs text-gray-400 mt-0.5 font-medium">{formatBytes(fileSize)}</p>
+                </div>
+              </div>
+              <ProgressBar pct={progress} />
+              <p className="mt-3 text-sm text-gray-400 font-medium">{progressLabel || 'Starting…'}</p>
+            </div>
+          </motion.div>
+        )}
+
+        {phase === 'done' && (
+          <motion.div key="done" {...fadeUp}>
+
+            {/* ── Toolbar ──────────────────────────────────────── */}
+            <div className="bg-surface-card backdrop-blur-xl border border-surface-border rounded-2xl shadow-glass p-4 mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+
+                {/* File info + reset */}
+                <div className="flex items-center gap-3 min-w-0 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-brand/10 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-4.5 h-4.5 text-brand" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-gray-900 truncate">{fileName}</p>
+                    <p className="text-[11px] text-gray-400 font-medium">{pages.length} pages · {formatBytes(fileSize)}</p>
                   </div>
                   <button
                     onClick={handleReset}
-                    className="flex-shrink-0 text-xs text-gray-300 hover:text-gray-600 font-semibold underline underline-offset-2 transition-colors"
+                    className="ml-1 p-1.5 rounded-lg text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-all"
+                    title="Start over"
                   >
-                    Start over
+                    <RotateCcw className="w-4 h-4" />
                   </button>
                 </div>
 
-                {phase === 'processing' && (
-                  <div className="flex-1">
-                    <ProgressBar pct={progress} />
-                    <p className="mt-3 text-sm text-gray-400 font-medium">{progressLabel || 'Starting…'}</p>
+                <div className="hidden sm:block w-px h-8 bg-gray-200" />
+
+                {/* Selection controls */}
+                <div className="flex items-center gap-2 flex-wrap flex-1">
+                  <button
+                    onClick={selectAll}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+                  >
+                    <CheckSquare className="w-3.5 h-3.5" /> All
+                  </button>
+                  <button
+                    onClick={deselectAll}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+                  >
+                    <Square className="w-3.5 h-3.5" /> None
+                  </button>
+
+                  <div className="hidden sm:block w-px h-6 bg-gray-200" />
+
+                  {/* Range input */}
+                  <div className="flex items-center gap-1.5">
+                    <input
+                      type="text"
+                      value={rangeInput}
+                      onChange={(e) => setRangeInput(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === 'Enter') applyRange() }}
+                      placeholder="e.g. 1-3, 5, 8-10"
+                      className="w-36 px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-medium text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand/20 transition-all"
+                    />
+                    <button
+                      onClick={applyRange}
+                      className="px-3 py-1.5 rounded-xl text-xs font-bold text-brand bg-brand/10 hover:bg-brand/20 transition-colors"
+                    >
+                      Apply
+                    </button>
                   </div>
-                )}
+                </div>
 
-                {phase === 'done' && (
-                  <ul className="flex-1 space-y-1.5 overflow-y-auto max-h-80 pr-1 -mr-1">
-                    {pages.map(({ url, filename }, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.035, duration: 0.3 }}
-                      >
-                        <a
-                          href={url}
-                          download={filename}
-                          className="flex items-center justify-between px-4 py-2.5 bg-gray-50/80 rounded-2xl hover:bg-brand/5 hover:text-brand transition-all group"
-                        >
-                          <span className="flex items-center gap-2.5 text-sm font-semibold text-gray-700 group-hover:text-brand">
-                            <FileText aria-hidden="true" className="w-4 h-4 text-gray-300 group-hover:text-brand transition-colors" />
-                            Page {i + 1}
-                          </span>
-                          <span className="text-xs font-semibold text-gray-300 group-hover:text-brand transition-colors">
-                            Download ↓
-                          </span>
-                        </a>
-                      </motion.li>
-                    ))}
-                  </ul>
-                )}
-
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <AnimatePresence mode="wait">
-                  {phase === 'done' ? (
-                    <motion.button
-                      key="download"
-                      initial={{ opacity: 0, scale: 0.94 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.94 }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{ type: 'spring', stiffness: 280, damping: 18 }}
-                      onClick={handleDownloadAll}
-                      className="w-full py-4 bg-brand hover:bg-brand-light text-white font-extrabold text-lg rounded-3xl shadow-lg transition-colors"
-                    >
-                      Download All
-                    </motion.button>
-                  ) : (
-                    <motion.div
-                      key="waiting"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="w-full py-4 bg-gray-100 text-gray-300 font-extrabold text-lg rounded-3xl text-center select-none cursor-not-allowed"
-                    >
-                      Processing…
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Selection count */}
+                <div className="flex-shrink-0">
+                  <span className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${
+                    selectedCount > 0
+                      ? 'bg-brand/10 text-brand'
+                      : 'bg-gray-100 text-gray-400'
+                  }`}>
+                    {selectedCount} selected
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* ── Thumbnail Grid ───────────────────────────────── */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-5">
+              {pages.map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: Math.min(i * 0.03, 0.6), duration: 0.3 }}
+                >
+                  <PageThumbnail
+                    fileArrayBuffer={arrayBufRef.current}
+                    pageIndex={i}
+                    selected={selected.has(i)}
+                    onToggle={() => togglePage(i)}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* ── Download Bar ──────────────────────────────────── */}
+            <div className="bg-surface-card backdrop-blur-xl border border-surface-border rounded-2xl shadow-glass p-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+
+                {/* Download mode toggle */}
+                <div className="flex rounded-xl bg-gray-100 p-1 flex-shrink-0">
+                  <button
+                    onClick={() => setDownloadMode('separate')}
+                    className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                      downloadMode === 'separate'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    <Files className="w-3.5 h-3.5" /> Separate PDFs
+                  </button>
+                  <button
+                    onClick={() => setDownloadMode('merged')}
+                    className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                      downloadMode === 'merged'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    <FileOutput className="w-3.5 h-3.5" /> Merged PDF
+                  </button>
+                </div>
+
+                <div className="flex-1" />
+
+                {/* Download buttons */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleDownloadAll}
+                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+                  >
+                    Download All Pages
+                  </button>
+                  <button
+                    onClick={handleDownload}
+                    disabled={selectedCount === 0 || merging}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-extrabold transition-all ${
+                      selectedCount > 0 && !merging
+                        ? 'bg-brand hover:bg-brand-light text-white shadow-lg shadow-brand/25'
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    }`}
+                  >
+                    {merging
+                      ? 'Merging…'
+                      : selectedCount > 0
+                        ? `Download ${selectedCount} ${selectedCount === 1 ? 'Page' : 'Pages'}`
+                        : 'Select Pages'
+                    }
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </motion.div>
         )}
 
@@ -357,7 +612,6 @@ export default function PdfSplitter() {
         aria-label="Free PDF Splitter Online — complete guide"
       >
 
-        {/* Article H1 — the page's primary semantic heading */}
         <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
           Free PDF Splitter Online
         </h1>
@@ -415,8 +669,6 @@ export default function PdfSplitter() {
             </div>
 
             <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass lg:flex lg:gap-10">
-
-              {/* Main privacy copy */}
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
                   Most online PDF tools quietly upload your file to a remote server the moment you drop
@@ -440,7 +692,6 @@ export default function PdfSplitter() {
                 </p>
               </div>
 
-              {/* Aside — supplementary privacy highlights */}
               <aside
                 aria-label="Privacy and performance highlights"
                 className="mt-8 lg:mt-0 lg:w-56 flex-shrink-0 flex flex-col gap-3"
@@ -473,7 +724,6 @@ export default function PdfSplitter() {
                   </div>
                 </div>
               </aside>
-
             </div>
           </section>
 

@@ -349,10 +349,10 @@ export default function SocialResizer() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="Social Media Image Resizer — Free Online Cropper"
-        description="Free social media image resizer. Crop and resize photos for Instagram, TikTok, and YouTube instantly in your browser. 100% private — your images never leave your device."
-        appName="Free Social Image Resizer"
-        appDescription="A free online tool that crops and resizes images to perfect dimensions for Instagram, TikTok, and YouTube — entirely in your browser. No uploads, no servers."
+        title="Social Media Image Resizer | Crop for Every Platform"
+        description="Resize and crop images to pixel-perfect dimensions for Instagram, TikTok, YouTube, LinkedIn, and X. Client-side processing keeps your photos private."
+        appName="Social Media Image Resizer"
+        appDescription="Resize images to exact dimensions for Instagram, TikTok, YouTube, LinkedIn, and X in one step. Canvas API processing — zero cloud uploads, zero data tracking."
       />
       <FAQSchema faqs={FAQS} />
 

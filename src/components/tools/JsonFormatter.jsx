@@ -234,10 +234,10 @@ export default function JsonFormatter() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="JSON Formatter &amp; Validator — Free Online Tool"
-        description="Free online JSON formatter, validator and minifier. Beautify, validate, and compress JSON instantly in your browser. 100% private — your data never leaves your device."
-        appName="Free JSON Formatter"
-        appDescription="A free online JSON tool that beautifies, validates, and minifies JSON entirely in your browser. No uploads, no servers — 100% private and instant."
+        title="JSON Formatter &amp; Validator Online | Beautify &amp; Minify"
+        description="Paste or type raw JSON and instantly beautify, validate, or minify it with syntax highlighting and line-level error reporting. Runs in your browser — API keys stay safe."
+        appName="JSON Formatter and Validator"
+        appDescription="Beautify, validate, and minify JSON payloads with syntax highlighting and error reporting. Runs entirely in your browser — no uploads, API tokens stay private."
       />
       <FAQSchema faqs={FAQS} />
 

@@ -165,10 +165,10 @@ export default function QrGenerator() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="Free QR Code Generator — Instant, Private, No Sign-Up"
-        description="Create scannable QR codes from any URL or text in seconds. Runs 100% in your browser — no sign-up, no data collected. Download PNG free forever."
-        appName="Free QR Code Generator"
-        appDescription="A free, private QR code generator that runs entirely in your browser. No uploads, no server, no account required."
+        title="QR Code Generator Online | Create &amp; Download Instantly"
+        description="Generate scannable QR codes from URLs, text, Wi-Fi credentials, or phone numbers. Customizable colors, high-res PNG download, and zero data collection."
+        appName="QR Code Generator"
+        appDescription="Generate custom QR codes from any URL or text instantly in your browser. Adjustable error correction, branded colors, high-resolution PNG export — no sign-up."
       />
       <FAQSchema faqs={FAQS} />
 

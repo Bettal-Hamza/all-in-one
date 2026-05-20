@@ -59,8 +59,8 @@ export default function AboutPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="About Toolyy — Free, Private Browser Tools for Everyone"
-        description="Toolyy was built because every online file tool required an upload. We built an alternative: powerful utilities that run entirely in your browser, for free, forever."
+        title="About Us | Our Mission &amp; Story"
+        description="Toolyy exists because every file tool demanded an upload. We built privacy-first browser utilities that process everything locally — free, fast, and forever open."
         appName="About Toolyy"
         appDescription="The story behind Toolyy — free, private, browser-based file utilities built for everyone."
       />

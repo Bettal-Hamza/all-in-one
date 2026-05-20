@@ -394,10 +394,10 @@ export default function BackgroundRemover() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="AI Background Remover — Free, Private, No Upload"
-        description="Remove image backgrounds instantly with on-device AI. No upload, no sign-up, no watermarks. Runs 100% in your browser using WebAssembly — free forever."
-        appName="Free AI Background Remover"
-        appDescription="A free, private AI background remover that runs entirely in your browser using WebAssembly. No uploads, no server, outputs transparent PNG."
+        title="AI Background Remover Online | Remove Backgrounds Instantly"
+        description="Erase image backgrounds in seconds using on-device AI powered by WebAssembly. No uploads to any server, no sign-up, and outputs clean transparent PNGs."
+        appName="AI Background Remover"
+        appDescription="Remove image backgrounds instantly using on-device AI inference via WebAssembly. Outputs transparent PNG, runs entirely in your browser — zero uploads."
       />
       <FAQSchema faqs={FAQS} />
 

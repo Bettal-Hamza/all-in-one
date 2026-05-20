@@ -223,10 +223,10 @@ export default function ImageOptimizer() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="Convert JPG & PNG to WebP Free — Image Optimizer"
-        description="Convert JPEG and PNG images to WebP and reduce file sizes by up to 80%. Runs 100% in your browser — no upload, no account, free forever."
-        appName="Free Image to WebP Converter"
-        appDescription="A free, private image converter that converts JPG and PNG to WebP format entirely in your browser. No uploads, no server, adjustable quality slider."
+        title="Image to WebP Converter Online | Compress &amp; Optimize"
+        description="Convert JPG and PNG images to modern WebP format and reduce file sizes by up to 80%. Adjustable quality, batch-ready, and processed entirely in your browser."
+        appName="Image to WebP Converter"
+        appDescription="Convert JPEG and PNG images to optimized WebP format with adjustable quality — entirely in your browser. No uploads, no account, no watermarks."
       />
       <FAQSchema faqs={FAQS} />
 

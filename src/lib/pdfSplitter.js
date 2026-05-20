@@ -23,11 +23,24 @@ export async function splitPdf(file, onProgress = () => {}) {
     results.push({ url, filename })
     onProgress(i + 1, totalPages)
 
-    // Yield to the event loop so React can repaint the progress bar
     if (i < totalPages - 1) {
       await new Promise(resolve => setTimeout(resolve, 0))
     }
   }
 
   return results
+}
+
+export async function mergePages(file, pageIndices) {
+  const arrayBuffer = await file.arrayBuffer()
+  const srcDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true })
+  const newDoc = await PDFDocument.create()
+  const copiedPages = await newDoc.copyPages(srcDoc, pageIndices)
+  copiedPages.forEach(page => newDoc.addPage(page))
+  const pdfBytes = await newDoc.save()
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+  const url = URL.createObjectURL(blob)
+  const baseName = file.name.replace(/\.pdf$/i, '')
+  const filename = `${baseName}_pages_${pageIndices.map(i => i + 1).join('-')}.pdf`
+  return { url, filename }
 }

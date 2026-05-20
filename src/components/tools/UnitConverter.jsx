@@ -156,36 +156,36 @@ function formatResult(num) {
 
 const CATEGORY_SEO = {
   length: {
-    title: 'Online Length Unit Converter | mm, cm, m, km, in, ft, mi',
-    description: 'Convert between length units instantly — millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles. Free, private, and works offline.',
+    title: 'Length Unit Converter Online | Metric &amp; Imperial',
+    description: 'Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles instantly in your browser. Offline-capable and privacy-first.',
   },
   weight: {
-    title: 'Online Weight & Mass Converter | kg, lb, oz, g, stone',
-    description: 'Convert between weight and mass units including kilograms, pounds, ounces, grams, milligrams, metric tons, and stones. Instant results in your browser.',
+    title: 'Weight &amp; Mass Converter Online | kg, lb, oz, stone',
+    description: 'Convert kilograms, pounds, ounces, grams, metric tons, and stones in real time. Runs entirely client-side with no data sent to any server.',
   },
   temperature: {
-    title: 'Temperature Converter | Celsius, Fahrenheit, Kelvin',
-    description: 'Convert between Celsius (°C), Fahrenheit (°F), and Kelvin (K) instantly. Uses exact conversion formulas for scientific-grade precision.',
+    title: 'Temperature Converter Online | Celsius, Fahrenheit, Kelvin',
+    description: 'Convert between Celsius, Fahrenheit, and Kelvin using exact formulas for scientific-grade precision. Instant results calculated in your browser.',
   },
   area: {
-    title: 'Online Area Unit Converter | m², ft², acres, hectares',
-    description: 'Convert between area units — square meters, square feet, acres, hectares, square kilometers, and square miles. Real-time metric and imperial area conversion.',
+    title: 'Area Unit Converter Online | m², ft², Acres, Hectares',
+    description: 'Convert between square meters, square feet, acres, hectares, square kilometers, and square miles. Real-time metric and imperial area calculations.',
   },
   volume: {
-    title: 'Online Volume Converter | liters, gallons, cups, mL, fl oz',
-    description: 'Convert between volume units including liters, milliliters, gallons, cups, pints, fluid ounces, tablespoons, and cubic meters instantly.',
+    title: 'Volume Converter Online | Liters, Gallons, mL, Cups',
+    description: 'Convert between liters, milliliters, gallons, cups, pints, fluid ounces, tablespoons, and cubic meters. Instant browser-based calculations.',
   },
   speed: {
-    title: 'Online Speed Unit Converter | m/s, km/h, mph, knots',
-    description: 'Convert between speed units including meters per second (m/s), kilometers per hour (km/h), miles per hour (mph), knots, and feet per second instantly.',
+    title: 'Speed Unit Converter Online | m/s, km/h, mph, Knots',
+    description: 'Convert between meters per second, kilometers per hour, miles per hour, knots, and feet per second. Instant results with zero server round-trips.',
   },
   data: {
-    title: 'Data Storage Converter | bytes, KB, MB, GB, TB, bits',
-    description: 'Convert between digital storage units — bytes, kilobytes, megabytes, gigabytes, terabytes, bits, kilobits, and megabits. Uses binary (1024) base.',
+    title: 'Data Storage Converter Online | Bytes, KB, MB, GB, TB',
+    description: 'Convert between bytes, kilobytes, megabytes, gigabytes, terabytes, bits, and megabits using binary 1024-base. Privacy-first and works offline.',
   },
   time: {
-    title: 'Online Time Unit Converter | seconds, minutes, hours, days',
-    description: 'Convert between time units — milliseconds, seconds, minutes, hours, days, weeks, months, and years. Instant real-time calculations in your browser.',
+    title: 'Time Unit Converter Online | Seconds, Hours, Days, Years',
+    description: 'Convert between milliseconds, seconds, minutes, hours, days, weeks, months, and years. Instant real-time calculations entirely in your browser.',
   },
 }
 
