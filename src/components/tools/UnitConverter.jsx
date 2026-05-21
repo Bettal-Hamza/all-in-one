@@ -657,6 +657,111 @@ export default function UnitConverter() {
             </div>
           </section>
 
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h3 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h3>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h4 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How do I convert kilometers to miles instantly online?
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Open Toolyy's Unit Converter, select the Length category, choose "Kilometer"
+                  as the source unit and "Mile" as the target, and type your value. The result
+                  updates instantly as you type — no button click needed. The formula is:
+                  miles = kilometers x 0.621371.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h4 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the most accurate free online unit converter?
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Toolyy's Unit Converter uses IEEE 754 double-precision arithmetic with
+                  conversion factors sourced from NIST and SI standards. Results are displayed
+                  with up to 12 significant digits. It covers 8 categories: length, weight,
+                  temperature, area, volume, speed, data, and time — all calculated locally
+                  in your browser with zero server round-trips.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h4 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Can I use a unit converter offline without internet?
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Yes — once Toolyy's Unit Converter page has loaded, it works entirely offline.
+                  All conversion logic runs in your browser using JavaScript, with no server
+                  calls or API dependencies. You can disconnect from the internet and continue
+                  converting between any units without interruption.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h3 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other Unit Converters
+              </h3>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Converters</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Works offline</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Yes — fully offline</td>
+                    <td className="px-6 py-3 text-gray-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Ad-free experience</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Yes — zero ads</td>
+                    <td className="px-6 py-3 text-gray-400">Rare</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Categories</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">8 (length, weight, temp, area, volume, speed, data, time)</td>
+                    <td className="px-6 py-3 text-gray-400">Varies</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Precision</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">IEEE 754 double (NIST/SI factors)</td>
+                    <td className="px-6 py-3 text-gray-400">Varies</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Data tracking</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">None — 100% private</td>
+                    <td className="px-6 py-3 text-gray-400">Usually tracked</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no limits</td>
+                    <td className="px-6 py-3 text-gray-400">Free with ads</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           {/* ── FAQ ────────────────────────────────────────────── */}
           <section aria-labelledby="faq-heading">
             <div className="flex items-center gap-3 mb-6">

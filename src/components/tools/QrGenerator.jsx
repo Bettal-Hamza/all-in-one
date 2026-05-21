@@ -4,6 +4,7 @@ import { QRCodeCanvas } from 'qrcode.react'
 import {
   Download, Share2, Link2, QrCode,
   ChevronDown, ShieldCheck, Gauge, Palette, Smartphone,
+  Zap, LayoutGrid,
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
@@ -493,6 +494,110 @@ export default function QrGenerator() {
                 ))}
               </aside>
 
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I generate a QR code that never expires?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Use Toolyy's QR Code Generator — it encodes your URL or text directly into the
+                  QR pattern without any redirect server. Unlike subscription-based QR services,
+                  there is no middleman that can break your code. The PNG you download is
+                  self-contained and works indefinitely, as long as your destination URL is live.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the most private way to create a QR code from a URL?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Toolyy generates QR codes entirely in your browser using the qrcode.react
+                  library. Your URL or text is never sent to any server — it stays on your device
+                  at all times. No analytics are attached to scans, and no data is logged. This
+                  makes it the safest choice for encoding sensitive links or personal information.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Can I create a QR code for Wi-Fi credentials?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Yes — paste your Wi-Fi SSID and password as text into Toolyy's QR generator.
+                  Modern smartphone cameras on both iPhone and Android automatically recognise
+                  Wi-Fi QR codes and offer to connect directly. This is perfect for guest
+                  networks at offices, restaurants, or short-term rentals.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other QR Code Generators
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical QR Generators</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">URL tracking / redirect</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — direct encoding</td>
+                    <td className="px-6 py-3 text-gray-400">Yes — every scan tracked</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Account required</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No</td>
+                    <td className="px-6 py-3 text-gray-400">Often</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Code expiry</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Never — permanent</td>
+                    <td className="px-6 py-3 text-gray-400">Often after free trial</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Data stored on server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Yes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Custom colours</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Classic + Branded</td>
+                    <td className="px-6 py-3 text-gray-400">Paid feature</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free forever</td>
+                    <td className="px-6 py-3 text-gray-400">Subscription-based</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

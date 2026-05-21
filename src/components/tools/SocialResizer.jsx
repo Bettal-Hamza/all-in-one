@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Upload, Download, Share2, Square, Smartphone, Monitor,
   ChevronDown, ShieldCheck, Gauge, LayoutGrid, FileType,
-  ImageIcon, Move, RotateCcw, ZoomIn, ZoomOut, Crop,
+  ImageIcon, Move, RotateCcw, ZoomIn, ZoomOut, Crop, Zap,
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
@@ -700,6 +700,110 @@ export default function SocialResizer() {
                   </div>
                 </div>
               </aside>
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I resize an image for Instagram without losing quality?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Use Toolyy's Social Resizer — upload your image, select the Instagram Post
+                  preset (1080 x 1080), position the crop frame over the area you want, and
+                  download. The tool exports at Instagram's exact recommended resolution, so
+                  the platform won't re-compress your image. Everything happens in your browser.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What are the exact image dimensions for social media platforms?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Instagram Post: 1080 x 1080px (1:1). TikTok / Instagram Story: 1080 x 1920px
+                  (9:16). YouTube Thumbnail: 1280 x 720px (16:9). Toolyy's Social Resizer has
+                  built-in presets for each platform, plus a custom size option for any other
+                  dimension you need.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Can I crop one image for multiple social media platforms at once?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Yes — after downloading one version, simply select a different platform preset
+                  and the crop frame adjusts to the new aspect ratio. Reposition if needed and
+                  download again. You can produce Instagram, TikTok, and YouTube versions from
+                  the same image in seconds, all without re-uploading.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other Image Resizers
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Resizers</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Image uploaded to server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Yes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Account required</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No</td>
+                    <td className="px-6 py-3 text-gray-400">Usually</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Platform presets</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Instagram, TikTok, YouTube, Custom</td>
+                    <td className="px-6 py-3 text-gray-400">Limited selection</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Visual crop with grid</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Yes — rule-of-thirds overlay</td>
+                    <td className="px-6 py-3 text-gray-400">Basic crop only</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Watermarks</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Never</td>
+                    <td className="px-6 py-3 text-gray-400">Common on free tier</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no limits</td>
+                    <td className="px-6 py-3 text-gray-400">Free trial, then paid</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

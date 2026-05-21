@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Braces, Sparkles, Minimize2, CheckCircle2, XCircle,
   Copy, Trash2, Download, Upload, ChevronDown,
-  ShieldCheck, Gauge, LayoutGrid, Code2, Check,
+  ShieldCheck, Gauge, LayoutGrid, Code2, Check, Zap,
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
@@ -543,6 +543,110 @@ export default function JsonFormatter() {
                   </div>
                 </div>
               </aside>
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I format JSON online without exposing my API keys?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Use Toolyy's JSON Formatter — it processes everything directly in your browser
+                  using native JavaScript. Your data never leaves your device, so API keys, tokens,
+                  and sensitive configuration values stay completely private. Paste your JSON, click
+                  Beautify, and copy the formatted output.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the fastest way to validate JSON syntax?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Paste your JSON into Toolyy's formatter and click the Validate button. The tool
+                  instantly checks your syntax and shows the exact error message with position
+                  information if something is wrong. Validation runs locally in milliseconds —
+                  no server round-trip, no rate limits.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How do I minify JSON for production API payloads?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Paste your JSON into Toolyy's formatter and click the Minify button. The tool
+                  strips all whitespace and line breaks to produce the smallest possible output —
+                  perfect for reducing bandwidth in API responses, configuration files, and
+                  localStorage entries. One click, then copy or download.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other JSON Formatters
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Formatters</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Data sent to server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Usually</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Syntax highlighting</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Yes — colour-coded preview</td>
+                    <td className="px-6 py-3 text-gray-400">Sometimes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Validation</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Built-in with error location</td>
+                    <td className="px-6 py-3 text-gray-400">Separate tool</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Minify support</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">One-click minify</td>
+                    <td className="px-6 py-3 text-gray-400">Sometimes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">File size limit</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">None (device RAM only)</td>
+                    <td className="px-6 py-3 text-gray-400">Varies</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no ads</td>
+                    <td className="px-6 py-3 text-gray-400">Free with ads</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

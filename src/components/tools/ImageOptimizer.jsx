@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Download, Zap, FileImage, ChevronDown, ShieldCheck, Gauge, Globe } from 'lucide-react'
+import { Download, Zap, FileImage, ChevronDown, ShieldCheck, Gauge, Globe, LayoutGrid } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
@@ -676,6 +676,110 @@ export default function ImageOptimizer() {
                 ))}
               </aside>
 
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I convert a JPG to WebP for free without uploading my image?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  You can convert any JPG or PNG to WebP instantly at Toolyy.net. The tool uses
+                  the HTML5 Canvas API directly in your browser — your image never leaves your
+                  device. Drop your file, adjust the quality slider, and download the optimized
+                  WebP. No account, no upload, no watermarks.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the best way to reduce image file size for websites?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Convert your images to WebP format — Google's modern image format that produces
+                  files 25–80% smaller than JPEG and PNG at equivalent visual quality. Use Toolyy's
+                  Image to WebP converter to process images privately in your browser. The quality
+                  slider lets you find the exact size-vs-fidelity balance for your site.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Does converting to WebP reduce image quality?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  At quality settings of 75% and above, the difference between WebP and the
+                  original JPEG is imperceptible to the human eye. Toolyy's adjustable slider
+                  lets you preview the result before downloading. For photography, 80% quality
+                  is the sweet spot — typically 60–75% smaller with no visible loss.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other Image Converters
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Converters</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Image uploaded to server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Yes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Account required</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No</td>
+                    <td className="px-6 py-3 text-gray-400">Usually</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Quality control</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Adjustable slider (1–100%)</td>
+                    <td className="px-6 py-3 text-gray-400">Fixed presets</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">File size limit</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">None (device RAM only)</td>
+                    <td className="px-6 py-3 text-gray-400">5–50 MB</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Watermarks</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Never</td>
+                    <td className="px-6 py-3 text-gray-400">Common on free tier</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no limits</td>
+                    <td className="px-6 py-3 text-gray-400">Free trial, then paid</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Music, Upload, Download, RotateCcw, ChevronDown,
   ShieldCheck, Gauge, LayoutGrid, FileAudio, Loader2,
-  AlertCircle, CheckCircle2,
+  AlertCircle, CheckCircle2, Zap,
 } from 'lucide-react'
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
@@ -580,6 +580,109 @@ export default function Mp4ToMp3() {
                 for future use. After the initial load, conversions start instantly with no
                 network activity required.
               </p>
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I extract audio from a video without installing software?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Open Toolyy.net and select the MP4 to MP3 converter. Drop your video file into
+                  the workspace — MP4, WebM, MOV, AVI, and MKV are all supported. The tool uses
+                  FFmpeg compiled to WebAssembly, running entirely in your browser. Choose your
+                  bitrate (128–320 kbps) and download the MP3 when conversion completes.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the safest way to convert MP4 to MP3 with private content?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Use a client-side converter like Toolyy that processes your video entirely in
+                  your browser. Unlike server-based tools, your video file never leaves your
+                  device — nothing is uploaded, stored, or accessible to anyone but you. This
+                  makes it safe for personal recordings, lectures, and copyrighted material.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Can I convert video to MP3 on my phone?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Yes — Toolyy's MP4 to MP3 converter works on any modern mobile browser. Open
+                  the page, tap to upload your video from your device or cloud storage, select
+                  your preferred audio quality, and download the extracted MP3. No app needed.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other Video Converters
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Converters</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Video uploaded to server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Yes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Account required</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No</td>
+                    <td className="px-6 py-3 text-gray-400">Usually</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Supported formats</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">MP4, WebM, MOV, AVI, MKV</td>
+                    <td className="px-6 py-3 text-gray-400">Usually just MP4</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Quality selection</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">128, 192, 256, 320 kbps</td>
+                    <td className="px-6 py-3 text-gray-400">Fixed quality</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">File size limit</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">None (device RAM only)</td>
+                    <td className="px-6 py-3 text-gray-400">50–200 MB</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no limits</td>
+                    <td className="px-6 py-3 text-gray-400">Free trial, then paid</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
