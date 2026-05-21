@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
 import SEOManager from '../SEOManager.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const ACCEPT = 'video/mp4,video/webm,video/quicktime,video/x-msvideo,video/x-matroska,.mp4,.webm,.mov,.avi,.mkv'
 
@@ -262,6 +263,17 @@ export default function Mp4ToMp3() {
         description="Extract crystal clear MP3 audio files from any MP4 video natively in your browser. Fast conversion speeds with zero file-size limitations or data tracking."
         appName="MP4 to MP3 Audio Extractor"
         appDescription="Extract high-quality MP3 audio from MP4, MOV, and WebM video files entirely in your browser. No uploads, no file-size limits, no data tracking."
+      />
+      <HowToSchema
+        name="How to Convert MP4 to MP3 Free Online"
+        description="Extract high-quality MP3 audio from any video file directly in your browser using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the MP4 to MP3 converter.',
+          'Drag and drop your video file (MP4, WebM, MOV, AVI, or MKV) into the workspace.',
+          'Choose your preferred audio quality bitrate and wait for conversion to complete.',
+          'Download your extracted MP3 audio file.',
+        ]}
+        totalTime="PT2M"
       />
       <FAQSchema faqs={FAQS} />
 

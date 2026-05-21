@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
 import SEOManager from '../SEOManager.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const ACCEPT = 'image/jpeg,image/png,image/webp'
 
@@ -353,6 +354,16 @@ export default function SocialResizer() {
         description="Resize and crop images to pixel-perfect dimensions for Instagram, TikTok, YouTube, LinkedIn, and X. Client-side processing keeps your photos private."
         appName="Social Media Image Resizer"
         appDescription="Resize images to exact dimensions for Instagram, TikTok, YouTube, LinkedIn, and X in one step. Canvas API processing — zero cloud uploads, zero data tracking."
+      />
+      <HowToSchema
+        name="How to Resize Images for Social Media Free Online"
+        description="Crop and resize images to pixel-perfect dimensions for Instagram, TikTok, and YouTube using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the Social Resizer tool.',
+          'Upload your image and choose a platform preset (Instagram Post, TikTok/Story, YouTube Thumbnail) or enter a custom size.',
+          'Adjust the crop area by dragging, then download your perfectly sized image.',
+        ]}
+        totalTime="PT30S"
       />
       <FAQSchema faqs={FAQS} />
 

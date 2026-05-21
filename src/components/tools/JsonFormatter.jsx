@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
 import SEOManager from '../SEOManager.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -238,6 +239,16 @@ export default function JsonFormatter() {
         description="Paste or type raw JSON and instantly beautify, validate, or minify it with syntax highlighting and line-level error reporting. Runs in your browser — API keys stay safe."
         appName="JSON Formatter and Validator"
         appDescription="Beautify, validate, and minify JSON payloads with syntax highlighting and error reporting. Runs entirely in your browser — no uploads, API tokens stay private."
+      />
+      <HowToSchema
+        name="How to Format and Validate JSON Free Online"
+        description="Beautify, validate, and minify JSON payloads instantly in your browser using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the JSON Formatter tool.',
+          'Paste your raw JSON or drag a .json file into the editor.',
+          'Click Beautify to format, Validate to check syntax, or Minify to compress — then copy or download.',
+        ]}
+        totalTime="PT15S"
       />
       <FAQSchema faqs={FAQS} />
 

@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const BRAND_COLOR   = '#4F46E5'
 const CLASSIC_COLOR = '#18181B'
@@ -169,6 +170,16 @@ export default function QrGenerator() {
         description="Generate scannable QR codes from URLs, text, Wi-Fi credentials, or phone numbers. Customizable colors, high-res PNG download, and zero data collection."
         appName="QR Code Generator"
         appDescription="Generate custom QR codes from any URL or text instantly in your browser. Adjustable error correction, branded colors, high-resolution PNG export — no sign-up."
+      />
+      <HowToSchema
+        name="How to Generate a QR Code Free Online"
+        description="Create scannable QR codes from any URL, text, or Wi-Fi credentials instantly using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the QR Code Generator.',
+          'Paste your URL, text, or Wi-Fi credentials into the input field.',
+          'Choose your style and download the QR code as a high-res PNG.',
+        ]}
+        totalTime="PT15S"
       />
       <FAQSchema faqs={FAQS} />
 

@@ -9,6 +9,8 @@ import { splitPdf, mergePages } from '../../lib/pdfSplitter.js'
 import { recordVisit } from '../../lib/recentTools.js'
 import ProgressBar from '../ui/ProgressBar.jsx'
 import SEOManager from '../SEOManager.jsx'
+import FAQSchema from '../FAQSchema.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const ACCEPT = 'application/pdf'
 const THUMB_SCALE = 0.5
@@ -354,6 +356,17 @@ export default function PdfSplitter() {
         appName="Free PDF Splitter Online"
         appDescription="Split and extract specific pages from multi-page PDFs entirely in your browser. Select pages visually, download separately or merged — no uploads, no servers."
       />
+      <HowToSchema
+        name="How to Split PDF Pages Free Online"
+        description="Split any PDF document into separate pages natively inside your browser using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the PDF Splitter tool.',
+          'Drag and drop your PDF file into the browser workspace.',
+          'Select the page ranges you want to extract and click download.',
+        ]}
+        totalTime="PT1M"
+      />
+      <FAQSchema faqs={FAQS} />
 
       {/* ── Page title ──────────────────────────────────────────── */}
       <motion.div
@@ -724,6 +737,109 @@ export default function PdfSplitter() {
                   </div>
                 </div>
               </aside>
+            </div>
+          </section>
+
+          {/* ── Answer-First Snippet Blocks ─────────────────────────── */}
+          <section aria-labelledby="snippets-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                <Zap aria-hidden="true" className="w-4 h-4 text-amber-500" />
+              </div>
+              <h2 id="snippets-heading" className="text-xl font-black text-gray-900">
+                Quick Answers
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  How can I split a PDF file for free without an account?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  You can split a PDF instantly by dropping your file into Toolyy.net. The tool runs
+                  completely inside your browser locally, meaning your data never uploads to a server.
+                  Select the pages you need visually or type a range like "1-3, 5, 8-10", then download
+                  them as separate PDFs or merged into one file.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  What is the safest way to split a PDF with sensitive data?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Use a client-side PDF splitter like Toolyy that processes files entirely in your
+                  browser. Unlike server-based tools, your document never leaves your device — nothing
+                  is uploaded, logged, or stored. This makes it safe for contracts, medical records,
+                  financial statements, and any confidential material.
+                </p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-glass">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-2">
+                  Can I extract specific pages from a PDF on my phone?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Yes. Toolyy's PDF Splitter works on any modern mobile browser — Safari on iPhone
+                  and Chrome on Android. Open the page, tap to upload your PDF, select the pages you
+                  want, and download. No app install required.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Comparison Table ──────────────────────────────────────── */}
+          <section aria-labelledby="compare-heading">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                <LayoutGrid aria-hidden="true" className="w-4 h-4 text-blue-500" />
+              </div>
+              <h2 id="compare-heading" className="text-xl font-black text-gray-900">
+                Toolyy vs Other PDF Splitters
+              </h2>
+            </div>
+
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left font-extrabold text-gray-900 px-6 py-4">Feature</th>
+                    <th className="text-left font-extrabold text-brand px-6 py-4">Toolyy</th>
+                    <th className="text-left font-extrabold text-gray-400 px-6 py-4">Typical Online Tools</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">File upload to server</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No — 100% local</td>
+                    <td className="px-6 py-3 text-gray-400">Yes</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Account required</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">No</td>
+                    <td className="px-6 py-3 text-gray-400">Usually</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">File size limit</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">None (device RAM only)</td>
+                    <td className="px-6 py-3 text-gray-400">5–100 MB</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Watermarks</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Never</td>
+                    <td className="px-6 py-3 text-gray-400">Common on free tier</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Cost</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Free — no limits</td>
+                    <td className="px-6 py-3 text-gray-400">Free trial, then paid</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-3 font-medium text-gray-700">Processing speed</td>
+                    <td className="px-6 py-3 text-emerald-600 font-bold">Instant (no upload wait)</td>
+                    <td className="px-6 py-3 text-gray-400">Depends on connection</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

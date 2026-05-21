@@ -4,6 +4,7 @@ import { Download, Zap, FileImage, ChevronDown, ShieldCheck, Gauge, Globe } from
 import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const ACCEPT       = 'image/jpeg,image/png'
 const DEFAULT_QUALITY = 82
@@ -227,6 +228,16 @@ export default function ImageOptimizer() {
         description="Convert JPG and PNG images to modern WebP format and reduce file sizes by up to 80%. Adjustable quality, batch-ready, and processed entirely in your browser."
         appName="Image to WebP Converter"
         appDescription="Convert JPEG and PNG images to optimized WebP format with adjustable quality — entirely in your browser. No uploads, no account, no watermarks."
+      />
+      <HowToSchema
+        name="How to Convert Images to WebP Free Online"
+        description="Convert JPG and PNG images to modern WebP format for faster websites using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the Image to WebP converter.',
+          'Drag and drop your JPG or PNG image into the browser workspace.',
+          'Adjust the quality slider to balance size and fidelity, then download your WebP file.',
+        ]}
+        totalTime="PT30S"
       />
       <FAQSchema faqs={FAQS} />
 

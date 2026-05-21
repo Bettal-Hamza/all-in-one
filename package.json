@@ -11,6 +11,7 @@
     "sitemap": "node scripts/generate-sitemap.js",
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "vite build",
+    "postbuild": "node scripts/prerender-seo.js",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
 import SEOManager from '../SEOManager.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const CATEGORIES = [
   {
@@ -352,6 +353,16 @@ export default function UnitConverter() {
         appDescription="A free online real-time unit calculator that converts between hundreds of metric and imperial units across 8 categories — length, weight, temperature, area, volume, speed, data, and time. 100% private, offline-capable, no sign-up required."
         applicationCategory="UtilityApplication"
         operatingSystem="All"
+      />
+      <HowToSchema
+        name="How to Convert Units Free Online"
+        description="Convert between metric and imperial units for length, weight, temperature, and more using Toolyy."
+        steps={[
+          'Go to toolyy.net and select the Unit Converter tool.',
+          'Choose a category (length, weight, temperature, etc.) and select your source and target units.',
+          'Type a value and see the converted result instantly — no button click needed.',
+        ]}
+        totalTime="PT10S"
       />
       <FAQSchema faqs={FAQS} />
 

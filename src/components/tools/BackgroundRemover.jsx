@@ -8,6 +8,7 @@ import {
 import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
+import HowToSchema from '../HowToSchema.jsx'
 
 const ACCEPT = 'image/jpeg,image/png,image/webp'
 
@@ -398,6 +399,16 @@ export default function BackgroundRemover() {
         description="Erase image backgrounds in seconds using on-device AI powered by WebAssembly. No uploads to any server, no sign-up, and outputs clean transparent PNGs."
         appName="AI Background Remover"
         appDescription="Remove image backgrounds instantly using on-device AI inference via WebAssembly. Outputs transparent PNG, runs entirely in your browser — zero uploads."
+      />
+      <HowToSchema
+        name="How to Remove Image Backgrounds Free Online"
+        description="Remove backgrounds from photos instantly using on-device AI at Toolyy — no uploads, no sign-up."
+        steps={[
+          'Go to toolyy.net and select the Background Remover tool.',
+          'Drag and drop your JPG, PNG, or WebP photo into the workspace.',
+          'The AI processes your image locally, then download the transparent PNG result.',
+        ]}
+        totalTime="PT30S"
       />
       <FAQSchema faqs={FAQS} />
 
