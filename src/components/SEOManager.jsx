@@ -1,25 +1,14 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { ALIAS_MAP } from '../constants/seo-aliases.js'
 
 const SITE_NAME    = 'Toolyy'
 const DEFAULT_TITLE = 'Toolyy | Minimalist Developer & Consumer Utility Hub'
 const DEFAULT_DESC  = 'Access clean, fast, privacy-first web utilities. Convert formats, compress assets, and format data instantly in your browser with zero server uploads.'
 
-/**
- * Drop this at the top of any tool page's JSX return.
- *
- * Props:
- *   title             – page-specific title, e.g. "Split PDF Online — 100% Private & Free"
- *   description       – meta description (≤155 chars recommended)
- *   appName           – SoftwareApplication.name  (falls back to title)
- *   appDescription    – SoftwareApplication.description (falls back to description)
- *   applicationCategory – schema.org category   (default: 'UtilityApplication')
- *   operatingSystem   – schema.org OS list       (default: 'Windows, macOS, Android, iOS')
- *   canonicalPath     – override the canonical URL path (default: current pathname)
- */
 export default function SEOManager({
-  title,
-  description,
+  title: propTitle,
+  description: propDescription,
   appName,
   appDescription,
   applicationCategory = 'UtilityApplication',
@@ -27,10 +16,13 @@ export default function SEOManager({
   canonicalPath,
 }) {
   const { pathname } = useLocation()
+  const alias       = ALIAS_MAP[pathname]
+  const title       = alias?.title ?? propTitle
+  const description = alias?.description ?? propDescription
   const resolvedPath = canonicalPath ?? pathname
   const origin       = typeof window !== 'undefined' ? window.location.origin : ''
   const canonicalUrl = `${origin}${resolvedPath}`
-  const fullTitle    = `${title} | ${SITE_NAME}`
+  const fullTitle    = alias ? title : `${title} | ${SITE_NAME}`
 
   useEffect(() => {
     // ── Helper: get existing element or create & append it ──

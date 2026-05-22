@@ -5,19 +5,29 @@ import Footer from './components/layout/Footer.jsx'
 import HomePage from './pages/HomePage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import { TOOLS } from './constants/tools.js'
+import { SEO_ALIASES } from './constants/seo-aliases.js'
 
 const PrivacyPage  = React.lazy(() => import('./pages/PrivacyPage.jsx'))
 const TermsPage    = React.lazy(() => import('./pages/TermsPage.jsx'))
 const AboutPage    = React.lazy(() => import('./pages/AboutPage.jsx'))
 const FeedbackPage = React.lazy(() => import('./pages/FeedbackPage.jsx'))
 
-// Only register routes for tools that are live and have a component
+const toolsById = Object.fromEntries(TOOLS.filter(t => t.live && t.component).map(t => [t.id, t]))
+
 const toolRoutes = TOOLS
   .filter(t => t.live && t.component)
   .map(tool => ({
     path: tool.path,
     Component: React.lazy(tool.component),
   }))
+
+const aliasRoutes = SEO_ALIASES
+  .map(alias => {
+    const parent = toolsById[alias.parentTool]
+    if (!parent) return null
+    return { path: alias.path, Component: React.lazy(parent.component) }
+  })
+  .filter(Boolean)
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -57,6 +67,9 @@ export default function App() {
               <Route path="/terms"    element={<TermsPage />} />
               <Route path="/feedback" element={<FeedbackPage />} />
               {toolRoutes.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+              ))}
+              {aliasRoutes.map(({ path, Component }) => (
                 <Route key={path} path={path} element={<Component />} />
               ))}
               <Route path="*" element={<NotFoundPage />} />

@@ -19,12 +19,16 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { SEO_ALIASES } from '../src/constants/seo-aliases.js'
+import { TOOLS } from '../src/constants/tools.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const DIST = resolve(__dirname, '..', 'dist')
 const BASE_URL = (process.env.SITE_URL || 'https://toolyy.net').replace(/\/$/, '')
 
 const template = readFileSync(resolve(DIST, 'index.html'), 'utf-8')
+
+const toolLabelById = Object.fromEntries(TOOLS.map(t => [t.id, t.label]))
 
 const TOOLS_SEO = [
   {
@@ -57,6 +61,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT1M',
     },
+    relatedTools: ['image-converter', 'background-remover', 'mp4-to-mp3'],
   },
   {
     path: 'tools/image-converter',
@@ -86,6 +91,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT30S',
     },
+    relatedTools: ['background-remover', 'social-resizer', 'pdf-splitter'],
   },
   {
     path: 'tools/qr-generator',
@@ -114,6 +120,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT15S',
     },
+    relatedTools: ['background-remover', 'unit-converter', 'social-resizer'],
   },
   {
     path: 'tools/background-remover',
@@ -142,6 +149,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT30S',
     },
+    relatedTools: ['image-converter', 'social-resizer', 'qr-generator'],
   },
   {
     path: 'tools/json-formatter',
@@ -170,6 +178,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT15S',
     },
+    relatedTools: ['pdf-splitter', 'unit-converter', 'mp4-to-mp3'],
   },
   {
     path: 'tools/social-resizer',
@@ -198,6 +207,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT30S',
     },
+    relatedTools: ['image-converter', 'background-remover', 'mp4-to-mp3'],
   },
   {
     path: 'tools/mp4-to-mp3',
@@ -228,6 +238,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT2M',
     },
+    relatedTools: ['pdf-splitter', 'image-converter', 'qr-generator'],
   },
   {
     path: 'tools/unit-converter',
@@ -256,6 +267,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT10S',
     },
+    relatedTools: ['json-formatter', 'social-resizer', 'pdf-splitter'],
   },
 ]
 
@@ -263,9 +275,36 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
+function buildBreadcrumbSchema(pageName, canonical) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: BASE_URL + '/tools' },
+      { '@type': 'ListItem', position: 3, name: pageName, item: canonical },
+    ],
+  }
+}
+
+function buildRelatedToolsHtml(relatedToolIds) {
+  if (!relatedToolIds || relatedToolIds.length === 0) return ''
+  const links = relatedToolIds
+    .map(id => {
+      const label = toolLabelById[id]
+      if (!label) return null
+      return `<li><a href="${BASE_URL}/tools/${id}">${escapeHtml(label)}</a></li>`
+    })
+    .filter(Boolean)
+  if (links.length === 0) return ''
+  return `\n      <h2>Related Free Tools</h2>\n      <ul>\n        ${links.join('\n        ')}\n      </ul>`
+}
+
 function buildSeoHtml(tool) {
   const schemaJson = JSON.stringify(tool.schema, null, 2)
   const canonical = `${BASE_URL}/${tool.path}`
+  const breadcrumb = JSON.stringify(buildBreadcrumbSchema(tool.h1, canonical), null, 2)
+  const relatedHtml = buildRelatedToolsHtml(tool.relatedTools)
 
   return `
     <article style="max-width:48rem;margin:0 auto;padding:2rem 1rem">
@@ -279,40 +318,97 @@ function buildSeoHtml(tool) {
 
       <h2>Frequently Asked Questions</h2>
       ${tool.faqs.map(f => `<h3>${escapeHtml(f.q)}</h3>\n      <p>${escapeHtml(f.a)}</p>`).join('\n      ')}
+      ${relatedHtml}
 
       <p><a href="${canonical}">Use ${escapeHtml(tool.h1)} on Toolyy</a></p>
     </article>
-    <script type="application/ld+json">${schemaJson}</script>`
+    <script type="application/ld+json">${schemaJson}</script>
+    <script type="application/ld+json">${breadcrumb}</script>`
+}
+
+function buildAliasSeoHtml(alias) {
+  const canonical = `${BASE_URL}${alias.path}`
+  const breadcrumb = buildBreadcrumbSchema(alias.h1, canonical)
+  const relatedHtml = buildRelatedToolsHtml(alias.relatedTools)
+
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to ${alias.h1} Online`,
+    description: alias.description,
+    step: alias.steps.map(text => ({ '@type': 'HowToStep', text })),
+    totalTime: 'PT1M',
+  }
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: alias.faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+
+  return `
+    <article style="max-width:48rem;margin:0 auto;padding:2rem 1rem">
+      <h1>${escapeHtml(alias.h1)}</h1>
+      <p>${escapeHtml(alias.intro)}</p>
+
+      <h2>How It Works</h2>
+      <ol>
+        ${alias.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('\n        ')}
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      ${alias.faqs.map(f => `<h3>${escapeHtml(f.q)}</h3>\n      <p>${escapeHtml(f.a)}</p>`).join('\n      ')}
+      ${relatedHtml}
+
+      <p><a href="${canonical}">Use ${escapeHtml(alias.h1)} on Toolyy</a></p>
+    </article>
+    <script type="application/ld+json">${JSON.stringify(howToSchema, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(faqSchema, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>`
 }
 
 let generated = 0
 
-for (const tool of TOOLS_SEO) {
-  const dir = resolve(DIST, tool.path)
+function writePage(pagePath, pageTitle, pageDesc, seoContent) {
+  const dir = resolve(DIST, pagePath.replace(/^\//, ''))
   mkdirSync(dir, { recursive: true })
 
-  const seoContent = buildSeoHtml(tool)
-
   let html = template
-    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(tool.title)}</title>`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(pageTitle)}</title>`)
     .replace(
       /<meta name="description" content="[^"]*"/,
-      `<meta name="description" content="${escapeHtml(tool.description)}"`,
+      `<meta name="description" content="${escapeHtml(pageDesc)}"`,
     )
     .replace(
       /(<div id="root">)[\s\S]*?(<\/div>\s*<\/body>)/,
       `$1${seoContent}\n    $2`,
     )
 
-  const canonicalTag = `<link rel="canonical" href="${BASE_URL}/${tool.path}" />`
+  const fullUrl = pagePath.startsWith('/') ? `${BASE_URL}${pagePath}` : `${BASE_URL}/${pagePath}`
+  const canonicalTag = `<link rel="canonical" href="${fullUrl}" />`
   html = html.replace('</head>', `    ${canonicalTag}\n  </head>`)
 
   writeFileSync(resolve(dir, 'index.html'), html, 'utf-8')
   generated++
 }
 
+for (const tool of TOOLS_SEO) {
+  writePage(tool.path, tool.title, tool.description, buildSeoHtml(tool))
+}
+
+for (const alias of SEO_ALIASES) {
+  writePage(alias.path, alias.title, alias.description, buildAliasSeoHtml(alias))
+}
+
 console.log(`\n[prerender-seo] Generated ${generated} static HTML files in dist/`)
 for (const tool of TOOLS_SEO) {
   console.log(`  /${tool.path}/index.html`)
+}
+for (const alias of SEO_ALIASES) {
+  console.log(`  ${alias.path}/index.html`)
 }
 console.log()

@@ -14,6 +14,7 @@ import { writeFileSync, mkdirSync } from 'fs'
 import { resolve, dirname }         from 'path'
 import { fileURLToPath }            from 'url'
 import { TOOLS }                    from '../src/constants/tools.js'
+import { SEO_ALIASES }              from '../src/constants/seo-aliases.js'
 
 // ── Config ──────────────────────────────────────────────────────────────────
 
@@ -41,7 +42,13 @@ const toolPages = TOOLS
     priority:   '0.9',
   }))
 
-const ALL_URLS = [...STATIC_PAGES, ...toolPages]
+const aliasPages = SEO_ALIASES.map(a => ({
+  path:       a.path,
+  changefreq: 'weekly',
+  priority:   '0.8',
+}))
+
+const ALL_URLS = [...STATIC_PAGES, ...toolPages, ...aliasPages]
 
 // ── XML builder ──────────────────────────────────────────────────────────────
 
