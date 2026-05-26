@@ -300,30 +300,60 @@ function buildRelatedToolsHtml(relatedToolIds) {
   return `\n      <h2>Related Free Tools</h2>\n      <ul>\n        ${links.join('\n        ')}\n      </ul>`
 }
 
+function buildFaqSchema(faqs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+}
+
 function buildSeoHtml(tool) {
-  const schemaJson = JSON.stringify(tool.schema, null, 2)
   const canonical = `${BASE_URL}/${tool.path}`
-  const breadcrumb = JSON.stringify(buildBreadcrumbSchema(tool.h1, canonical), null, 2)
+  const breadcrumb = buildBreadcrumbSchema(tool.h1, canonical)
+  const faqSchema  = buildFaqSchema(tool.faqs)
   const relatedHtml = buildRelatedToolsHtml(tool.relatedTools)
 
   return `
-    <article style="max-width:48rem;margin:0 auto;padding:2rem 1rem">
-      <h1>${escapeHtml(tool.h1)}</h1>
-      <p>${escapeHtml(tool.intro)}</p>
+    <main>
+      <nav aria-label="Breadcrumb" style="max-width:48rem;margin:0 auto;padding:1rem 1rem 0;font-size:.875rem;color:#6b7280">
+        <a href="${BASE_URL}/">Home</a> &rsaquo; <a href="${BASE_URL}/">Tools</a> &rsaquo; <span>${escapeHtml(tool.h1)}</span>
+      </nav>
+      <article style="max-width:48rem;margin:0 auto;padding:1.5rem 1rem 2rem">
+        <h1>${escapeHtml(tool.h1)}</h1>
+        <p>${escapeHtml(tool.intro)}</p>
 
-      <h2>How It Works</h2>
-      <ol>
-        ${tool.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('\n        ')}
-      </ol>
+        <section>
+          <h2>How It Works</h2>
+          <ol>
+            ${tool.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('\n            ')}
+          </ol>
+        </section>
 
-      <h2>Frequently Asked Questions</h2>
-      ${tool.faqs.map(f => `<h3>${escapeHtml(f.q)}</h3>\n      <p>${escapeHtml(f.a)}</p>`).join('\n      ')}
-      ${relatedHtml}
+        <section>
+          <h2>Why Use Toolyy?</h2>
+          <ul>
+            <li><strong>100% Private</strong> &mdash; your files never leave your device. All processing runs locally in your browser.</li>
+            <li><strong>No Account Required</strong> &mdash; no sign-up, no email, no login. Just open and use.</li>
+            <li><strong>No File Size Limits</strong> &mdash; no artificial server caps. The only limit is your device&rsquo;s memory.</li>
+            <li><strong>Completely Free</strong> &mdash; no premium tiers, no watermarks, no per-file fees.</li>
+          </ul>
+        </section>
 
-      <p><a href="${canonical}">Use ${escapeHtml(tool.h1)} on Toolyy</a></p>
-    </article>
-    <script type="application/ld+json">${schemaJson}</script>
-    <script type="application/ld+json">${breadcrumb}</script>`
+        <section>
+          <h2>Frequently Asked Questions</h2>
+          ${tool.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
+        </section>
+        ${relatedHtml}
+      </article>
+    </main>
+    <script type="application/ld+json">${JSON.stringify(tool.schema, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(faqSchema, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>`
 }
 
 function buildAliasSeoHtml(alias) {
@@ -340,32 +370,41 @@ function buildAliasSeoHtml(alias) {
     totalTime: 'PT1M',
   }
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: alias.faqs.map(f => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
+  const faqSchema = buildFaqSchema(alias.faqs)
 
   return `
-    <article style="max-width:48rem;margin:0 auto;padding:2rem 1rem">
-      <h1>${escapeHtml(alias.h1)}</h1>
-      <p>${escapeHtml(alias.intro)}</p>
+    <main>
+      <nav aria-label="Breadcrumb" style="max-width:48rem;margin:0 auto;padding:1rem 1rem 0;font-size:.875rem;color:#6b7280">
+        <a href="${BASE_URL}/">Home</a> &rsaquo; <a href="${BASE_URL}/">Tools</a> &rsaquo; <span>${escapeHtml(alias.h1)}</span>
+      </nav>
+      <article style="max-width:48rem;margin:0 auto;padding:1.5rem 1rem 2rem">
+        <h1>${escapeHtml(alias.h1)}</h1>
+        <p>${escapeHtml(alias.intro)}</p>
 
-      <h2>How It Works</h2>
-      <ol>
-        ${alias.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('\n        ')}
-      </ol>
+        <section>
+          <h2>How It Works</h2>
+          <ol>
+            ${alias.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('\n            ')}
+          </ol>
+        </section>
 
-      <h2>Frequently Asked Questions</h2>
-      ${alias.faqs.map(f => `<h3>${escapeHtml(f.q)}</h3>\n      <p>${escapeHtml(f.a)}</p>`).join('\n      ')}
-      ${relatedHtml}
+        <section>
+          <h2>Why Use Toolyy?</h2>
+          <ul>
+            <li><strong>100% Private</strong> &mdash; your files never leave your device. All processing runs locally in your browser.</li>
+            <li><strong>No Account Required</strong> &mdash; no sign-up, no email, no login. Just open and use.</li>
+            <li><strong>No File Size Limits</strong> &mdash; no artificial server caps. The only limit is your device&rsquo;s memory.</li>
+            <li><strong>Completely Free</strong> &mdash; no premium tiers, no watermarks, no per-file fees.</li>
+          </ul>
+        </section>
 
-      <p><a href="${canonical}">Use ${escapeHtml(alias.h1)} on Toolyy</a></p>
-    </article>
+        <section>
+          <h2>Frequently Asked Questions</h2>
+          ${alias.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
+        </section>
+        ${relatedHtml}
+      </article>
+    </main>
     <script type="application/ld+json">${JSON.stringify(howToSchema, null, 2)}</script>
     <script type="application/ld+json">${JSON.stringify(faqSchema, null, 2)}</script>
     <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>`
@@ -389,8 +428,10 @@ function writePage(pagePath, pageTitle, pageDesc, seoContent) {
     )
 
   const fullUrl = pagePath.startsWith('/') ? `${BASE_URL}${pagePath}` : `${BASE_URL}/${pagePath}`
-  const canonicalTag = `<link rel="canonical" href="${fullUrl}" />`
-  html = html.replace('</head>', `    ${canonicalTag}\n  </head>`)
+  html = html.replace(
+    /<link rel="canonical" href="[^"]*" \/>/,
+    `<link rel="canonical" href="${fullUrl}" />`,
+  )
 
   writeFileSync(resolve(dir, 'index.html'), html, 'utf-8')
   generated++

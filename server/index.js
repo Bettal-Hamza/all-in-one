@@ -10,11 +10,8 @@ const IS_PROD   = process.env.NODE_ENV === 'production'
 
 const app = express()
 
-// ── Trust the first proxy hop (Nginx, Cloudflare, Vercel edge, etc.)
-// Required so req.ip / X-Forwarded-For reflects the real client IP.
 app.set('trust proxy', 1)
 
-// ── CORS: allow the Vite dev server in development only
 if (!IS_PROD) {
   app.use(cors({
     origin: process.env.CLIENT_URL ?? 'http://localhost:5173',
@@ -22,17 +19,42 @@ if (!IS_PROD) {
   }))
 }
 
-// ── Body parsing — hard cap at 32 KB to blunt oversized-body attacks
 app.use(express.json({ limit: '32kb' }))
 
-// ── API routes
 app.use('/api/suggestions', suggestionsRouter)
 
-// ── Serve the Vite production build from the same process
 if (IS_PROD) {
   const dist = join(__dirname, '..', 'dist')
-  app.use(express.static(dist))
-  // SPA fallback — any unmatched path returns index.html so React Router works
+
+  // ── 1. Enforce no-trailing-slash (301) ────────────────────
+  // Google sees /tools/pdf-splitter/ and /tools/pdf-splitter as two
+  // different URLs. Pick ONE form and 301-redirect the other.
+  // We choose no-trailing-slash (matches sitemap + canonical tags).
+  app.use((req, res, next) => {
+    if (req.path.length > 1 && req.path.endsWith('/')) {
+      const clean = req.path.slice(0, -1)
+      const qs = req.originalUrl.slice(req.path.length)
+      return res.redirect(301, clean + qs)
+    }
+    next()
+  })
+
+  // ── 2. Static files — disable express.static's auto-redirect ──
+  // By default express.static 301-redirects /dir → /dir/ when it
+  // finds a directory. This caused the "Page with redirect" error.
+  app.use(express.static(dist, { redirect: false }))
+
+  // ── 3. Serve prerendered index.html for clean URLs ────────
+  // e.g. /tools/pdf-splitter → dist/tools/pdf-splitter/index.html
+  // No redirect, no trailing slash — served directly at the
+  // canonical URL that matches the sitemap.
+  app.use((req, res, next) => {
+    if (req.path.includes('.')) return next()
+    const indexPath = join(dist, req.path, 'index.html')
+    res.sendFile(indexPath, err => { if (err) next() })
+  })
+
+  // ── 4. SPA fallback — React Router handles remaining routes ──
   app.get('{*splat}', (_req, res) => res.sendFile(join(dist, 'index.html')))
 }
 

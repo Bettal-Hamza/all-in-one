@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { ALIAS_MAP } from '../constants/seo-aliases.js'
 
 const SITE_NAME    = 'Toolyy'
-const DEFAULT_TITLE = 'Toolyy | Minimalist Developer & Consumer Utility Hub'
-const DEFAULT_DESC  = 'Access clean, fast, privacy-first web utilities. Convert formats, compress assets, and format data instantly in your browser with zero server uploads.'
+const SITE_ORIGIN  = 'https://toolyy.net'
+const DEFAULT_DESC = 'Access clean, fast, privacy-first web utilities. Convert formats, compress assets, and format data instantly in your browser with zero server uploads.'
 
 export default function SEOManager({
   title: propTitle,
@@ -19,13 +19,13 @@ export default function SEOManager({
   const alias       = ALIAS_MAP[pathname]
   const title       = alias?.title ?? propTitle
   const description = alias?.description ?? propDescription
-  const resolvedPath = canonicalPath ?? pathname
-  const origin       = typeof window !== 'undefined' ? window.location.origin : ''
-  const canonicalUrl = `${origin}${resolvedPath}`
+
+  const rawPath      = canonicalPath ?? pathname
+  const cleanPath    = rawPath.length > 1 ? rawPath.replace(/\/+$/, '') : rawPath
+  const canonicalUrl = `${SITE_ORIGIN}${cleanPath}`
   const fullTitle    = alias ? title : `${title} | ${SITE_NAME}`
 
   useEffect(() => {
-    // ── Helper: get existing element or create & append it ──
     function upsert(selector, tag, attrs = {}) {
       let el = document.querySelector(selector)
       let created = false
@@ -38,11 +38,9 @@ export default function SEOManager({
       return { el, created }
     }
 
-    // ── 1. Title ────────────────────────────────────────────
     const prevTitle = document.title
     document.title = fullTitle
 
-    // ── 2. Meta description ─────────────────────────────────
     const { el: descEl, created: descCreated } = upsert(
       'meta[name="description"]',
       'meta',
@@ -51,7 +49,6 @@ export default function SEOManager({
     const prevDesc = descCreated ? null : descEl.getAttribute('content')
     descEl.setAttribute('content', description)
 
-    // ── 3. Canonical link ───────────────────────────────────
     const { el: canonEl, created: canonCreated } = upsert(
       'link[rel="canonical"]',
       'link',
@@ -60,7 +57,6 @@ export default function SEOManager({
     const prevCanon = canonCreated ? null : canonEl.getAttribute('href')
     canonEl.setAttribute('href', canonicalUrl)
 
-    // ── 4. Open Graph tags ──────────────────────────────────
     function upsertOg(property, content) {
       const { el } = upsert(
         `meta[property="${property}"]`,
@@ -79,7 +75,6 @@ export default function SEOManager({
     const twitterTitle  = upsertOg('twitter:title',   fullTitle)
     const twitterDesc   = upsertOg('twitter:description', description)
 
-    // ── 5. JSON-LD — SoftwareApplication schema ─────────────
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -102,7 +97,6 @@ export default function SEOManager({
     ldScript.textContent = JSON.stringify(schema, null, 2)
     document.head.appendChild(ldScript)
 
-    // ── Cleanup: restore site-level defaults on unmount ─────
     return () => {
       document.title = prevTitle
 
