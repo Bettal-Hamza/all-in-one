@@ -10,6 +10,7 @@ import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
 import HowToSchema from '../HowToSchema.jsx'
+import RelatedToolsNav from '../ui/RelatedToolsNav.jsx'
 
 const BRAND_COLOR   = '#4F46E5'
 const CLASSIC_COLOR = '#18181B'
@@ -167,10 +168,10 @@ export default function QrGenerator() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <SEOManager
-        title="QR Code Generator Online | Create &amp; Download Instantly"
-        description="Generate scannable QR codes from URLs, text, Wi-Fi credentials, or phone numbers. Customizable colors, high-res PNG download, and zero data collection."
-        appName="QR Code Generator"
-        appDescription="Generate custom QR codes from any URL or text instantly in your browser. Adjustable error correction, branded colors, high-resolution PNG export — no sign-up."
+        title="Free Online QR Code Generator | Create &amp; Download Instantly"
+        description="Free online QR generator — create scannable QR codes from URLs, text, Wi-Fi passwords, or phone numbers. Custom colors, high-res PNG download. No uploads, no sign-up."
+        appName="Free Online QR Code Generator"
+        appDescription="Free online QR code generator. Create custom QR codes from any URL or text instantly in your browser. Branded colors, high-resolution PNG export — no sign-up, no data collection."
       />
       <HowToSchema
         name="How to Generate a QR Code Free Online"
@@ -191,12 +192,12 @@ export default function QrGenerator() {
         transition={{ duration: 0.4 }}
         className="mb-8"
       >
-        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Utility Tools</p>
-        <p className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
-          QR Generator
-        </p>
+        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Free Online Tool</p>
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+          Free Online QR Code Generator
+        </h1>
         <p className="mt-2 text-gray-400 font-medium">
-          Paste any URL, text, or contact info — get a scannable QR code instantly. Nothing leaves your browser.
+          Generate scannable QR codes from any URL, text, Wi-Fi password, or contact info — free online QR generator with instant download. Nothing leaves your browser.
         </p>
       </motion.div>
 
@@ -367,13 +368,14 @@ export default function QrGenerator() {
         aria-label="Professional QR Code Generator — complete guide"
       >
 
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
-          Professional QR Code Generator — Free &amp; Private
-        </h1>
+        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
+          Free Online QR Generator — Create QR Codes Instantly
+        </h2>
         <p className="text-sm text-gray-500 leading-relaxed mb-16 max-w-2xl">
-          Toolyy's browser-based QR code generator encodes any URL, text, phone number, or email
-          address into a ready-to-scan QR pattern — instantly, privately, and for free. No account,
-          no watermark, no expiry date.
+          This free online QR code generator encodes any URL, text, phone number, Wi-Fi password, or email
+          address into a ready-to-scan QR pattern — instantly, privately, and at no cost. Unlike most online QR generators,
+          Toolyy encodes your data directly into the QR pattern with no middleman redirect server. No account,
+          no watermark, no expiry date, and your data never leaves your device.
         </p>
 
         <div className="space-y-16">
@@ -620,6 +622,8 @@ export default function QrGenerator() {
           </section>
 
         </div>
+
+        <RelatedToolsNav currentToolId="qr-generator" />
       </motion.article>
     </div>
   )

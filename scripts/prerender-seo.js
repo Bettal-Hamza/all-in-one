@@ -95,10 +95,10 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/qr-generator',
-    title: 'QR Code Generator Online | Create & Download Instantly | Toolyy',
-    description: 'Generate scannable QR codes from URLs, text, Wi-Fi credentials, or phone numbers. Customizable colors, high-res PNG download, and zero data collection.',
-    h1: 'QR Code Generator',
-    intro: 'Generate scannable QR codes from any URL, text, Wi-Fi credentials, or phone number. Customizable styles, instant PNG download, and completely private — your data never leaves your device.',
+    title: 'Free Online QR Code Generator | Create & Download Instantly | Toolyy',
+    description: 'Free online QR generator — create scannable QR codes from URLs, text, Wi-Fi passwords, or phone numbers. Custom colors, high-res PNG download. No uploads, no tracking.',
+    h1: 'Free Online QR Code Generator',
+    intro: 'Free online QR generator — create scannable QR codes from any URL, text, Wi-Fi credentials, or phone number. Customizable styles, instant PNG download, and completely private — your data is encoded directly into the QR pattern with no redirect server. Your data never leaves your device.',
     steps: [
       'Go to toolyy.net and select the QR Code Generator.',
       'Paste your URL, text, or Wi-Fi credentials into the input field.',
@@ -124,10 +124,10 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/background-remover',
-    title: 'AI Background Remover Online | Remove Backgrounds Instantly | Toolyy',
-    description: 'Erase image backgrounds in seconds using on-device AI powered by WebAssembly. No uploads, no sign-up, and outputs clean transparent PNGs.',
-    h1: 'AI Background Remover',
-    intro: 'Remove backgrounds from photos instantly using on-device AI. The neural network runs entirely in your browser via WebAssembly — no uploads, no server, complete privacy. Outputs lossless transparent PNGs.',
+    title: 'AI Background Remover & Transparent Background Maker Online | Toolyy',
+    description: 'Free transparent background maker online — remove backgrounds from any image using AI in your browser. No uploads, no sign-up. Outputs clean transparent PNGs for logos, products, and portraits.',
+    h1: 'AI Background Remover — Free Transparent Background Maker Online',
+    intro: 'Free transparent background maker online — remove backgrounds from photos instantly using on-device AI. The neural network runs entirely in your browser via WebAssembly — no uploads, no server, complete privacy. Outputs lossless transparent PNGs perfect for logos, product photos, e-commerce listings, and graphic design.',
     steps: [
       'Go to toolyy.net and select the Background Remover tool.',
       'Drag and drop your JPG, PNG, or WebP photo into the workspace.',
@@ -242,27 +242,29 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/unit-converter',
-    title: 'Unit Converter Online | Length, Weight, Temperature & More | Toolyy',
-    description: 'Convert between metric and imperial units across 8 categories — length, weight, temperature, area, volume, speed, data, and time. Instant results, 100% private.',
-    h1: 'Unit Converter',
-    intro: 'Convert between hundreds of metric and imperial units across 8 categories — length, weight, temperature, area, volume, speed, data, and time. Real-time results as you type, 100% private, no sign-up required.',
+    title: 'Length Unit Converter Online | Free Metric & Imperial Calculator | Toolyy',
+    description: 'Free online length unit converter — convert meters, feet, kilometers, miles, inches, centimeters and more. Also supports weight, temperature, area, volume, speed, data, and time. 100% private.',
+    h1: 'Length Unit Converter Online',
+    intro: 'Free online length unit converter — convert between meters, kilometers, miles, feet, inches, centimeters, yards, and millimeters instantly. Also supports weight, temperature, area, volume, speed, data storage, and time conversions. All calculations happen in your browser with zero data sent to any server.',
     steps: [
       'Go to toolyy.net and select the Unit Converter tool.',
-      'Choose a category (length, weight, temperature, etc.) and select your source and target units.',
-      'Type a value and see the converted result instantly.',
+      'Choose a category (Length, Weight, Temperature, etc.) and select your source and target units.',
+      'Type a value and see the converted result instantly — no button click needed.',
     ],
     faqs: [
+      { q: 'How do I convert meters to feet online?', a: 'Select Meter as the source and Foot as the target, then type your value. The formula is: feet = meters × 3.28084. For example, 10 meters = 32.81 feet.' },
       { q: 'Does the unit converter work offline?', a: 'Yes. Once the page loads, all conversions happen locally in your browser with zero server communication.' },
-      { q: 'What unit categories are supported?', a: 'Length, weight, temperature, area, volume, speed, data storage, and time.' },
+      { q: 'What unit categories are supported?', a: 'Length, weight, temperature, area, volume, speed, data storage, and time — with full metric and imperial support.' },
+      { q: 'How many centimeters are in an inch?', a: 'One inch equals exactly 2.54 centimeters. This is an exact definition, not an approximation.' },
     ],
     schema: {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      name: 'How to Convert Units Free Online',
-      description: 'Convert between metric and imperial units for length, weight, temperature, and more using Toolyy.',
+      name: 'How to Convert Length Units Free Online',
+      description: 'Convert between metric and imperial length units — meters, feet, kilometers, miles, inches, centimeters — using Toolyy\'s free online calculator.',
       step: [
         { '@type': 'HowToStep', text: 'Go to toolyy.net and select the Unit Converter tool.' },
-        { '@type': 'HowToStep', text: 'Choose a category and select your source and target units.' },
+        { '@type': 'HowToStep', text: 'Choose the Length category and select your source and target units (e.g., Kilometers to Miles).' },
         { '@type': 'HowToStep', text: 'Type a value and see the converted result instantly.' },
       ],
       totalTime: 'PT10S',
@@ -312,11 +314,24 @@ function buildFaqSchema(faqs) {
   }
 }
 
+function buildAllToolsNav(currentPath) {
+  const liveTools = TOOLS.filter(t => t.live && t.path)
+  const links = liveTools
+    .filter(t => `tools/${t.id}` !== currentPath && t.path !== `/${currentPath}`)
+    .map(t => `<li><a href="${BASE_URL}${t.path}">${escapeHtml(t.label)}</a></li>`)
+  return `
+      <nav aria-label="Browse all tools" style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e5e7eb">
+        <h2>Explore More Free Online Tools</h2>
+        <ul>${links.join('\n          ')}</ul>
+      </nav>`
+}
+
 function buildSeoHtml(tool) {
   const canonical = `${BASE_URL}/${tool.path}`
   const breadcrumb = buildBreadcrumbSchema(tool.h1, canonical)
   const faqSchema  = buildFaqSchema(tool.faqs)
   const relatedHtml = buildRelatedToolsHtml(tool.relatedTools)
+  const allToolsNav = buildAllToolsNav(tool.path)
 
   return `
     <main>
@@ -349,6 +364,7 @@ function buildSeoHtml(tool) {
           ${tool.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
         </section>
         ${relatedHtml}
+        ${allToolsNav}
       </article>
     </main>
     <script type="application/ld+json">${JSON.stringify(tool.schema, null, 2)}</script>
@@ -360,6 +376,7 @@ function buildAliasSeoHtml(alias) {
   const canonical = `${BASE_URL}${alias.path}`
   const breadcrumb = buildBreadcrumbSchema(alias.h1, canonical)
   const relatedHtml = buildRelatedToolsHtml(alias.relatedTools)
+  const allToolsNav = buildAllToolsNav(alias.path.replace(/^\//, ''))
 
   const howToSchema = {
     '@context': 'https://schema.org',
@@ -403,6 +420,7 @@ function buildAliasSeoHtml(alias) {
           ${alias.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
         </section>
         ${relatedHtml}
+        ${allToolsNav}
       </article>
     </main>
     <script type="application/ld+json">${JSON.stringify(howToSchema, null, 2)}</script>

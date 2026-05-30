@@ -141,10 +141,10 @@ export const SEO_ALIASES = [
     id: 'transparent-background-maker',
     parentTool: 'background-remover',
     path: '/tools/transparent-background-maker',
-    title: 'Make Image Background Transparent — Free AI Tool',
-    description: 'Make any image background transparent with on-device AI. Get clean cutouts for logos, product photos, and portraits. No watermarks, no sign-up.',
-    h1: 'Make Image Background Transparent',
-    intro: 'Create transparent backgrounds for logos, product photos, portraits, and design assets using on-device AI. The output is a lossless PNG with clean, precise edges — ready for use in presentations, e-commerce listings, or graphic design projects.',
+    title: 'Transparent Background Maker Online Free — AI-Powered Tool',
+    description: 'Free transparent background maker online. Remove backgrounds from any image using AI that runs in your browser. Get clean PNG cutouts for logos, products, and portraits — no watermarks, no sign-up, no uploads.',
+    h1: 'Transparent Background Maker Online',
+    intro: 'Use this free transparent background maker online to create clean, professional cutouts from any photo. Powered by on-device AI running directly in your browser, this tool removes backgrounds instantly and outputs a lossless PNG with full alpha-channel transparency — perfect for logos, product photos, portraits, e-commerce listings, presentations, and graphic design projects. Your images never leave your device.',
     steps: [
       'Open the Transparent Background Maker on Toolyy.',
       'Upload your image by dropping it into the tool.',
@@ -356,6 +356,27 @@ export const SEO_ALIASES = [
   },
 
   // ── Unit Converter variants ───────────────────────────────────────
+  {
+    id: 'length-unit-converter',
+    parentTool: 'unit-converter',
+    path: '/tools/length-unit-converter',
+    title: 'Length Unit Converter Online — Metric & Imperial | Free Calculator',
+    description: 'Free online length unit converter. Convert between meters, kilometers, miles, feet, inches, centimeters, yards, and millimeters instantly. Browser-based, works offline.',
+    h1: 'Length Unit Converter Online',
+    intro: 'Convert between all length and distance units instantly with this free online length unit converter. Whether you need to convert meters to feet, kilometers to miles, inches to centimeters, or any combination of metric and imperial length units — Toolyy calculates results in real time as you type. All processing happens in your browser with zero data sent to any server.',
+    steps: [
+      'Open the Length Unit Converter on Toolyy.',
+      'Select your source length unit (e.g., Kilometers) and target unit (e.g., Miles).',
+      'Type a value and see the converted length instantly — no button click needed.',
+    ],
+    faqs: [
+      { q: 'How do I convert meters to feet online?', a: 'Use Toolyy\'s length unit converter: select Meter as the source and Foot as the target, then type your value. The formula is: feet = meters × 3.28084. For example, 10 meters = 32.81 feet.' },
+      { q: 'How many centimeters are in an inch?', a: 'One inch equals exactly 2.54 centimeters. This is an exact definition — not an approximation. Toolyy\'s converter uses this exact factor for precision.' },
+      { q: 'What is the difference between metric and imperial length units?', a: 'Metric length units (millimeters, centimeters, meters, kilometers) use a base-10 system. Imperial units (inches, feet, yards, miles) use inconsistent factors — 12 inches per foot, 3 feet per yard, 5,280 feet per mile. Toolyy converts between both systems seamlessly.' },
+      { q: 'Can I use this length converter offline?', a: 'Yes. Once the page loads, all length conversions happen locally in your browser using JavaScript. No internet connection is needed after the initial page load.' },
+    ],
+    relatedTools: ['pdf-splitter', 'image-converter', 'qr-generator'],
+  },
   {
     id: 'kg-to-lbs',
     parentTool: 'unit-converter',

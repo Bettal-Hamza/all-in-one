@@ -17,7 +17,9 @@ export default function ToolCard({ tool, isRecent }) {
           </span>
         )}
 
-        <span className="text-4xl mb-4 relative">{tool.icon}</span>
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 relative" style={{ backgroundColor: tool.accent + '15' }}>
+          <tool.Icon aria-hidden="true" className="w-6 h-6" style={{ color: tool.accent }} />
+        </div>
         <h3 className="font-bold text-gray-900 text-base relative">{tool.label}</h3>
         <p className="mt-1.5 text-sm text-gray-400 leading-snug relative flex-1">{tool.description}</p>
 

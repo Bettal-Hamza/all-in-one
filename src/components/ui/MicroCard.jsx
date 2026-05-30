@@ -24,10 +24,10 @@ export default function MicroCard({ tool }) {
       <div className="flex items-start gap-4 pl-3">
         {/* Icon badge */}
         <div
-          className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-xl"
+          className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
           style={{ backgroundColor: `${isLive ? tool.accent : '#9CA3AF'}18` }}
         >
-          {tool.icon}
+          <tool.Icon aria-hidden="true" className="w-5 h-5" style={{ color: isLive ? tool.accent : '#9CA3AF' }} />
         </div>
 
         <div className="flex-1 min-w-0">

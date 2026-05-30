@@ -9,6 +9,7 @@ import { recordVisit } from '../../lib/recentTools.js'
 import FAQSchema from '../FAQSchema.jsx'
 import SEOManager from '../SEOManager.jsx'
 import HowToSchema from '../HowToSchema.jsx'
+import RelatedToolsNav from '../ui/RelatedToolsNav.jsx'
 
 const CATEGORIES = [
   {
@@ -373,12 +374,22 @@ export default function UnitConverter() {
         transition={{ duration: 0.4 }}
         className="mb-8"
       >
-        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Developer &amp; Utility</p>
+        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Free Online Calculator</p>
         <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
-          Unit Converter
+          {catId === 'length' && 'Length Unit Converter'}
+          {catId === 'weight' && 'Weight & Mass Converter'}
+          {catId === 'temperature' && 'Temperature Converter'}
+          {catId === 'area' && 'Area Unit Converter'}
+          {catId === 'volume' && 'Volume Converter'}
+          {catId === 'speed' && 'Speed Unit Converter'}
+          {catId === 'data' && 'Data Storage Converter'}
+          {catId === 'time' && 'Time Unit Converter'}
         </h1>
         <p className="mt-2 text-gray-400 font-medium">
-          Convert between any units — length, weight, temperature &amp; more. Free online metric conversion calculator.
+          {catId === 'length'
+            ? 'Free online length unit converter — convert between meters, feet, kilometers, miles, inches, centimeters and more instantly.'
+            : `Convert between any ${cat.label.toLowerCase()} units instantly. Free online metric and imperial conversion calculator — runs in your browser.`
+          }
         </p>
       </motion.header>
 
@@ -523,12 +534,16 @@ export default function UnitConverter() {
         aria-label="Free Unit Converter — complete guide"
       >
         <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
-          Free Online Unit Converter
+          {catId === 'length'
+            ? 'Free Length Unit Converter Online — Metric & Imperial'
+            : 'Free Online Unit Converter — Metric & Imperial Calculator'
+          }
         </h2>
         <p className="text-sm text-gray-500 leading-relaxed mb-16 max-w-2xl">
-          Toolyy's browser-based Unit Converter lets you convert between hundreds of metric and imperial units
-          across 8 categories — instantly, privately, and at no cost. No account needed,
-          no ads interrupting your workflow, and everything runs locally on your device.
+          {catId === 'length'
+            ? 'Toolyy\'s free length unit converter lets you convert between meters, kilometers, miles, feet, inches, centimeters, yards, and millimeters instantly. All calculations happen in your browser — no data is sent to any server. Whether you need to convert centimeters to inches for a DIY project or kilometers to miles for travel planning, this length conversion calculator delivers real-time results with scientific-grade precision.'
+            : 'Toolyy\'s browser-based Unit Converter lets you convert between hundreds of metric and imperial units across 8 categories — instantly, privately, and at no cost. No account needed, no ads interrupting your workflow, and everything runs locally on your device.'
+          }
         </p>
 
         <div className="space-y-16">
@@ -812,7 +827,67 @@ export default function UnitConverter() {
             </div>
           </section>
 
+          {/* ── Length Conversion Reference Table ──────────────────── */}
+          {catId === 'length' && (
+            <section aria-labelledby="length-table-heading">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-xl bg-sky-50 flex items-center justify-center">
+                  <Ruler aria-hidden="true" className="w-4 h-4 text-sky-600" />
+                </div>
+                <h3 id="length-table-heading" className="text-xl font-black text-gray-900">
+                  Common Length Conversions Reference Table
+                </h3>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-100 bg-gray-50/50">
+                      <th className="text-left font-extrabold text-gray-900 px-6 py-3">From</th>
+                      <th className="text-left font-extrabold text-gray-900 px-6 py-3">To</th>
+                      <th className="text-left font-extrabold text-gray-900 px-6 py-3">Factor</th>
+                      <th className="text-left font-extrabold text-gray-900 px-6 py-3">Example</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {[
+                      { from: 'Meters', to: 'Feet', factor: '× 3.28084', example: '10 m = 32.81 ft' },
+                      { from: 'Feet', to: 'Meters', factor: '× 0.3048', example: '100 ft = 30.48 m' },
+                      { from: 'Kilometers', to: 'Miles', factor: '× 0.621371', example: '5 km = 3.11 mi' },
+                      { from: 'Miles', to: 'Kilometers', factor: '× 1.60934', example: '26.2 mi = 42.16 km' },
+                      { from: 'Inches', to: 'Centimeters', factor: '× 2.54', example: '12 in = 30.48 cm' },
+                      { from: 'Centimeters', to: 'Inches', factor: '× 0.393701', example: '100 cm = 39.37 in' },
+                      { from: 'Yards', to: 'Meters', factor: '× 0.9144', example: '100 yd = 91.44 m' },
+                      { from: 'Millimeters', to: 'Inches', factor: '× 0.03937', example: '25.4 mm = 1 in' },
+                    ].map(({ from, to, factor, example }) => (
+                      <tr key={from + to}>
+                        <td className="px-6 py-3 font-medium text-gray-700">{from}</td>
+                        <td className="px-6 py-3 font-medium text-gray-700">{to}</td>
+                        <td className="px-6 py-3 text-brand font-bold font-mono">{factor}</td>
+                        <td className="px-6 py-3 text-gray-500">{example}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-6 bg-white border border-gray-100 rounded-3xl p-8 shadow-glass">
+                <h4 className="text-sm font-extrabold text-gray-900 mb-3">How Length Unit Conversion Works</h4>
+                <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                  Length unit conversion uses a simple formula: first convert the source value to a common base unit (meters in SI),
+                  then convert from the base unit to the target unit. For example, to convert 5 miles to kilometers:
+                  5 mi × 1609.344 m/mi = 8046.72 m, then 8046.72 m ÷ 1000 m/km = 8.047 km.
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Toolyy's length unit converter automates this process using IEEE 754 double-precision arithmetic with
+                  conversion factors sourced from NIST and SI standards. Results are precise to 15–17 significant digits —
+                  more than sufficient for engineering, science, construction, and everyday measurements.
+                </p>
+              </div>
+            </section>
+          )}
+
         </div>
+
+        <RelatedToolsNav currentToolId="unit-converter" />
       </motion.article>
     </div>
   )

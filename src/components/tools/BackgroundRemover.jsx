@@ -10,6 +10,7 @@ import { recordVisit } from '../../lib/recentTools.js'
 import SEOManager from '../SEOManager.jsx'
 import FAQSchema from '../FAQSchema.jsx'
 import HowToSchema from '../HowToSchema.jsx'
+import RelatedToolsNav from '../ui/RelatedToolsNav.jsx'
 
 const ACCEPT = 'image/jpeg,image/png,image/webp'
 
@@ -167,7 +168,7 @@ function CompareSlider({ origUrl, resultUrl, dims }) {
     >
       <img
         src={origUrl}
-        alt="Original uploaded photo before AI background removal — before state of the comparison slider"
+        alt="Original photo before using the free transparent background maker online tool"
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         draggable={false}
@@ -179,7 +180,7 @@ function CompareSlider({ origUrl, resultUrl, dims }) {
         <div className="absolute inset-0" style={CHECKERBOARD} />
         <img
           src={resultUrl}
-          alt="Processed photo with background removed, showing transparent checkerboard areas — after state of the comparison slider"
+          alt="Image with transparent background created by the online AI background remover — transparent PNG output"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           draggable={false}
@@ -420,12 +421,12 @@ export default function BackgroundRemover() {
         transition={{ duration: 0.4 }}
         className="mb-8"
       >
-        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">Image Tools</p>
-        <p className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
-          Background Remover
-        </p>
+        <p className="text-xs font-bold tracking-widest uppercase text-brand/70 mb-1">AI Image Tools</p>
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+          AI Background Remover
+        </h1>
         <p className="mt-2 text-gray-400 font-medium">
-          Remove any image background instantly with on-device AI — no uploads, no accounts.
+          Free transparent background maker online — remove any image background instantly with on-device AI. No uploads, no accounts, no watermarks.
         </p>
       </motion.div>
 
@@ -507,7 +508,7 @@ export default function BackgroundRemover() {
                 <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
                   <img
                     src={origUrl}
-                    alt="Small thumbnail preview of the image currently being processed by the background removal tool"
+                    alt="Thumbnail of image being processed by the transparent background maker"
                     loading="lazy"
                     className="w-14 h-14 rounded-xl object-cover flex-shrink-0 border border-gray-100"
                   />
@@ -589,13 +590,14 @@ export default function BackgroundRemover() {
         aria-label="AI Background Remover — complete guide"
       >
 
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
-          AI Background Remover — Free Online Tool, No Upload Required
-        </h1>
+        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900 mb-3">
+          Free Transparent Background Maker Online — AI-Powered, No Upload
+        </h2>
         <p className="text-sm text-gray-500 leading-relaxed mb-16 max-w-2xl">
-          Toolyy's background remover uses a neural network running directly in your browser to
-          isolate subjects and erase backgrounds in seconds — with no account, no watermark, and no
-          file ever leaving your device.
+          Toolyy's transparent background maker uses a neural network running directly in your browser to
+          isolate subjects and erase backgrounds in seconds. This free online background remover produces clean
+          transparent PNG cutouts — perfect for logos, product photos, portraits, and e-commerce listings.
+          No account, no watermark, and no file ever leaving your device.
         </p>
 
         <div className="space-y-16">
@@ -842,6 +844,8 @@ export default function BackgroundRemover() {
           </section>
 
         </div>
+
+        <RelatedToolsNav currentToolId="background-remover" />
       </motion.article>
     </div>
   )
