@@ -65,19 +65,23 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/image-converter',
-    title: 'Image to WebP Converter Online | Compress & Optimize | Toolyy',
-    description: 'Convert JPG and PNG images to modern WebP format and reduce file sizes by up to 80%. Adjustable quality, and processed entirely in your browser.',
-    h1: 'Image to WebP Converter',
-    intro: 'Convert JPG and PNG images to WebP format for faster, leaner websites. Adjustable quality slider, zero uploads, and instant results — all inside your browser.',
+    title: 'Image to WebP Converter Free Online | Toolyy',
+    description: 'Convert JPG, PNG, and GIF images to WebP format free online. Reduce file sizes by up to 80% with adjustable quality. Browser-based — no upload, no sign-up, works offline.',
+    h1: 'Image to WebP Converter Online',
+    intro: 'Convert JPG and PNG images to Google\'s modern WebP format and reduce file sizes by up to 80% with virtually no visible quality loss. Adjustable quality slider, zero uploads, and instant results — all inside your browser. Perfect for web developers, bloggers, and anyone optimizing page load speed and Core Web Vitals scores.',
     steps: [
       'Go to toolyy.net and select the Image to WebP converter.',
       'Drag and drop your JPG or PNG image into the browser workspace.',
       'Adjust the quality slider to balance size and fidelity, then download your WebP file.',
     ],
     faqs: [
-      { q: 'Why should I convert images to WebP format?', a: 'WebP produces 25–34% smaller files than JPEG and up to 80% smaller than PNG at equivalent quality. Smaller images mean faster page loads and better Core Web Vitals.' },
-      { q: 'Is there a file size limit for conversion?', a: "No server-side limit. All conversion happens inside your browser using the Canvas API. Most devices handle images up to 30–40 megapixels." },
-      { q: 'Do all browsers support WebP?', a: 'Yes — WebP has 97%+ global browser support including Chrome, Firefox, Safari 14+, and Edge.' },
+      { q: 'What is WebP and why should I use it?', a: 'WebP is a modern image format developed by Google that provides superior lossless and lossy compression for web images. WebP files are 25–34% smaller than equivalent JPEG images and up to 80% smaller than PNG — resulting in faster page loads, lower bandwidth costs, and better Core Web Vitals scores.' },
+      { q: 'How do I convert JPG to WebP online?', a: 'Open Toolyy\'s Image to WebP converter, drag your JPG file into the workspace, adjust the quality slider if needed, and download the converted WebP file. The entire process happens in your browser — no upload to any server.' },
+      { q: 'Does converting to WebP reduce image quality?', a: 'At quality settings above 80%, WebP produces images that are visually indistinguishable from the originals while being significantly smaller. You can use the quality slider to find the perfect balance between file size and visual fidelity.' },
+      { q: 'Do all browsers support WebP in 2026?', a: 'Yes — WebP has over 97% global browser support including Chrome, Firefox, Edge, Safari 14+, and all modern mobile browsers. It is safe to use WebP as the primary image format for any website.' },
+      { q: 'Is there a file size limit for conversion?', a: 'No server-side limit. All conversion happens inside your browser using the Canvas API. Most devices handle images up to 30–40 megapixels without issues.' },
+      { q: 'Will my transparent PNG backgrounds be preserved in WebP?', a: 'Yes. WebP fully supports alpha channel transparency, so transparent PNGs convert to transparent WebP files with no loss of quality or transparency data.' },
+      { q: 'How does WebP compare to AVIF?', a: 'AVIF offers slightly better compression than WebP but has lower browser support (~92% vs 97%) and slower encoding speeds. WebP remains the best all-around choice for web images in 2026 due to its universal browser support and fast encoding.' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -105,8 +109,12 @@ const TOOLS_SEO = [
       'Choose your style and download the QR code as a high-res PNG.',
     ],
     faqs: [
-      { q: 'Are my QR codes stored on a server?', a: 'No. QR codes are generated entirely inside your browser. Your data never leaves your device.' },
-      { q: 'Do QR codes generated here ever expire?', a: 'Never. The destination is encoded directly into the QR pattern with no middleman server.' },
+      { q: 'Are my QR codes stored on a server?', a: 'No. QR codes are generated entirely inside your browser using JavaScript. Your data never leaves your device and nothing is stored anywhere.' },
+      { q: 'Do QR codes generated here ever expire?', a: 'Never. The destination URL or text is encoded directly into the QR pattern. There is no middleman server or redirect service that could go offline. These are static QR codes that work permanently.' },
+      { q: 'What is a QR code and how does it work?', a: 'A QR (Quick Response) code is a two-dimensional barcode that stores data in a matrix of black and white squares. When scanned with a phone camera, it instantly decodes the stored information — typically a URL, text, Wi-Fi credentials, or contact details. QR codes can store up to 4,296 alphanumeric characters.' },
+      { q: 'What is the difference between static and dynamic QR codes?', a: 'Static QR codes encode the destination directly into the pattern — they never change and never expire. Dynamic QR codes use a redirect URL that can be changed later but depend on a third-party server. Toolyy generates static QR codes for maximum reliability and privacy.' },
+      { q: 'What are common uses for QR codes?', a: 'Business cards and resumes, restaurant menus, event tickets, product packaging, Wi-Fi network sharing, marketing flyers and posters, app download links, payment links, and website URLs. QR codes bridge the physical and digital worlds.' },
+      { q: 'What size should I print a QR code?', a: 'Minimum 2 × 2 cm (0.8 × 0.8 inches) for close-range scanning like business cards. For posters or signs, scale proportionally — the scanning distance is roughly 10× the QR code width. Toolyy outputs high-resolution PNG that scales cleanly for print.' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -134,8 +142,12 @@ const TOOLS_SEO = [
       'The AI processes your image locally, then download the transparent PNG result.',
     ],
     faqs: [
-      { q: 'Is my photo uploaded to a server?', a: "No. The background remover runs 100% in your browser using WebAssembly and ONNX Runtime. Your image never leaves your device." },
-      { q: 'Does the AI work on all types of photos?', a: 'Yes — the model handles people, products, animals, objects, and most complex scenes with clear subject-to-background contrast.' },
+      { q: 'Is my photo uploaded to a server?', a: 'No. The background remover runs 100% in your browser using WebAssembly and ONNX Runtime. Your image never leaves your device — not even temporarily.' },
+      { q: 'Does the AI work on all types of photos?', a: 'Yes — the model handles people, products, animals, objects, and most complex scenes with clear subject-to-background contrast. It works best with well-lit photos where the subject stands out from the background.' },
+      { q: 'What image formats support transparent backgrounds?', a: 'PNG and WebP support alpha channel transparency. JPEG does not support transparency at all. Toolyy outputs PNG files with full alpha transparency, which is compatible with all design tools, e-commerce platforms, and presentation software.' },
+      { q: 'Can I remove backgrounds from product photos for e-commerce?', a: 'Yes. The AI handles product photography well — clothing, electronics, food items, jewelry, and more. Clean transparent cutouts are perfect for Amazon, Shopify, Etsy, and eBay product listings where a white or transparent background is required.' },
+      { q: 'How does AI background removal work?', a: 'The tool uses a deep neural network (U²-Net architecture) that has been trained on millions of images to identify foreground subjects. It runs via ONNX Runtime compiled to WebAssembly, executing entirely in your browser with no server involvement.' },
+      { q: 'How does this compare to remove.bg?', a: 'Similar AI quality, but Toolyy processes everything locally on your device. No uploads, no watermarks, no account required, no per-image fees, and no usage limits. Your images remain completely private.' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -153,18 +165,22 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/json-formatter',
-    title: 'JSON Formatter & Validator Online | Beautify & Minify | Toolyy',
-    description: 'Paste or type raw JSON and instantly beautify, validate, or minify it with syntax highlighting and line-level error reporting. Runs in your browser.',
-    h1: 'JSON Formatter & Validator',
-    intro: 'Beautify, validate, and minify JSON with syntax highlighting and clear error reporting. Paste sensitive API keys and tokens safely — everything runs in your browser with zero server contact.',
+    title: 'JSON Formatter & Validator Online Free | Toolyy',
+    description: 'Free online JSON formatter, validator, and minifier with syntax highlighting and line-level error reporting. Paste any JSON to beautify, validate, or compress. 100% browser-based — safe for API keys and tokens.',
+    h1: 'JSON Formatter & Validator Online',
+    intro: 'Beautify, validate, and minify JSON with syntax highlighting and clear error reporting. Paste sensitive API keys and tokens safely — everything runs in your browser with zero server contact. Toolyy\'s JSON formatter handles any payload size with instant results and no data tracking.',
     steps: [
       'Go to toolyy.net and select the JSON Formatter tool.',
       'Paste your raw JSON or drag a .json file into the editor.',
       'Click Beautify to format, Validate to check syntax, or Minify to compress — then copy or download.',
     ],
     faqs: [
-      { q: 'Is my JSON data safe when using this formatter?', a: "Yes — everything processes directly in your browser. Your data is never sent to any server." },
-      { q: 'Can this tool fix broken JSON?', a: 'The Validate button identifies syntax errors and their exact location. You fix the error based on the feedback, then Beautify works normally.' },
+      { q: 'Is my JSON data safe when using this formatter?', a: 'Yes — everything processes directly in your browser using JavaScript. Your data is never sent to any server, making it safe for API keys, authentication tokens, and sensitive configuration data.' },
+      { q: 'Can this tool fix broken JSON?', a: 'The Validate button identifies syntax errors with exact line numbers and descriptions. Common errors detected include missing commas, trailing commas, unquoted keys, mismatched brackets, and invalid escape sequences.' },
+      { q: 'What is JSON and what is it used for?', a: 'JSON (JavaScript Object Notation) is a lightweight, human-readable data interchange format. It is the standard for REST APIs, configuration files, NoSQL databases, and web application data exchange. Its simplicity and language independence make it the most widely used data format on the web.' },
+      { q: 'What is the difference between beautify and minify?', a: 'Beautify adds indentation and line breaks to make JSON human-readable. Minify removes all whitespace to create the smallest possible payload — ideal for production APIs, reducing bandwidth, and improving load times. Both operations preserve the data structure exactly.' },
+      { q: 'Can I format large JSON files?', a: 'Yes. Since all processing happens client-side in your browser, there is no upload or server limit. Files up to several megabytes parse and format instantly on modern devices.' },
+      { q: 'What is valid JSON format?', a: 'Valid JSON requires double-quoted strings for keys and values, no trailing commas, no comments, and properly nested objects and arrays. The root element must be an object {} or array []. Toolyy validates against the strict JSON specification (RFC 8259).' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -178,7 +194,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT15S',
     },
-    relatedTools: ['pdf-splitter', 'unit-converter', 'mp4-to-mp3'],
+    relatedTools: ['pdf-splitter', 'unit-converter', 'image-converter'],
   },
   {
     path: 'tools/social-resizer',
@@ -211,19 +227,24 @@ const TOOLS_SEO = [
   },
   {
     path: 'tools/mp4-to-mp3',
-    title: 'Convert MP4 to MP3 Audio Online | High-Quality Extractor | Toolyy',
-    description: 'Extract crystal clear MP3 audio from any MP4 video natively in your browser. Fast conversion with zero file-size limitations or data tracking.',
-    h1: 'MP4 to MP3 Converter',
-    intro: 'Extract high-quality MP3 audio from MP4, WebM, MOV, AVI, and MKV video files entirely in your browser. Choose bitrates from 128 to 320 kbps. No uploads, no file-size limits, no data tracking.',
+    title: 'MP4 to MP3 Converter Free Online | Toolyy',
+    description: 'Convert MP4 to MP3 free online. Extract high-quality audio from any video file (MP4, MOV, WebM, AVI, MKV) directly in your browser. Choose 128–320 kbps bitrate. No upload, no file size limit.',
+    h1: 'MP4 to MP3 Converter Online',
+    intro: 'Extract high-quality MP3 audio from MP4, WebM, MOV, AVI, and MKV video files entirely in your browser. Powered by FFmpeg compiled to WebAssembly, the conversion runs locally on your device with zero server uploads. Choose bitrates from 128 to 320 kbps for the perfect balance between file size and audio quality.',
     steps: [
       'Go to toolyy.net and select the MP4 to MP3 converter.',
       'Drag and drop your video file into the workspace.',
-      'Choose your preferred audio quality and wait for conversion.',
+      'Choose your preferred audio quality (128–320 kbps) and wait for conversion.',
       'Download your extracted MP3 audio file.',
     ],
     faqs: [
-      { q: 'Is my video uploaded to a server?', a: 'No. Conversion happens entirely in your browser using FFmpeg compiled to WebAssembly. Your file never leaves your device.' },
-      { q: 'What video formats are supported?', a: 'MP4, WebM, MOV, AVI, and MKV. Most common video codecs (H.264, H.265, VP8, VP9, AV1) are supported.' },
+      { q: 'Is my video uploaded to a server?', a: 'No. Conversion happens entirely in your browser using FFmpeg compiled to WebAssembly. Your file never leaves your device — even with multi-gigabyte videos.' },
+      { q: 'What video formats can I convert to MP3?', a: 'MP4, WebM, MOV, AVI, and MKV with H.264, H.265, VP8, VP9, and AV1 codecs are all supported. If your browser can play the video, Toolyy can extract the audio.' },
+      { q: 'What is MP4?', a: 'MP4 (MPEG-4 Part 14) is a digital multimedia container format that stores video, audio, subtitles, and still images. It is the most common video format used on the internet, supported by virtually every device and platform.' },
+      { q: 'What is MP3?', a: 'MP3 (MPEG-1 Audio Layer III) is the most widely supported audio format. It uses lossy compression to reduce file sizes by 75–95% compared to uncompressed audio while maintaining acceptable listening quality. Supported by every music player, phone, and browser.' },
+      { q: 'What bitrate should I choose for MP3?', a: '128 kbps is acceptable for spoken word and podcasts. 192 kbps is good for general music listening. 256 kbps is high quality. 320 kbps is the maximum MP3 bitrate and is nearly indistinguishable from the original audio for most listeners.' },
+      { q: 'How long does MP4 to MP3 conversion take?', a: 'Depends on file size and your device. A 5-minute video typically converts in 10–30 seconds on modern hardware. Larger files (1+ hours) may take a few minutes. All processing uses your device CPU.' },
+      { q: 'Is there a file size limit?', a: 'No server-side limit since nothing is uploaded. The practical limit is your device RAM. Most modern computers handle video files up to several gigabytes.' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -238,7 +259,7 @@ const TOOLS_SEO = [
       ],
       totalTime: 'PT2M',
     },
-    relatedTools: ['pdf-splitter', 'image-converter', 'qr-generator'],
+    relatedTools: ['image-converter', 'pdf-splitter', 'qr-generator'],
   },
   {
     path: 'tools/unit-converter',
@@ -272,6 +293,97 @@ const TOOLS_SEO = [
     relatedTools: ['json-formatter', 'social-resizer', 'pdf-splitter'],
   },
 ]
+
+const TOOLS_SEO_EXTRA_HTML = {
+  'tools/json-formatter': `
+        <section>
+          <h2>What Is JSON?</h2>
+          <p>JSON (JavaScript Object Notation) is a lightweight, text-based data interchange format derived from JavaScript. Despite its name, JSON is language-independent and supported by virtually every modern programming language including Python, Java, C#, Go, Ruby, PHP, and Rust.</p>
+          <p>JSON uses two core structures: <strong>objects</strong> (key-value pairs wrapped in curly braces) and <strong>arrays</strong> (ordered lists wrapped in square brackets). Values can be strings, numbers, booleans, null, objects, or arrays — making JSON flexible enough for API responses, configuration files, database records, and inter-service communication.</p>
+          <h2>Common JSON Errors and How to Fix Them</h2>
+          <p><strong>Trailing commas:</strong> JSON does not allow a comma after the last item in an object or array. Remove the final comma.</p>
+          <p><strong>Single quotes:</strong> JSON requires double quotes for strings. Replace all single quotes with double quotes.</p>
+          <p><strong>Unquoted keys:</strong> Unlike JavaScript objects, JSON keys must always be wrapped in double quotes.</p>
+          <p><strong>Comments:</strong> Standard JSON (RFC 8259) does not support comments. Remove any // or /* */ comments before validating.</p>
+          <p><strong>Missing commas:</strong> Every key-value pair must be separated by a comma. The validator pinpoints the exact line where a comma is expected.</p>
+          <h2>JSON vs XML vs YAML</h2>
+          <p><strong>JSON</strong> is the web standard — compact, fast to parse, and natively supported in browsers. Best for APIs and web applications.</p>
+          <p><strong>XML</strong> is more verbose but supports attributes, namespaces, and mixed content. Used in enterprise systems, SOAP APIs, and document markup.</p>
+          <p><strong>YAML</strong> uses indentation instead of brackets, making it human-friendly for configuration files (Docker, Kubernetes, CI/CD). However, YAML is sensitive to whitespace errors and slower to parse than JSON.</p>
+        </section>`,
+  'tools/image-converter': `
+        <section>
+          <h2>What Is WebP?</h2>
+          <p>WebP is a modern image format developed by Google that provides superior lossless and lossy compression for web images. Released in 2010 and now supported by over 97% of browsers worldwide, WebP delivers the same visual quality as JPEG and PNG at significantly smaller file sizes.</p>
+          <p>WebP supports alpha channel transparency (like PNG), animation (like GIF), and both lossy and lossless compression modes — making it a versatile replacement for older image formats on the web.</p>
+          <h2>WebP vs PNG vs JPEG — When to Use Each</h2>
+          <table>
+            <thead><tr><th>Format</th><th>Best For</th><th>Transparency</th><th>Typical Size</th></tr></thead>
+            <tbody>
+              <tr><td>WebP</td><td>All web images</td><td>Yes</td><td>25–80% smaller</td></tr>
+              <tr><td>JPEG</td><td>Photos (legacy)</td><td>No</td><td>Baseline</td></tr>
+              <tr><td>PNG</td><td>Logos, icons (legacy)</td><td>Yes</td><td>2–5× larger than WebP</td></tr>
+            </tbody>
+          </table>
+          <h2>Why Convert to WebP for Your Website?</h2>
+          <p><strong>Faster page loads:</strong> Smaller images mean faster load times, especially on mobile networks. Google PageSpeed Insights specifically recommends WebP for image optimization.</p>
+          <p><strong>Better Core Web Vitals:</strong> Largest Contentful Paint (LCP) improves significantly with WebP images, directly impacting your Google search rankings.</p>
+          <p><strong>Lower bandwidth costs:</strong> For sites serving millions of images, the 25–80% size reduction translates to significant CDN and hosting savings.</p>
+          <p><strong>Universal support:</strong> With 97%+ browser coverage in 2026, there is no practical reason to avoid WebP. Safari, Chrome, Firefox, Edge, and all modern mobile browsers render WebP natively.</p>
+        </section>`,
+  'tools/mp4-to-mp3': `
+        <section>
+          <h2>What Is MP4?</h2>
+          <p>MP4 (MPEG-4 Part 14) is a digital multimedia container format that can store video, audio, subtitles, and still images. It is the most widely used video format on the internet — used by YouTube, social media platforms, streaming services, and smartphone cameras. MP4 files typically use H.264 or H.265 video codecs paired with AAC audio.</p>
+          <h2>What Is MP3?</h2>
+          <p>MP3 (MPEG-1 Audio Layer III) is the most universally supported audio format. Developed in the early 1990s, MP3 uses lossy compression to reduce audio file sizes by 75–95% compared to uncompressed WAV while maintaining acceptable listening quality. It remains the standard for music files, podcasts, and audio downloads due to its universal device and player support.</p>
+          <h2>Audio Bitrate Guide: Which Quality Should You Choose?</h2>
+          <table>
+            <thead><tr><th>Bitrate</th><th>Quality</th><th>Best For</th><th>File Size (per minute)</th></tr></thead>
+            <tbody>
+              <tr><td>128 kbps</td><td>Acceptable</td><td>Podcasts, spoken word, previews</td><td>~960 KB</td></tr>
+              <tr><td>192 kbps</td><td>Good</td><td>General music listening</td><td>~1.4 MB</td></tr>
+              <tr><td>256 kbps</td><td>High</td><td>Music archiving, DJing</td><td>~1.9 MB</td></tr>
+              <tr><td>320 kbps</td><td>Maximum</td><td>Audiophile quality, studio use</td><td>~2.4 MB</td></tr>
+            </tbody>
+          </table>
+          <p>Higher bitrates preserve more audio detail but produce larger files. For most people, 192 kbps offers the best balance between quality and file size.</p>
+        </section>`,
+  'tools/qr-generator': `
+        <section>
+          <h2>What Is a QR Code?</h2>
+          <p>A QR (Quick Response) code is a two-dimensional matrix barcode invented in 1994 by Denso Wave for the Japanese automotive industry. Unlike traditional barcodes that store data in one direction, QR codes encode information in both horizontal and vertical directions — enabling them to store up to 4,296 alphanumeric characters in a small square pattern.</p>
+          <p>Modern smartphones can scan QR codes natively using their built-in camera apps (iPhone iOS 11+ and Android 10+), making QR codes the fastest bridge between the physical and digital worlds.</p>
+          <h2>Static vs Dynamic QR Codes</h2>
+          <p><strong>Static QR codes</strong> encode the destination directly into the pattern. They never expire, require no ongoing service, and work even if the generator goes offline. Toolyy generates static QR codes — the most reliable and private option.</p>
+          <p><strong>Dynamic QR codes</strong> encode a short redirect URL instead of the final destination. This allows the destination to be changed after printing, but depends on a third-party server staying online. Most "free" QR generators that offer dynamic codes eventually charge monthly fees.</p>
+          <h2>Popular QR Code Use Cases</h2>
+          <ul>
+            <li><strong>Business cards &amp; resumes:</strong> Link to your LinkedIn, portfolio, or vCard for instant contact sharing</li>
+            <li><strong>Restaurant menus:</strong> Replace paper menus with a scannable code linking to your digital menu</li>
+            <li><strong>Wi-Fi sharing:</strong> Let guests connect to your network by scanning — no typing passwords</li>
+            <li><strong>Product packaging:</strong> Link to manuals, warranty registration, or product pages</li>
+            <li><strong>Event tickets:</strong> Encode ticket IDs for fast check-in at events and venues</li>
+            <li><strong>Marketing materials:</strong> Add QR codes to flyers, posters, and brochures to drive traffic to landing pages</li>
+          </ul>
+          <h2>QR Code Printing Size Guide</h2>
+          <p>The minimum recommended print size is <strong>2 × 2 cm (0.8 × 0.8 in)</strong> for close-range scanning like business cards. For posters, the scanning distance is approximately 10× the QR code width — so a 10 cm QR code can be scanned from about 1 meter away. Always test your printed QR code with multiple phones before distributing.</p>
+        </section>`,
+  'tools/background-remover': `
+        <section>
+          <h2>Use Cases for Transparent Backgrounds</h2>
+          <h3>E-Commerce Product Photos</h3>
+          <p>Amazon, Shopify, Etsy, and eBay require or strongly recommend product images on white or transparent backgrounds. Use Toolyy to create clean cutouts that meet marketplace standards without paying per-image fees to services like remove.bg.</p>
+          <h3>Logo &amp; Branding</h3>
+          <p>Transparent logo files (PNG) are essential for placing your brand mark on any colored background — websites, presentations, social media, and print materials. Remove the background from a logo photo or scan to create a versatile transparent PNG.</p>
+          <h3>Social Media Graphics</h3>
+          <p>Create layered compositions by removing backgrounds from portrait photos, product shots, or objects. Combine transparent cutouts with custom backgrounds for Instagram posts, YouTube thumbnails, and TikTok content.</p>
+          <h3>Presentations &amp; Documents</h3>
+          <p>Transparent images integrate seamlessly into PowerPoint, Google Slides, and Keynote presentations. No more awkward white rectangles around images on colored slide backgrounds.</p>
+          <h2>PNG vs JPEG: Why Transparency Requires PNG</h2>
+          <p>JPEG does not support transparency — it always fills transparent areas with a solid color (usually white). PNG supports full alpha channel transparency, preserving clean edges and partial transparency. Toolyy outputs PNG files to ensure your transparent backgrounds work correctly in all applications.</p>
+        </section>`,
+}
 
 function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -326,12 +438,27 @@ function buildAllToolsNav(currentPath) {
       </nav>`
 }
 
+function buildSoftwareAppSchema(tool, canonical) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.h1,
+    url: canonical,
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Web Browser',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description: tool.description || tool.intro,
+  }
+}
+
 function buildSeoHtml(tool) {
   const canonical = `${BASE_URL}/${tool.path}`
   const breadcrumb = buildBreadcrumbSchema(tool.h1, canonical)
   const faqSchema  = buildFaqSchema(tool.faqs)
+  const appSchema  = buildSoftwareAppSchema(tool, canonical)
   const relatedHtml = buildRelatedToolsHtml(tool.relatedTools)
   const allToolsNav = buildAllToolsNav(tool.path)
+  const extraHtml = TOOLS_SEO_EXTRA_HTML[tool.path] || ''
 
   return `
     <main>
@@ -363,13 +490,45 @@ function buildSeoHtml(tool) {
           <h2>Frequently Asked Questions</h2>
           ${tool.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
         </section>
+        ${extraHtml}
         ${relatedHtml}
         ${allToolsNav}
       </article>
     </main>
     <script type="application/ld+json">${JSON.stringify(tool.schema, null, 2)}</script>
     <script type="application/ld+json">${JSON.stringify(faqSchema, null, 2)}</script>
-    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>`
+    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(appSchema, null, 2)}</script>`
+}
+
+const ALIAS_EXTRA_HTML = {
+  'kg-to-lbs': `
+        <section>
+          <h2>How to Convert Kilograms to Pounds (KG to LBS) for Gym &amp; Fitness</h2>
+          <p>The exact conversion factor is <strong>1 kg = 2.20462 lbs</strong>. Multiply any kilogram value by 2.20462 to get the equivalent in pounds. For a quick mental estimate at the gym, multiply by 2.2 — close enough for loading plates.</p>
+          <p>This matters for lifters because most US gyms label plates and machines in pounds, while Olympic weightlifting and international competitions use kilograms. Whether you follow a European training program, watch powerlifting meets, or track macros using a metric food scale, fast kg-to-lbs conversion is essential. Toolyy calculates it in real time as you type — no rounding errors, no conversion charts needed.</p>
+
+          <h3>Quick Weight Conversion Table for Weightlifting &amp; Bodybuilding</h3>
+          <table>
+            <thead><tr><th>Kilograms (kg)</th><th>Pounds (lbs)</th><th>Common Use</th></tr></thead>
+            <tbody>
+              <tr><td>10 kg</td><td>22.05 lbs</td><td>Small bumper plate</td></tr>
+              <tr><td>15 kg</td><td>33.07 lbs</td><td>Training plate</td></tr>
+              <tr><td>20 kg</td><td>44.09 lbs</td><td>Standard Olympic barbell</td></tr>
+              <tr><td>25 kg</td><td>55.12 lbs</td><td>Large bumper plate</td></tr>
+              <tr><td>40 kg</td><td>88.18 lbs</td><td>Loaded EZ-curl bar</td></tr>
+              <tr><td>50 kg</td><td>110.23 lbs</td><td>Heavy dumbbell</td></tr>
+              <tr><td>60 kg</td><td>132.28 lbs</td><td>Intermediate bench press</td></tr>
+              <tr><td>80 kg</td><td>176.37 lbs</td><td>Advanced squat</td></tr>
+              <tr><td>100 kg</td><td>220.46 lbs</td><td>Two-plate bench milestone</td></tr>
+              <tr><td>140 kg</td><td>308.65 lbs</td><td>Advanced deadlift</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Healthy Meal Prep: Converting KG to LBS for Food Tracking</h3>
+          <p>Nutrition labels in the US list serving sizes in ounces and pounds, while kitchen scales globally default to grams and kilograms. When meal-prepping chicken breast, rice, or vegetables in bulk, converting between kg and lbs ensures accurate macro tracking. For example, a 2.5 kg pack of chicken breast equals 5.51 lbs — about 22 four-ounce servings.</p>
+          <p>Quick reference: 0.5 kg = 1.1 lbs, 1 kg = 2.2 lbs, 2 kg = 4.4 lbs, 5 kg = 11 lbs.</p>
+        </section>`,
 }
 
 function buildAliasSeoHtml(alias) {
@@ -377,6 +536,7 @@ function buildAliasSeoHtml(alias) {
   const breadcrumb = buildBreadcrumbSchema(alias.h1, canonical)
   const relatedHtml = buildRelatedToolsHtml(alias.relatedTools)
   const allToolsNav = buildAllToolsNav(alias.path.replace(/^\//, ''))
+  const extraHtml = ALIAS_EXTRA_HTML[alias.id] || ''
 
   const howToSchema = {
     '@context': 'https://schema.org',
@@ -388,6 +548,16 @@ function buildAliasSeoHtml(alias) {
   }
 
   const faqSchema = buildFaqSchema(alias.faqs)
+  const appSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: alias.h1,
+    url: canonical,
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Web Browser',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description: alias.description,
+  }
 
   return `
     <main>
@@ -419,13 +589,15 @@ function buildAliasSeoHtml(alias) {
           <h2>Frequently Asked Questions</h2>
           ${alias.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
         </section>
+        ${extraHtml}
         ${relatedHtml}
         ${allToolsNav}
       </article>
     </main>
     <script type="application/ld+json">${JSON.stringify(howToSchema, null, 2)}</script>
     <script type="application/ld+json">${JSON.stringify(faqSchema, null, 2)}</script>
-    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>`
+    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(appSchema, null, 2)}</script>`
 }
 
 let generated = 0

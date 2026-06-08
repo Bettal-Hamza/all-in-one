@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Ruler, ArrowRightLeft, ChevronDown, Copy, Check,
@@ -251,6 +252,29 @@ const FAQS = [
   },
 ]
 
+const PATH_DEFAULTS = {
+  '/tools/kg-to-lbs': ['weight', 'kg', 'lb'],
+  '/tools/lbs-to-kg': ['weight', 'lb', 'kg'],
+  '/tools/celsius-to-fahrenheit': ['temperature', 'c', 'f'],
+  '/tools/cm-to-inches': ['length', 'cm', 'in'],
+  '/tools/length-unit-converter': ['length', 'km', 'mi'],
+}
+
+const WEIGHT_GYM_FAQS = [
+  {
+    q: 'How many lbs is a 20kg bar?',
+    a: 'A standard 20 kg Olympic barbell weighs approximately 44.09 lbs (20 × 2.20462). In most US gyms this is rounded to 45 lbs, but the actual metric bar is 44.09 lbs.',
+  },
+  {
+    q: 'What is the formula to change kg to lbs quickly in your head?',
+    a: 'Multiply the kg value by 2.2 for a quick mental estimate. For example, 80 kg × 2.2 = 176 lbs. For exact results, use the precise factor: 1 kg = 2.20462 lbs.',
+  },
+  {
+    q: 'Is a kilo heavier than a pound?',
+    a: 'Yes. One kilogram equals approximately 2.205 pounds, making it more than twice as heavy as a single pound. The kilogram is the base unit of mass in the metric (SI) system.',
+  },
+]
+
 // ─── SUB-COMPONENTS ─────────────────────────────────────────────────────────
 
 function FaqItem({ q, a }) {
@@ -308,9 +332,12 @@ function UnitSelect({ units, value, onChange, label }) {
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
 
 export default function UnitConverter() {
-  const [catId, setCatId] = useState('length')
-  const [fromId, setFromId] = useState('km')
-  const [toId, setToId] = useState('mi')
+  const { pathname } = useLocation()
+  const [defaultCat, defaultFrom, defaultTo] = PATH_DEFAULTS[pathname] || ['length', 'km', 'mi']
+
+  const [catId, setCatId] = useState(defaultCat)
+  const [fromId, setFromId] = useState(defaultFrom)
+  const [toId, setToId] = useState(defaultTo)
   const [inputVal, setInputVal] = useState('1')
   const [copied, setCopied] = useState(false)
 
@@ -366,6 +393,7 @@ export default function UnitConverter() {
         totalTime="PT10S"
       />
       <FAQSchema faqs={FAQS} />
+      {catId === 'weight' && <FAQSchema faqs={WEIGHT_GYM_FAQS} />}
 
       {/* ── Page heading ───────────────────────────────────────────── */}
       <motion.header
@@ -881,6 +909,121 @@ export default function UnitConverter() {
                   conversion factors sourced from NIST and SI standards. Results are precise to 15–17 significant digits —
                   more than sufficient for engineering, science, construction, and everyday measurements.
                 </p>
+              </div>
+            </section>
+          )}
+
+          {/* ── Weight / Gym / Fitness Content ───────────────────── */}
+          {catId === 'weight' && (
+            <section aria-labelledby="weight-gym-heading">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-xl bg-orange-50 flex items-center justify-center">
+                  <Weight aria-hidden="true" className="w-4 h-4 text-orange-600" />
+                </div>
+                <h2 id="weight-gym-heading" className="text-2xl font-black text-gray-900">
+                  How to Convert Kilograms to Pounds (KG to LBS) for Gym &amp; Fitness
+                </h2>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass space-y-4">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  The exact conversion factor is <strong className="text-gray-800">1 kg = 2.20462 lbs</strong>. Multiply any
+                  kilogram value by 2.20462 to get the equivalent in pounds. For a quick mental estimate at the gym, simply
+                  multiply by 2.2 — close enough for loading plates.
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  This matters for lifters because most commercial gyms in the United States label plates and machines in
+                  pounds, while Olympic weightlifting and international competitions use kilograms. If you follow a European
+                  training program, watch powerlifting meets, or track macros using a metric food scale, you need fast,
+                  reliable kg-to-lbs conversion. Toolyy calculates it in real time as you type — no searching through
+                  conversion charts or rounding errors.
+                </p>
+              </div>
+
+              {/* Gym weight conversion table */}
+              <div className="mt-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 flex items-center justify-center">
+                    <Ruler aria-hidden="true" className="w-4 h-4 text-red-600" />
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900">
+                    Quick Weight Conversion Table for Weightlifting &amp; Bodybuilding
+                  </h3>
+                </div>
+                <div className="bg-white border border-gray-100 rounded-3xl shadow-glass overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-100 bg-gray-50/50">
+                        <th className="text-left font-extrabold text-gray-900 px-6 py-3">Kilograms (kg)</th>
+                        <th className="text-left font-extrabold text-gray-900 px-6 py-3">Pounds (lbs)</th>
+                        <th className="text-left font-extrabold text-gray-900 px-6 py-3">Common Use</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {[
+                        { kg: '10', lbs: '22.05', use: 'Small bumper plate' },
+                        { kg: '15', lbs: '33.07', use: 'Training plate' },
+                        { kg: '20', lbs: '44.09', use: 'Standard Olympic barbell' },
+                        { kg: '25', lbs: '55.12', use: 'Large bumper plate' },
+                        { kg: '40', lbs: '88.18', use: 'Loaded EZ-curl bar' },
+                        { kg: '50', lbs: '110.23', use: 'Heavy dumbbell' },
+                        { kg: '60', lbs: '132.28', use: 'Intermediate bench press' },
+                        { kg: '80', lbs: '176.37', use: 'Advanced squat' },
+                        { kg: '100', lbs: '220.46', use: 'Two-plate bench milestone' },
+                        { kg: '140', lbs: '308.65', use: 'Advanced deadlift' },
+                      ].map(({ kg, lbs, use }) => (
+                        <tr key={kg}>
+                          <td className="px-6 py-3 font-bold text-gray-800">{kg} kg</td>
+                          <td className="px-6 py-3 text-brand font-bold font-mono">{lbs} lbs</td>
+                          <td className="px-6 py-3 text-gray-500">{use}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Meal prep section */}
+              <div className="mt-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center">
+                    <Zap aria-hidden="true" className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900">
+                    Healthy Meal Prep: Converting KG to LBS for Food Tracking
+                  </h3>
+                </div>
+                <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-glass space-y-4">
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Nutrition labels in the US list serving sizes in ounces and pounds, while kitchen scales sold globally
+                    often default to grams and kilograms. When meal-prepping chicken breast, rice, or vegetables in bulk,
+                    converting between kg and lbs ensures accurate macro tracking. For example, a 2.5 kg pack of chicken
+                    breast equals 5.51 lbs — about 22 four-ounce servings.
+                  </p>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Quick reference: <strong className="text-gray-800">0.5 kg = 1.1 lbs</strong>,{' '}
+                    <strong className="text-gray-800">1 kg = 2.2 lbs</strong>,{' '}
+                    <strong className="text-gray-800">2 kg = 4.4 lbs</strong>,{' '}
+                    <strong className="text-gray-800">5 kg = 11 lbs</strong>. Use Toolyy's converter for precise
+                    values when your macros need to be exact — especially during cutting or competition prep phases.
+                  </p>
+                </div>
+              </div>
+
+              {/* Weight FAQ accordion */}
+              <div className="mt-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-xl bg-violet-50 flex items-center justify-center">
+                    <Weight aria-hidden="true" className="w-4 h-4 text-violet-600" />
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900">
+                    KG to LBS — Common Questions
+                  </h3>
+                </div>
+                <div className="bg-white border border-gray-100 rounded-3xl px-8 shadow-glass divide-y divide-gray-100">
+                  {WEIGHT_GYM_FAQS.map((item, i) => (
+                    <FaqItem key={i} q={item.q} a={item.a} />
+                  ))}
+                </div>
               </div>
             </section>
           )}

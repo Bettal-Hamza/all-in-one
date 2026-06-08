@@ -381,20 +381,23 @@ export const SEO_ALIASES = [
     id: 'kg-to-lbs',
     parentTool: 'unit-converter',
     path: '/tools/kg-to-lbs',
-    title: 'KG to LBS Converter — Kilograms to Pounds Calculator',
-    description: 'Convert kilograms to pounds instantly. Type a value and see the result in real-time. Supports decimal precision. Free, works offline.',
-    h1: 'Kilograms to Pounds Converter',
-    intro: "Convert kilograms to pounds (and back) instantly with real-time results as you type. Whether you're tracking fitness goals, shipping packages, or converting recipes, get precise kg-to-lbs conversions without searching through conversion tables.",
+    title: 'KG to LBS Converter — Kilograms to Pounds Calculator | Toolyy',
+    description: 'Convert kg to lbs instantly for weightlifting, bodybuilding, and meal prep tracking. See common gym plate conversions, the exact formula (1 kg = 2.20462 lbs), and quick reference tables. Free, works offline.',
+    h1: 'KG to LBS Converter — Kilograms to Pounds',
+    intro: 'Convert kilograms to pounds instantly with this free KG to LBS converter built for gym-goers, lifters, and anyone tracking nutrition. Whether you need to convert Olympic barbell plates, dumbbell weights, or food portions from metric to imperial, get real-time results as you type. The exact formula is 1 kg = 2.20462 lbs. All calculations run in your browser — no uploads, no tracking, works offline.',
     steps: [
-      'Open the Unit Converter on Toolyy.',
-      'Select the Weight category and choose Kilograms → Pounds.',
-      'Type your value to see the converted result instantly.',
+      'Open the KG to LBS Converter on Toolyy.',
+      'The tool defaults to Kilograms → Pounds. Type your weight value.',
+      'See the converted result instantly. Use the swap button to convert LBS back to KG.',
     ],
     faqs: [
-      { q: 'How many pounds is 1 kilogram?', a: '1 kilogram equals approximately 2.20462 pounds. The converter provides full decimal precision.' },
-      { q: 'Does this work offline?', a: 'Yes. Once the page loads, all conversions happen locally with zero server communication.' },
+      { q: 'How many lbs is a 20kg bar?', a: 'A standard 20 kg Olympic barbell weighs approximately 44.09 lbs (20 × 2.20462). In most US gyms this is rounded to 45 lbs, but the actual metric bar is 44.09 lbs.' },
+      { q: 'What is the formula to change kg to lbs quickly in your head?', a: 'Multiply the kg value by 2.2 for a quick mental estimate. For example, 80 kg × 2.2 = 176 lbs. For exact results, use the precise factor: 1 kg = 2.20462 lbs.' },
+      { q: 'Is a kilo heavier than a pound?', a: 'Yes. One kilogram equals approximately 2.205 pounds, making it more than twice as heavy as a single pound. The kilogram is the base unit of mass in the metric (SI) system.' },
+      { q: 'How do I convert my body weight from kg to lbs?', a: 'Multiply your weight in kilograms by 2.20462. For example, 75 kg × 2.20462 = 165.3 lbs. Toolyy calculates this instantly with full decimal precision.' },
+      { q: 'What are common gym plate weights in kg and lbs?', a: 'Standard Olympic plates: 10 kg (22 lbs), 15 kg (33 lbs), 20 kg (44 lbs), 25 kg (55 lbs). US-style plates are typically 5, 10, 25, 35, and 45 lbs.' },
     ],
-    relatedTools: ['pdf-splitter', 'json-formatter', 'qr-generator'],
+    relatedTools: ['background-remover', 'image-converter', 'qr-generator'],
   },
   {
     id: 'celsius-to-fahrenheit',
@@ -433,6 +436,148 @@ export const SEO_ALIASES = [
       { q: 'Is this precise enough for engineering?', a: 'Yes. The converter uses IEEE 754 double-precision floating point, providing 15-17 significant digits of precision.' },
     ],
     relatedTools: ['pdf-splitter', 'social-resizer', 'mp4-to-mp3'],
+  },
+
+  // ── Reverse unit converter aliases ────────────────────────────────
+  {
+    id: 'lbs-to-kg',
+    parentTool: 'unit-converter',
+    path: '/tools/lbs-to-kg',
+    title: 'LBS to KG Converter — Pounds to Kilograms Calculator | Toolyy',
+    description: 'Convert pounds to kilograms instantly. Free online LBS to KG converter with real-time results. The exact formula is 1 lb = 0.453592 kg. Works offline, no sign-up.',
+    h1: 'LBS to KG Converter — Pounds to Kilograms',
+    intro: 'Convert pounds to kilograms instantly with this free LBS to KG converter. Whether you need to convert body weight, shipping packages, or recipe measurements from imperial to metric, get real-time results as you type. The exact formula is 1 lb = 0.453592 kg. All calculations run in your browser — no uploads, no tracking.',
+    steps: [
+      'Open the LBS to KG Converter on Toolyy.',
+      'The tool defaults to Pounds → Kilograms. Type your weight value.',
+      'See the converted result instantly. Use the swap button to convert KG back to LBS.',
+    ],
+    faqs: [
+      { q: 'How many kg is 1 pound?', a: '1 pound equals approximately 0.453592 kilograms. To convert any pound value to kilograms, multiply by 0.453592.' },
+      { q: 'What is the formula to convert lbs to kg?', a: 'Multiply the pound value by 0.453592. For a quick mental estimate, divide by 2.2. For example, 150 lbs ÷ 2.2 = 68.2 kg.' },
+      { q: 'How much is 200 lbs in kg?', a: '200 lbs = 90.72 kg (200 × 0.453592). This is a common benchmark for fitness and weight tracking.' },
+    ],
+    relatedTools: ['image-converter', 'qr-generator', 'background-remover'],
+  },
+
+  // ── MP4-to-MP3 format-pair aliases ────────────────────────────────
+  {
+    id: 'mov-to-mp3',
+    parentTool: 'mp4-to-mp3',
+    path: '/tools/mov-to-mp3',
+    title: 'MOV to MP3 Converter Free Online | Toolyy',
+    description: 'Convert MOV video files to MP3 audio free online. Extract audio from Apple QuickTime MOV videos directly in your browser. No upload, no software install.',
+    h1: 'MOV to MP3 Converter',
+    intro: 'Extract high-quality MP3 audio from Apple QuickTime MOV video files entirely in your browser. Toolyy uses FFmpeg compiled to WebAssembly — no server upload, no file size limit, no software to install. Choose bitrates from 128 to 320 kbps.',
+    steps: [
+      'Open the MOV to MP3 converter on Toolyy.',
+      'Drag and drop your MOV file into the workspace.',
+      'Select your preferred MP3 bitrate and download the extracted audio.',
+    ],
+    faqs: [
+      { q: 'Can I convert MOV files from my iPhone?', a: 'Yes. iPhone records video in MOV format by default. Transfer the file to your computer or open Toolyy on your phone\'s browser to extract the audio.' },
+      { q: 'Is MOV to MP3 conversion lossless?', a: 'The audio is re-encoded to MP3, which is a lossy format. At 320 kbps, the quality is nearly indistinguishable from the original audio track.' },
+    ],
+    relatedTools: ['image-converter', 'pdf-splitter', 'qr-generator'],
+  },
+  {
+    id: 'avi-to-mp3',
+    parentTool: 'mp4-to-mp3',
+    path: '/tools/avi-to-mp3',
+    title: 'AVI to MP3 Converter Free Online | Toolyy',
+    description: 'Convert AVI video files to MP3 audio free online. Extract audio from AVI videos directly in your browser using FFmpeg WebAssembly. No upload needed.',
+    h1: 'AVI to MP3 Converter',
+    intro: 'Extract MP3 audio from AVI video files entirely in your browser. Toolyy uses FFmpeg compiled to WebAssembly for fast, private conversion — no server upload, no file size limit. Choose bitrates from 128 to 320 kbps for the perfect balance between quality and file size.',
+    steps: [
+      'Open the AVI to MP3 converter on Toolyy.',
+      'Drag and drop your AVI file into the workspace.',
+      'Select your preferred MP3 bitrate and download the extracted audio.',
+    ],
+    faqs: [
+      { q: 'What is AVI?', a: 'AVI (Audio Video Interleave) is a multimedia container format developed by Microsoft. It stores both video and audio data and is commonly used for downloaded videos and older camera recordings.' },
+      { q: 'Is there a file size limit for AVI conversion?', a: 'No server-side limit since nothing is uploaded. The practical limit is your device RAM. Most modern computers handle AVI files up to several gigabytes.' },
+    ],
+    relatedTools: ['pdf-splitter', 'image-converter', 'background-remover'],
+  },
+  {
+    id: 'webm-to-mp3',
+    parentTool: 'mp4-to-mp3',
+    path: '/tools/webm-to-mp3',
+    title: 'WebM to MP3 Converter Free Online | Toolyy',
+    description: 'Convert WebM video files to MP3 audio free online. Extract audio from WebM videos in your browser. No upload, no install, works offline.',
+    h1: 'WebM to MP3 Converter',
+    intro: 'Extract MP3 audio from WebM video files entirely in your browser. WebM is the open format used by YouTube and many web platforms. Toolyy converts WebM to MP3 locally using FFmpeg WebAssembly — no upload, no file size limit, complete privacy.',
+    steps: [
+      'Open the WebM to MP3 converter on Toolyy.',
+      'Drag and drop your WebM file into the workspace.',
+      'Select your preferred MP3 quality and download the audio.',
+    ],
+    faqs: [
+      { q: 'What is WebM?', a: 'WebM is an open, royalty-free media format designed for the web. Developed by Google, it is used by YouTube and many web platforms for HTML5 video. It typically uses VP8/VP9 video codecs with Vorbis/Opus audio.' },
+      { q: 'Can I convert YouTube downloads from WebM to MP3?', a: 'Yes. If you have a WebM file downloaded from any source, drop it into Toolyy to extract the audio as an MP3 file.' },
+    ],
+    relatedTools: ['qr-generator', 'social-resizer', 'json-formatter'],
+  },
+
+  // ── Image converter format-pair aliases ────────────────────────────
+  {
+    id: 'gif-to-webp',
+    parentTool: 'image-converter',
+    path: '/tools/gif-to-webp',
+    title: 'GIF to WebP Converter Free Online | Toolyy',
+    description: 'Convert GIF images to WebP format free online for smaller file sizes. Browser-based conversion with no upload needed. Preserves transparency.',
+    h1: 'GIF to WebP Converter',
+    intro: 'Convert GIF images to WebP format for dramatically smaller file sizes — WebP supports both static images and animation with better compression than GIF. All conversion happens in your browser with no server upload. Transparency is fully preserved.',
+    steps: [
+      'Open the GIF to WebP converter on Toolyy.',
+      'Drag and drop your GIF image into the workspace.',
+      'Download your optimized WebP file.',
+    ],
+    faqs: [
+      { q: 'Is WebP better than GIF?', a: 'Yes. WebP supports 24-bit color (vs GIF\'s 256 colors), alpha transparency, and both lossy and lossless compression. Animated WebP files are typically 25–35% smaller than equivalent GIFs with better visual quality.' },
+      { q: 'Will my transparent GIF stay transparent?', a: 'Yes. WebP fully supports alpha channel transparency, so transparent GIFs convert with no loss of transparency data.' },
+    ],
+    relatedTools: ['background-remover', 'social-resizer', 'pdf-splitter'],
+  },
+  {
+    id: 'heic-to-webp',
+    parentTool: 'image-converter',
+    path: '/tools/heic-to-webp',
+    title: 'HEIC to WebP Converter Free Online | Toolyy',
+    description: 'Convert HEIC/HEIF images from iPhone to WebP format free online. Browser-based, no upload, no software install needed.',
+    h1: 'HEIC to WebP Converter',
+    intro: 'Convert HEIC and HEIF images (the default format on modern iPhones) to web-optimized WebP format. WebP files are universally supported by browsers and significantly smaller than HEIC for web use. All conversion happens locally in your browser.',
+    steps: [
+      'Open the HEIC to WebP converter on Toolyy.',
+      'Drag and drop your HEIC or HEIF file into the workspace.',
+      'Download your converted WebP image.',
+    ],
+    faqs: [
+      { q: 'What is HEIC?', a: 'HEIC (High Efficiency Image Container) is the default photo format on iPhones running iOS 11+. It uses the HEIF standard with H.265 compression, producing files roughly half the size of JPEG at similar quality.' },
+      { q: 'Why convert HEIC to WebP?', a: 'While HEIC is great for phone storage, it has limited browser support. WebP is universally supported by all modern browsers, making it the ideal format for sharing photos on the web, uploading to websites, or using in email.' },
+    ],
+    relatedTools: ['background-remover', 'social-resizer', 'qr-generator'],
+  },
+
+  // ── QR code type aliases ──────────────────────────────────────────
+  {
+    id: 'vcard-qr-code',
+    parentTool: 'qr-generator',
+    path: '/tools/vcard-qr-code',
+    title: 'vCard QR Code Generator — Share Contact Info Instantly | Toolyy',
+    description: 'Create a QR code for your contact information (vCard). Recipients scan to save your name, phone, email, and address directly to their phone. Free, no sign-up.',
+    h1: 'vCard QR Code Generator',
+    intro: 'Create a scannable QR code containing your contact information in vCard format. When scanned, the recipient\'s phone automatically offers to save your name, phone number, email address, and company details to their contacts. Perfect for business cards, name badges, and networking events.',
+    steps: [
+      'Open the vCard QR Code Generator on Toolyy.',
+      'Enter your contact details: name, phone, email, company, and website.',
+      'Download or print the QR code for your business card or badge.',
+    ],
+    faqs: [
+      { q: 'What is a vCard QR code?', a: 'A vCard QR code encodes contact information (name, phone, email, address, company) in the standard vCard format. When scanned, smartphones automatically offer to add the contact — no manual typing needed.' },
+      { q: 'Do vCard QR codes work on all phones?', a: 'Yes. All modern smartphones (iPhone iOS 11+ and Android 10+) can scan vCard QR codes natively from the camera app and automatically parse the contact data.' },
+    ],
+    relatedTools: ['background-remover', 'social-resizer', 'image-converter'],
   },
 ]
 
