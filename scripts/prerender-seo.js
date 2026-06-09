@@ -208,8 +208,13 @@ const TOOLS_SEO = [
       'Adjust the crop area by dragging, then download your perfectly sized image.',
     ],
     faqs: [
-      { q: 'What are the exact image sizes for social media platforms?', a: 'Instagram Post: 1080x1080px. TikTok/Instagram Story: 1080x1920px. YouTube Thumbnail: 1280x720px.' },
-      { q: 'Is my photo uploaded to a server?', a: 'No. All resizing happens locally in your browser using the Canvas API. Your images never leave your device.' },
+      { q: 'What are the exact image sizes for social media platforms in 2026?', a: 'Instagram Post: 1080×1080 px. Instagram Story / TikTok: 1080×1920 px. YouTube Thumbnail: 1280×720 px. LinkedIn Post: 1200×627 px. X (Twitter) Post: 1600×900 px. Facebook Post: 1200×630 px. Pinterest Pin: 1000×1500 px. These are the recommended pixel dimensions for maximum clarity on each platform.' },
+      { q: 'Is my photo uploaded to a server?', a: 'No. All resizing and cropping happens locally in your browser using the HTML5 Canvas API. Your images never leave your device — not even temporarily. This makes it safe to resize confidential or personal photos.' },
+      { q: 'What aspect ratio should I use for Instagram Reels and TikTok?', a: 'Instagram Reels and TikTok both use a 9:16 vertical aspect ratio at 1080×1920 pixels. This is the same ratio as a smartphone screen held in portrait orientation. Toolyy\'s preset handles this automatically.' },
+      { q: 'Can I resize images without losing quality?', a: 'Upscaling a small image will reduce quality because new pixels must be interpolated. Downscaling from a larger original preserves quality. For best results, start with the highest resolution source image you have. Toolyy uses the browser\'s high-quality bicubic interpolation algorithm.' },
+      { q: 'What is the best image format for social media?', a: 'JPEG is best for photographs — small file size with good quality. PNG is best for graphics, logos, and images with text or transparency. Most platforms accept both formats. Toolyy outputs JPEG by default for photos and PNG when transparency is detected.' },
+      { q: 'Does this work for YouTube channel banners?', a: 'Yes. YouTube recommends 2560×1440 px for channel banners (TV display) with a safe area of 1546×423 px for mobile. Enter these custom dimensions in Toolyy to create a perfectly sized banner.' },
+      { q: 'Can I crop and resize multiple images at once?', a: 'Currently, Toolyy processes one image at a time to give you precise control over the crop area. This ensures each image is framed exactly the way you want it for each platform.' },
     ],
     schema: {
       '@context': 'https://schema.org',
@@ -368,6 +373,40 @@ const TOOLS_SEO_EXTRA_HTML = {
           </ul>
           <h2>QR Code Printing Size Guide</h2>
           <p>The minimum recommended print size is <strong>2 × 2 cm (0.8 × 0.8 in)</strong> for close-range scanning like business cards. For posters, the scanning distance is approximately 10× the QR code width — so a 10 cm QR code can be scanned from about 1 meter away. Always test your printed QR code with multiple phones before distributing.</p>
+        </section>`,
+  'tools/social-resizer': `
+        <section>
+          <h2>Social Media Image Size Reference Guide (2026)</h2>
+          <p>Each social media platform has specific image dimension requirements. Using the wrong size causes cropping, blurriness, or letterboxing. This table lists the recommended pixel dimensions for every major platform.</p>
+          <table>
+            <thead><tr><th>Platform</th><th>Content Type</th><th>Dimensions (px)</th><th>Aspect Ratio</th></tr></thead>
+            <tbody>
+              <tr><td>Instagram</td><td>Square Post</td><td>1080 × 1080</td><td>1:1</td></tr>
+              <tr><td>Instagram</td><td>Portrait Post</td><td>1080 × 1350</td><td>4:5</td></tr>
+              <tr><td>Instagram</td><td>Story / Reel</td><td>1080 × 1920</td><td>9:16</td></tr>
+              <tr><td>TikTok</td><td>Video / Photo</td><td>1080 × 1920</td><td>9:16</td></tr>
+              <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td><td>16:9</td></tr>
+              <tr><td>YouTube</td><td>Channel Banner</td><td>2560 × 1440</td><td>16:9</td></tr>
+              <tr><td>Facebook</td><td>Post Image</td><td>1200 × 630</td><td>1.91:1</td></tr>
+              <tr><td>Facebook</td><td>Cover Photo</td><td>820 × 312</td><td>2.63:1</td></tr>
+              <tr><td>X (Twitter)</td><td>Post Image</td><td>1600 × 900</td><td>16:9</td></tr>
+              <tr><td>X (Twitter)</td><td>Header Photo</td><td>1500 × 500</td><td>3:1</td></tr>
+              <tr><td>LinkedIn</td><td>Post Image</td><td>1200 × 627</td><td>1.91:1</td></tr>
+              <tr><td>LinkedIn</td><td>Cover Photo</td><td>1128 × 191</td><td>5.91:1</td></tr>
+              <tr><td>Pinterest</td><td>Standard Pin</td><td>1000 × 1500</td><td>2:3</td></tr>
+            </tbody>
+          </table>
+          <h2>Why Image Dimensions Matter for Social Media</h2>
+          <p><strong>Avoid auto-cropping:</strong> Platforms automatically crop images that don't match their expected aspect ratios. A landscape photo uploaded as an Instagram Story gets zoomed in and loses important content at the edges.</p>
+          <p><strong>Maximum sharpness:</strong> Using the exact recommended pixel dimensions ensures your image displays at full resolution without scaling artifacts. Uploading undersized images causes visible blurriness on high-DPI screens.</p>
+          <p><strong>Algorithm advantage:</strong> Social media algorithms favor content that looks professional. Correctly sized images receive higher engagement rates because they display as intended in feeds, stories, and search results.</p>
+          <h2>Quick Tips for Better Social Media Images</h2>
+          <ul>
+            <li><strong>Start with high resolution:</strong> Always begin with the largest source image available. Downscaling preserves quality; upscaling creates blur.</li>
+            <li><strong>Use the rule of thirds:</strong> Place key subjects at intersection points when cropping to maintain visual balance.</li>
+            <li><strong>Keep text within safe zones:</strong> Platform UI elements (profile icons, like buttons, captions) overlay edges of images. Keep important text centered.</li>
+            <li><strong>Test on mobile:</strong> Over 80% of social media browsing happens on phones. Preview your cropped images at phone screen size before posting.</li>
+          </ul>
         </section>`,
   'tools/background-remover': `
         <section>
@@ -600,6 +639,87 @@ function buildAliasSeoHtml(alias) {
     <script type="application/ld+json">${JSON.stringify(appSchema, null, 2)}</script>`
 }
 
+const ABOUT_PAGE = {
+  path: 'about',
+  title: 'About Toolyy | Free Privacy-First Browser Tools',
+  description: 'Toolyy exists because every file tool demanded an upload. We built privacy-first browser utilities that process everything locally — free, fast, and forever open.',
+}
+
+function buildAboutSeoHtml() {
+  const canonical = `${BASE_URL}/about`
+  const liveToolCount = TOOLS.filter(t => t.live).length
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL + '/' },
+      { '@type': 'ListItem', position: 2, name: 'About', item: canonical },
+    ],
+  }
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Toolyy',
+    url: BASE_URL,
+    logo: `${BASE_URL}/toolyy-og.png`,
+    description: 'Free privacy-first browser tools for developers and consumers. All processing runs locally — your files never leave your device.',
+    foundingDate: '2025',
+  }
+
+  const allToolsLinks = TOOLS.filter(t => t.live && t.path)
+    .map(t => `<li><a href="${BASE_URL}${t.path}">${escapeHtml(t.label)}</a></li>`)
+
+  return `
+    <main>
+      <article style="max-width:48rem;margin:0 auto;padding:2rem 1rem 3rem">
+        <h1>About Toolyy — Free, Private Browser Tools for Everyone</h1>
+        <p>Toolyy is a collection of free browser-based utilities for PDFs, images, audio, QR codes, and more. Every tool runs entirely inside your browser using JavaScript, WebAssembly, and the Canvas API — your files never leave your device. No uploads, no accounts, no paywalls.</p>
+
+        <section>
+          <h2>Why We Built Toolyy</h2>
+          <p>We built Toolyy because we were tired of the same uncomfortable choice: use a capable online tool and hand over your files to an unknown server, or pay for desktop software you will use twice a year. There had to be a better way.</p>
+          <p>Think about the last time you needed to split a PDF, convert a photo, or remove a background. Chances are you searched online, landed on a site, and uploaded your file to a server you knew nothing about. Who runs it? Where is your data stored? Is it retained, analysed, or sold? Most of the time you had no idea — and you clicked "convert" anyway, because you needed to get the job done.</p>
+          <p>Modern browsers are already powerful enough to handle these operations locally. The JavaScript runtime has access to the File API, Web Workers, WebAssembly, and the Canvas API. Combined, these can perform the same file operations that online tools have been using servers for — splitting PDFs, converting image formats, running neural network inference for background removal. We just had to use them.</p>
+        </section>
+
+        <section>
+          <h2>What We Stand For</h2>
+          <h3>Privacy by Architecture</h3>
+          <p>We do not ask you to trust our privacy policy — we make trust unnecessary. Every tool on Toolyy runs entirely inside your browser. There is no server that could receive your files even if we wanted it to. Your documents, photos, and data belong to you alone.</p>
+          <h3>No Upload Wait, No Queue</h3>
+          <p>Because processing happens in your browser, there is no upload step, no server queue, and no bandwidth bottleneck. A 50-page PDF splits in under two seconds. A 4K image converts instantly. Speed is not a premium feature — it is the default.</p>
+          <h3>Radically Free, Forever</h3>
+          <p>No subscriptions. No paywalls. No "free tier" that quietly locks the features you actually need. Every tool on Toolyy is free to use for personal or commercial projects.</p>
+          <h3>Works Everywhere</h3>
+          <p>Toolyy is a web app — which means it works on any device with a modern browser. iPhone, Android, Windows, Mac, Linux. No app to install, no OS version to worry about. Just open the page and start working.</p>
+        </section>
+
+        <section>
+          <h2>Toolyy by the Numbers</h2>
+          <ul>
+            <li><strong>${liveToolCount} live tools</strong> — and more on the way</li>
+            <li><strong>0 bytes uploaded</strong> — your files never touch our servers</li>
+            <li><strong>100% free</strong> — no premium tiers, no per-file fees</li>
+            <li><strong>No file size limits</strong> — the only limit is your device memory</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Our Privacy Commitment</h2>
+          <p>We will never introduce server-side file processing without making it opt-in, clearly labelled, and accompanied by a prominent privacy notice. The default will always be client-side. That is a promise we are making publicly, not just in the fine print.</p>
+        </section>
+
+        <section>
+          <h2>Available Tools</h2>
+          <p>Explore all free browser-based tools available on Toolyy:</p>
+          <ul>${allToolsLinks.join('\n            ')}</ul>
+        </section>
+      </article>
+    </main>
+    <script type="application/ld+json">${JSON.stringify(breadcrumb, null, 2)}</script>
+    <script type="application/ld+json">${JSON.stringify(orgSchema, null, 2)}</script>`
+}
+
 let generated = 0
 
 function writePage(pagePath, pageTitle, pageDesc, seoContent) {
@@ -635,6 +755,8 @@ for (const alias of SEO_ALIASES) {
   writePage(alias.path, alias.title, alias.description, buildAliasSeoHtml(alias))
 }
 
+writePage(ABOUT_PAGE.path, ABOUT_PAGE.title, ABOUT_PAGE.description, buildAboutSeoHtml())
+
 console.log(`\n[prerender-seo] Generated ${generated} static HTML files in dist/`)
 for (const tool of TOOLS_SEO) {
   console.log(`  /${tool.path}/index.html`)
@@ -642,4 +764,5 @@ for (const tool of TOOLS_SEO) {
 for (const alias of SEO_ALIASES) {
   console.log(`  ${alias.path}/index.html`)
 }
+console.log(`  /about/index.html`)
 console.log()

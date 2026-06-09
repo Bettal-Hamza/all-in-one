@@ -39,12 +39,19 @@ if (IS_PROD) {
     next()
   })
 
-  // ── 2. Static files — disable express.static's auto-redirect ──
+  // ── 2. Sitemap: correct Content-Type + noindex ────────────────
+  // Sitemaps are not web pages — tell Google not to index them.
+  app.get('/sitemap.xml', (_req, res) => {
+    res.set({ 'Content-Type': 'application/xml', 'X-Robots-Tag': 'noindex' })
+    res.sendFile(join(dist, 'sitemap.xml'))
+  })
+
+  // ── 3. Static files — disable express.static's auto-redirect ──
   // By default express.static 301-redirects /dir → /dir/ when it
   // finds a directory. This caused the "Page with redirect" error.
   app.use(express.static(dist, { redirect: false }))
 
-  // ── 3. Serve prerendered index.html for clean URLs ────────
+  // ── 4. Serve prerendered index.html for clean URLs ────────
   // e.g. /tools/pdf-splitter → dist/tools/pdf-splitter/index.html
   // No redirect, no trailing slash — served directly at the
   // canonical URL that matches the sitemap.
@@ -54,7 +61,7 @@ if (IS_PROD) {
     res.sendFile(indexPath, err => { if (err) next() })
   })
 
-  // ── 4. SPA fallback — React Router handles remaining routes ──
+  // ── 5. SPA fallback — React Router handles remaining routes ──
   app.get('{*splat}', (_req, res) => res.sendFile(join(dist, 'index.html')))
 }
 
