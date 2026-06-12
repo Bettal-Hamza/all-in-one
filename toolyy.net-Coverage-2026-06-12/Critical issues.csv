@@ -1,7 +1,0 @@
-Reason,Source,Validation,Pages
-Page with redirect,Website,Failed,3
-Soft 404,Website,Not Started,1
-Alternate page with proper canonical tag,Website,Not Started,1
-Discovered - currently not indexed,Google systems,Started,3
-"Duplicate, Google chose different canonical than user",Google systems,Started,1
-Crawled - currently not indexed,Google systems,Started,1
