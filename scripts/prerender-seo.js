@@ -434,8 +434,7 @@ function buildBreadcrumbSchema(pageName, canonical) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Tools', item: BASE_URL + '/tools' },
-      { '@type': 'ListItem', position: 3, name: pageName, item: canonical },
+      { '@type': 'ListItem', position: 2, name: pageName, item: canonical },
     ],
   }
 }
@@ -477,6 +476,20 @@ function buildAllToolsNav(currentPath) {
       </nav>`
 }
 
+function buildAliasVariantsHtml(toolPath) {
+  const toolId = toolPath.replace(/^tools\//, '')
+  const variants = SEO_ALIASES.filter(a => a.parentTool === toolId)
+  if (variants.length === 0) return ''
+  const links = variants.map(a => `<li><a href="${BASE_URL}${a.path}">${escapeHtml(a.h1)}</a></li>`)
+  return `
+        <section>
+          <h2>Popular Variations of This Tool</h2>
+          <ul>
+            ${links.join('\n            ')}
+          </ul>
+        </section>`
+}
+
 function buildSoftwareAppSchema(tool, canonical) {
   return {
     '@context': 'https://schema.org',
@@ -498,11 +511,12 @@ function buildSeoHtml(tool) {
   const relatedHtml = buildRelatedToolsHtml(tool.relatedTools)
   const allToolsNav = buildAllToolsNav(tool.path)
   const extraHtml = TOOLS_SEO_EXTRA_HTML[tool.path] || ''
+  const variantsHtml = buildAliasVariantsHtml(tool.path)
 
   return `
     <main>
       <nav aria-label="Breadcrumb" style="max-width:48rem;margin:0 auto;padding:1rem 1rem 0;font-size:.875rem;color:#6b7280">
-        <a href="${BASE_URL}/">Home</a> &rsaquo; <a href="${BASE_URL}/">Tools</a> &rsaquo; <span>${escapeHtml(tool.h1)}</span>
+        <a href="${BASE_URL}/">Home</a> &rsaquo; <span>${escapeHtml(tool.h1)}</span>
       </nav>
       <article style="max-width:48rem;margin:0 auto;padding:1.5rem 1rem 2rem">
         <h1>${escapeHtml(tool.h1)}</h1>
@@ -530,6 +544,7 @@ function buildSeoHtml(tool) {
           ${tool.faqs.map(f => `<details><summary><strong>${escapeHtml(f.q)}</strong></summary>\n          <p>${escapeHtml(f.a)}</p></details>`).join('\n          ')}
         </section>
         ${extraHtml}
+        ${variantsHtml}
         ${relatedHtml}
         ${allToolsNav}
       </article>
@@ -567,6 +582,125 @@ const ALIAS_EXTRA_HTML = {
           <h3>Healthy Meal Prep: Converting KG to LBS for Food Tracking</h3>
           <p>Nutrition labels in the US list serving sizes in ounces and pounds, while kitchen scales globally default to grams and kilograms. When meal-prepping chicken breast, rice, or vegetables in bulk, converting between kg and lbs ensures accurate macro tracking. For example, a 2.5 kg pack of chicken breast equals 5.51 lbs — about 22 four-ounce servings.</p>
           <p>Quick reference: 0.5 kg = 1.1 lbs, 1 kg = 2.2 lbs, 2 kg = 4.4 lbs, 5 kg = 11 lbs.</p>
+          <p>Need the opposite direction? Use the <a href="${BASE_URL}/tools/lbs-to-kg">LBS to KG converter</a> to convert pounds to kilograms.</p>
+        </section>`,
+  'lbs-to-kg': `
+        <section>
+          <h2>How to Convert Pounds to Kilograms (LBS to KG)</h2>
+          <p>The exact conversion factor is <strong>1 lb = 0.453592 kg</strong>. Multiply any pound value by 0.453592 to get kilograms. For quick mental math, divide the pounds by 2.2 — for example, 150 lbs &divide; 2.2 &asymp; 68 kg.</p>
+          <p>The "lbs" abbreviation comes from <em>libra</em>, the ancient Roman unit of weight — which is also why the pound is called <em>libra</em> in Spanish and <em>livre</em> in French. The kilogram is the standard SI unit of mass used by nearly every country outside the United States.</p>
+
+          <h3>Body Weight Conversion Chart: Pounds to Kilograms</h3>
+          <p>Converting your body weight for a medical form, fitness app, or travel abroad? This chart covers the most common body weights:</p>
+          <table>
+            <thead><tr><th>Pounds (lbs)</th><th>Kilograms (kg)</th></tr></thead>
+            <tbody>
+              <tr><td>100 lbs</td><td>45.36 kg</td></tr>
+              <tr><td>110 lbs</td><td>49.90 kg</td></tr>
+              <tr><td>120 lbs</td><td>54.43 kg</td></tr>
+              <tr><td>130 lbs</td><td>58.97 kg</td></tr>
+              <tr><td>140 lbs</td><td>63.50 kg</td></tr>
+              <tr><td>150 lbs</td><td>68.04 kg</td></tr>
+              <tr><td>160 lbs</td><td>72.57 kg</td></tr>
+              <tr><td>170 lbs</td><td>77.11 kg</td></tr>
+              <tr><td>180 lbs</td><td>81.65 kg</td></tr>
+              <tr><td>190 lbs</td><td>86.18 kg</td></tr>
+              <tr><td>200 lbs</td><td>90.72 kg</td></tr>
+              <tr><td>220 lbs</td><td>99.79 kg</td></tr>
+              <tr><td>250 lbs</td><td>113.40 kg</td></tr>
+              <tr><td>300 lbs</td><td>136.08 kg</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Luggage, Shipping &amp; Towing Weight Conversions</h3>
+          <p>Airline baggage allowances, freight quotes, and towing capacities frequently mix pounds and kilograms. Common reference points:</p>
+          <table>
+            <thead><tr><th>Pounds (lbs)</th><th>Kilograms (kg)</th><th>Common Use</th></tr></thead>
+            <tbody>
+              <tr><td>40 lbs</td><td>18.14 kg</td><td>Budget airline checked bag limit</td></tr>
+              <tr><td>50 lbs</td><td>22.68 kg</td><td>Standard US checked baggage limit</td></tr>
+              <tr><td>70 lbs</td><td>31.75 kg</td><td>Heavy/oversize bag limit</td></tr>
+              <tr><td>1,000 lbs</td><td>453.59 kg</td><td>Half-ton truck payload class</td></tr>
+              <tr><td>5,000 lbs</td><td>2,268 kg</td><td>Typical SUV towing capacity</td></tr>
+              <tr><td>13,500 lbs</td><td>6,123 kg</td><td>Heavy-duty truck towing capacity</td></tr>
+              <tr><td>30,000 lbs</td><td>13,608 kg</td><td>Commercial freight load</td></tr>
+              <tr><td>40,000 lbs</td><td>18,144 kg</td><td>Max US semi-trailer cargo weight</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Cooking &amp; Grocery Quick Reference</h3>
+          <p>Converting recipe and grocery weights: &frac14; lb = 113 g, &frac12; lb = 227 g, 1 lb = 454 g, 2 lbs = 907 g, 4 lbs = 1.81 kg, 5 lbs = 2.27 kg, 10 lbs = 4.54 kg. A US "stick" context tip: one pound of butter is four sticks, or 454 grams.</p>
+          <p>Need the opposite direction? Use the <a href="${BASE_URL}/tools/kg-to-lbs">KG to LBS converter</a> to convert kilograms to pounds.</p>
+        </section>`,
+  'jpg-to-webp': `
+        <section>
+          <h2>JPG vs WebP: Side-by-Side Comparison</h2>
+          <table>
+            <thead><tr><th>Feature</th><th>JPG / JPEG</th><th>WebP</th></tr></thead>
+            <tbody>
+              <tr><td>Typical file size</td><td>Baseline</td><td>25&ndash;34% smaller</td></tr>
+              <tr><td>Transparency support</td><td>No</td><td>Yes (alpha channel)</td></tr>
+              <tr><td>Animation support</td><td>No</td><td>Yes</td></tr>
+              <tr><td>Browser support (2026)</td><td>100%</td><td>97%+</td></tr>
+              <tr><td>Best for</td><td>Legacy compatibility</td><td>All modern web images</td></tr>
+            </tbody>
+          </table>
+          <h2>JPG or JPEG — What's the Difference?</h2>
+          <p>Nothing — JPG and JPEG are exactly the same image format. The shorter "JPG" extension is a relic of early Windows systems that limited file extensions to three characters. Whether your photo ends in .jpg or .jpeg, this converter processes it identically and outputs the same optimized WebP file.</p>
+          <h2>Why Convert JPG to WebP?</h2>
+          <p><strong>Faster page loads:</strong> A typical 500 KB JPEG photo becomes a ~330 KB WebP at the same visual quality. Multiply that across every image on a page and load times drop noticeably, especially on mobile connections.</p>
+          <p><strong>Better Google rankings:</strong> Page speed is a ranking factor, and Google PageSpeed Insights explicitly flags JPEG images with the recommendation "serve images in next-gen formats" — WebP is that next-gen format.</p>
+          <p><strong>Lower bandwidth costs:</strong> If you pay for CDN or hosting bandwidth, a one-third reduction in image weight directly cuts your bill.</p>
+          <h2>Recommended Quality Settings</h2>
+          <p>For photographs, <strong>80&ndash;90% quality</strong> is the sweet spot — visually identical to the original at a fraction of the size. Use 90%+ for hero images and photography portfolios. Drop to 70&ndash;80% for thumbnails and decorative backgrounds where small artifacts are invisible.</p>
+          <p>Also converting PNG graphics? Use the <a href="${BASE_URL}/tools/png-to-webp">PNG to WebP converter</a>, or the <a href="${BASE_URL}/tools/compress-images-online">image compressor</a> to shrink any image file.</p>
+        </section>`,
+  'png-to-webp': `
+        <section>
+          <h2>PNG vs WebP: Side-by-Side Comparison</h2>
+          <table>
+            <thead><tr><th>Feature</th><th>PNG</th><th>WebP</th></tr></thead>
+            <tbody>
+              <tr><td>Typical file size</td><td>Baseline</td><td>26&ndash;80% smaller</td></tr>
+              <tr><td>Transparency support</td><td>Yes</td><td>Yes (alpha channel)</td></tr>
+              <tr><td>Compression modes</td><td>Lossless only</td><td>Lossless and lossy</td></tr>
+              <tr><td>Browser support (2026)</td><td>100%</td><td>97%+</td></tr>
+              <tr><td>Best for</td><td>Print, legacy software</td><td>All modern web images</td></tr>
+            </tbody>
+          </table>
+          <h2>What Converts Best from PNG to WebP?</h2>
+          <p><strong>Screenshots:</strong> UI screenshots with text and flat areas compress 60&ndash;80% smaller in WebP while keeping text perfectly crisp — one of the best use cases for conversion.</p>
+          <p><strong>Logos and icons:</strong> Flat-color graphics with transparency convert with 70%+ size reduction and full alpha-channel preservation. Your transparent backgrounds survive intact.</p>
+          <p><strong>Graphics with gradients:</strong> Banners, illustrations, and charts often shrink dramatically because WebP's prediction-based compression handles smooth color transitions far better than PNG's.</p>
+          <h2>When to Keep PNG</h2>
+          <p>Keep the original PNG when your destination demands it: print workflows, some document editors, older email clients, and app stores that require PNG assets. For anything displayed in a web browser, WebP is strictly better — smaller files, same quality, same transparency.</p>
+          <p>Working with photos instead? Use the <a href="${BASE_URL}/tools/jpg-to-webp">JPG to WebP converter</a>, or the <a href="${BASE_URL}/tools/compress-images-online">image compressor</a> to reduce any image's file size.</p>
+        </section>`,
+  'compress-images-online': `
+        <section>
+          <h2>How to Reduce an Image File Size from MB to KB</h2>
+          <p>Upload your image, lower the quality slider, and watch the live file-size preview update. A typical 4&ndash;5 MB smartphone photo compresses to <strong>300&ndash;800 KB at 80% quality</strong> — a 5&ndash;10&times; reduction with no visible quality loss. The compression converts your image to the efficient WebP format entirely inside your browser.</p>
+          <h3>Typical Compression Results</h3>
+          <table>
+            <thead><tr><th>Original</th><th>Compressed (80% quality)</th><th>Reduction</th></tr></thead>
+            <tbody>
+              <tr><td>12 MP phone photo (4.5 MB)</td><td>~600 KB</td><td>87%</td></tr>
+              <tr><td>Full-HD screenshot (1.2 MB PNG)</td><td>~250 KB</td><td>79%</td></tr>
+              <tr><td>DSLR photo (8 MB JPEG)</td><td>~1.1 MB</td><td>86%</td></tr>
+              <tr><td>Logo with transparency (400 KB PNG)</td><td>~90 KB</td><td>77%</td></tr>
+            </tbody>
+          </table>
+          <h3>Target File Sizes for Common Uses</h3>
+          <ul>
+            <li><strong>Website content images:</strong> under 200 KB — keeps pages fast and Core Web Vitals green</li>
+            <li><strong>Full-width hero images:</strong> under 500 KB</li>
+            <li><strong>Email attachments:</strong> keep total under 20&ndash;25 MB (Gmail/Outlook limits)</li>
+            <li><strong>Job applications &amp; government portals:</strong> often capped at 1&ndash;2 MB per file</li>
+            <li><strong>Forum avatars &amp; profile photos:</strong> typically under 500 KB</li>
+          </ul>
+          <h3>Quality Slider Guide</h3>
+          <p><strong>90%+:</strong> archival quality, modest savings. <strong>80&ndash;90%:</strong> the sweet spot — visually identical, large savings. <strong>70&ndash;80%:</strong> fine for thumbnails and previews. <strong>Below 70%:</strong> visible artifacts begin appearing in photos; use only when hitting strict upload limits.</p>
+          <p>Need a specific output format instead? Try the <a href="${BASE_URL}/tools/jpg-to-webp">JPG to WebP</a> or <a href="${BASE_URL}/tools/png-to-webp">PNG to WebP</a> converters.</p>
         </section>`,
 }
 
@@ -601,7 +735,7 @@ function buildAliasSeoHtml(alias) {
   return `
     <main>
       <nav aria-label="Breadcrumb" style="max-width:48rem;margin:0 auto;padding:1rem 1rem 0;font-size:.875rem;color:#6b7280">
-        <a href="${BASE_URL}/">Home</a> &rsaquo; <a href="${BASE_URL}/">Tools</a> &rsaquo; <span>${escapeHtml(alias.h1)}</span>
+        <a href="${BASE_URL}/">Home</a> &rsaquo; <span>${escapeHtml(alias.h1)}</span>
       </nav>
       <article style="max-width:48rem;margin:0 auto;padding:1.5rem 1rem 2rem">
         <h1>${escapeHtml(alias.h1)}</h1>
@@ -732,6 +866,9 @@ function writePage(pagePath, pageTitle, pageDesc, seoContent) {
       /<meta name="description" content="[^"]*"/,
       `<meta name="description" content="${escapeHtml(pageDesc)}"`,
     )
+    // Strip the homepage's og/twitter/robots tags — per-page versions are
+    // injected below alongside the canonical tag.
+    .replace(/^\s*<meta (?:name="robots"|property="og:(?:type|site_name|title|description|url)"|name="twitter:(?:title|description)") [^>]*\/>\r?\n/gm, '')
     .replace(
       /(<div id="root">)[\s\S]*?(<\/div>\s*<\/body>)/,
       `$1${seoContent}\n    $2`,
@@ -740,7 +877,15 @@ function writePage(pagePath, pageTitle, pageDesc, seoContent) {
   const fullUrl = pagePath.startsWith('/') ? `${BASE_URL}${pagePath}` : `${BASE_URL}/${pagePath}`
   html = html.replace(
     /<link rel="canonical" href="[^"]*" \/>/,
-    `<link rel="canonical" href="${fullUrl}" />`,
+    `<link rel="canonical" href="${fullUrl}" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Toolyy" />
+    <meta property="og:title" content="${escapeHtml(pageTitle)}" />
+    <meta property="og:description" content="${escapeHtml(pageDesc)}" />
+    <meta property="og:url" content="${fullUrl}" />
+    <meta name="twitter:title" content="${escapeHtml(pageTitle)}" />
+    <meta name="twitter:description" content="${escapeHtml(pageDesc)}" />`,
   )
 
   writeFileSync(resolve(dir, 'index.html'), html, 'utf-8')

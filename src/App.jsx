@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
 import HomePage from './pages/HomePage.jsx'
@@ -62,6 +62,7 @@ export default function App() {
           >
             <Routes>
               <Route path="/"        element={<HomePage />} />
+              <Route path="/tools"    element={<Navigate to="/" replace />} />
               <Route path="/about"    element={<AboutPage />} />
               <Route path="/privacy"  element={<PrivacyPage />} />
               <Route path="/terms"    element={<TermsPage />} />

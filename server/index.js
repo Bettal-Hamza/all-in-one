@@ -26,6 +26,24 @@ app.use('/api/suggestions', suggestionsRouter)
 if (IS_PROD) {
   const dist = join(__dirname, '..', 'dist')
 
+  // ── 0. Canonical host: force HTTPS + strip www (301) ──────
+  // GSC showed http://toolyy.net/, http://www.toolyy.net/ and
+  // https://www.toolyy.net/ crawled as separate URLs.
+  // trust proxy is set above, so req.secure reads x-forwarded-proto.
+  app.use((req, res, next) => {
+    const host = req.headers.host || ''
+    const apex = host.startsWith('www.') ? host.slice(4) : host
+    if (!req.secure || apex !== host) {
+      return res.redirect(301, `https://${apex}${req.originalUrl}`)
+    }
+    next()
+  })
+
+  // ── 0b. /tools is not a page — the homepage is the catalog ──
+  // The old breadcrumb schema advertised /tools, which served the
+  // SPA 404 with HTTP 200 and was flagged as Soft 404 in GSC.
+  app.get('/tools', (_req, res) => res.redirect(301, '/'))
+
   // ── 1. Enforce no-trailing-slash (301) ────────────────────
   // Google sees /tools/pdf-splitter/ and /tools/pdf-splitter as two
   // different URLs. Pick ONE form and 301-redirect the other.

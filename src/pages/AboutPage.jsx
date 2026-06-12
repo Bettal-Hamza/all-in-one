@@ -215,10 +215,10 @@ export default function AboutPage() {
             We're just getting started.
           </h2>
           <p className="text-sm text-gray-500 leading-relaxed mb-6">
-            Our roadmap includes an MP4-to-MP3 audio extractor, a social media image resizer,
-            a JSON formatter, and more. Every tool will follow the same principle: runs in your
-            browser, free, no account required. If there's a utility you'd like to see,
-            we'd love to hear from you.
+            From PDF splitting and AI background removal to audio extraction and unit
+            conversion, {LIVE_TOOLS.length} tools are live today — and more are on the way.
+            Every tool follows the same principle: runs in your browser, free, no account
+            required. If there's a utility you'd like to see, we'd love to hear from you.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link

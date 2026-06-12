@@ -21,8 +21,8 @@ export default function HomePage() {
   return (
     <div>
       <SEOManager
-        title="Minimalist Developer & Consumer Utility Hub"
-        description="Access clean, fast, privacy-first web utilities. Convert formats, compress assets, and format data instantly in your browser with zero server uploads."
+        title="Free Online Tools — PDF, Image, QR & More"
+        description="Free browser tools: split PDFs, convert images to WebP, remove backgrounds with AI, generate QR codes, extract MP3, format JSON. Files never leave your device."
         canonicalPath="/"
       />
       {/* Above-the-fold — loads immediately, no framer-motion */}
