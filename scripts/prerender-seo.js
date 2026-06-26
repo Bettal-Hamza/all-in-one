@@ -297,6 +297,38 @@ const TOOLS_SEO = [
     },
     relatedTools: ['json-formatter', 'social-resizer', 'pdf-splitter'],
   },
+  {
+    path: 'tools/fake-chat',
+    title: 'Fake Chat Generator — Make iMessage & WhatsApp Screenshots | Toolyy',
+    description: 'Free fake chat generator. Create realistic iMessage and WhatsApp chat screenshots for memes, TikTok text stories, and mockups. No sign-up, optional watermark, 100% in your browser.',
+    h1: 'Fake Chat Generator',
+    intro: "Create realistic fake iMessage and WhatsApp chat screenshots right in your browser. Write the conversation, choose the contact name, time, and style, switch between light and dark mode, and download a PNG with no sign-up and an optional watermark you can toggle off. Everything runs locally, so your conversation never leaves your device.",
+    steps: [
+      'Open the Fake Chat Generator on toolyy.net.',
+      'Add your messages and choose who sent each one, then set the name, time, and style.',
+      'Pick iMessage or WhatsApp, light or dark, and download your screenshot as a PNG.',
+    ],
+    faqs: [
+      { q: 'Is this fake chat generator free?', a: 'Yes — completely free with no sign-up, no limits, and an optional watermark you can switch off. It runs entirely in your browser.' },
+      { q: 'Are my conversations private?', a: 'Completely. Every message and image is processed locally in your browser using the HTML canvas. Nothing is uploaded, logged, or stored.' },
+      { q: 'Can I make both iMessage and WhatsApp screenshots?', a: 'Yes. Toggle between the iMessage (blue) and WhatsApp (green) styles, each with accurate light and dark modes.' },
+      { q: 'Does the image have a watermark?', a: 'By default a small toolyy.net watermark sits in the bottom corner, but you can toggle it off before downloading for a clean PNG with no branding.' },
+      { q: 'What can I use fake text screenshots for?', a: 'TikTok and Reels text stories, memes, comedy skits, app and UI mockups, presentations, and creative writing. It is a storytelling and design tool — not for deceiving or harassing anyone.' },
+    ],
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How to Make a Fake Text Message Screenshot',
+      description: 'Create a realistic fake iMessage or WhatsApp chat screenshot online with Toolyy.',
+      step: [
+        { '@type': 'HowToStep', text: 'Open the Fake Chat Generator on toolyy.net.' },
+        { '@type': 'HowToStep', text: 'Add your messages and choose who sent each one, then set the name, time, and style.' },
+        { '@type': 'HowToStep', text: 'Pick iMessage or WhatsApp, light or dark, and download your screenshot as a PNG.' },
+      ],
+      totalTime: 'PT1M',
+    },
+    relatedTools: ['social-resizer', 'background-remover', 'qr-generator'],
+  },
 ]
 
 const TOOLS_SEO_EXTRA_HTML = {

@@ -1,6 +1,6 @@
 import {
   Scissors, FileImage, QrCode, Wand2,
-  Braces, Share2, Music, Ruler,
+  Braces, Share2, Music, Ruler, MessageCircle,
 } from 'lucide-react'
 
 export const TOOLS = [
@@ -91,6 +91,17 @@ export const TOOLS = [
     accent: '#0EA5E9',
     live: true,
     component: () => import('../components/tools/UnitConverter.jsx'),
+  },
+  {
+    id: 'fake-chat',
+    label: 'Fake Chat Generator',
+    description: 'Create realistic iMessage & WhatsApp chat screenshots for memes and TikTok stories.',
+    Icon: MessageCircle,
+    category: 'Fun',
+    path: '/tools/fake-chat',
+    accent: '#22C55E',
+    live: true,
+    component: () => import('../components/tools/FakeChat.jsx'),
   },
 ]
 

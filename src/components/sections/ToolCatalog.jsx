@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   Scissors, FileImage, Wand2, QrCode,
-  Music, Braces, Share2, Ruler,
+  Music, Braces, Share2, Ruler, MessageCircle,
 } from 'lucide-react'
 
 const CATALOG = [
@@ -101,6 +101,18 @@ const CATALOG = [
     live: true,
     description:
       'Our Unit Converter will instantly translate values across length, weight, temperature, volume, speed, data, and dozens of other categories as you type, with no round-trip to a server. Privacy-focused and offline-capable, it works in full once the page has loaded.',
+  },
+  {
+    id: 'fake-chat',
+    Icon: MessageCircle,
+    label: 'Fake Chat Generator',
+    category: 'Fun',
+    accent: '#22C55E',
+    accentBg: '#F0FDF4',
+    path: '/tools/fake-chat',
+    live: true,
+    description:
+      'Our Fake Chat Generator builds realistic iMessage and WhatsApp chat screenshots for memes, TikTok text stories, and app mockups. Everything renders on the HTML canvas in your browser — no watermark, no sign-up, and nothing is ever uploaded.',
   },
 ]
 

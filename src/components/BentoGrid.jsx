@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import {
   Scissors, FileImage, Music, QrCode, Share2, Braces, Ruler,
-  TrendingUp, Palette, Code2, Wand2,
+  TrendingUp, Palette, Code2, Wand2, MessageCircle, Sparkles,
 } from 'lucide-react'
 
 const BADGE_STYLES = {
@@ -66,6 +66,26 @@ const SECTIONS = [
         live: true,
         badge: 'AI Powered',
         badgeStyle: 'purple',
+      },
+    ],
+  },
+  {
+    id: 'fun-viral',
+    label: 'Fun & Viral',
+    SectionIcon: Sparkles,
+    sectionColor: '#22C55E',
+    tools: [
+      {
+        id: 'fake-chat',
+        label: 'Fake Chat Generator',
+        description: 'Make iMessage & WhatsApp screenshots for memes, TikTok text stories, and mockups.',
+        Icon: MessageCircle,
+        accent: '#22C55E',
+        accentBg: '#F0FDF4',
+        path: '/tools/fake-chat',
+        live: true,
+        badge: 'New',
+        badgeStyle: 'green',
       },
     ],
   },
