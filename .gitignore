@@ -4,3 +4,10 @@ dist
 .env.local
 
 data/
+
+# personal notes and exports, kept locally only
+claude respond.txt
+adsense_data.md
+blueprint.md
+toolyy.net-*/
+Screenshot *.png
